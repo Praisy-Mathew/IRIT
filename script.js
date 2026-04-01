@@ -20,7 +20,7 @@ const slides = [
     },
     {
         title: "Digital<br><span class='text-gradient theme-colored'>Marketing</span>",
-        desc: "Driving <span class='desc-highlight'>hyper-growth</span> through data-driven campaigns, SEO mastery, and conversion rate optimization to scale digital brands rapidly.",
+        desc: "Driving <span class='highlight'>hyper-growth</span> through data-driven campaigns, SEO mastery, and conversion rate optimization to scale digital brands rapidly.",
         bgColor: "#14050a", 
         accentColor: "#ec4899",
         accentGlow: "rgba(236, 72, 153, 0.3)",
@@ -314,13 +314,27 @@ function animate() {
         activeSlideIndex = newSlideIndex;
         updateSlideContent(activeSlideIndex);
     }
+    
+    // --- ABSOLUTELY PERFECT DOT ALIGNMENT ENGINE ---
     const distanceToPoint = currentProgress * pathLength;
-    const point = path.getPointAtLength(distanceToPoint);
-    const svgRect = path.ownerSVGElement.getBoundingClientRect();
-    const viewportX = point.x * (svgRect.width / 1000);
-    const viewportY = point.y * (svgRect.height / 80); 
-    dot.style.left = `${viewportX}px`;
-    dot.style.top = `${viewportY}px`;
+    const localPoint = path.getPointAtLength(distanceToPoint);
+    
+    // Use the native Screen CTM (Coordinate Transformation Matrix)
+    // This maps the SVG ViewBox coordinate to exact screen pixels,
+    // handling all letterboxing, scaling, and resolution variations.
+    const matrix = path.getScreenCTM();
+    const svgPoint = path.ownerSVGElement.createSVGPoint();
+    svgPoint.x = localPoint.x;
+    svgPoint.y = localPoint.y;
+    const finalPoint = svgPoint.matrixTransform(matrix);
+    
+    // The dot is inside .scroll-track-container, which has position: absolute.
+    // To position it relative to its container, we subtract the container's bounding rect.
+    const containerRect = dot.parentElement.getBoundingClientRect();
+    
+    dot.style.left = `${finalPoint.x - containerRect.left}px`;
+    dot.style.top = `${finalPoint.y - containerRect.top}px`;
+    
     activePaths.forEach(p => p.style.strokeDashoffset = pathLength - distanceToPoint);
     
     if (!glassBox.classList.contains('content-fade-out')) {

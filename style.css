@@ -391,12 +391,14 @@ nav a:hover {
     height: 12px;
     background: #ffffff;
     border-radius: 50%;
-    top: 50px;
+    /* Positioned absolutely by JS using Matrix Transformation */
+    top: 0;
     left: 0;
     transform: translate(-50%, -50%);
     box-shadow: 0 0 15px 4px var(--accent-blue), 0 0 35px 12px rgba(0, 212, 255, 0.4);
     pointer-events: none;
     transition: box-shadow 0.3s;
+    z-index: 100;
 }
 
 /* Smooth SVG Stroke Transition */
@@ -453,50 +455,64 @@ nav a:hover {
     .content-wrapper {
         flex-direction: column; 
         justify-content: flex-start;
-        gap: 2rem;
-        padding: 5% 5% 20vh 5%; 
+        gap: 1.5rem;
+        padding: 5% 6% 25vh 6%; 
         margin-bottom: 0;
         height: 100%;
-        overflow: hidden; 
+        overflow-y: auto; 
+        -webkit-overflow-scrolling: touch;
     }
     .right-section {
         padding-left: 0;
         align-items: center;
         text-align: center;
         flex: 0; 
+        width: 100%;
     }
+    /* Balanced Typography for 720px - 1024px range */
     .hero-title {
-        font-size: 3.5rem;
+        font-size: clamp(2.2rem, 8vw, 3.8rem);
+        line-height: 1.1;
         text-align: center;
-        margin-bottom: 1rem;
+        margin-bottom: 0.75rem;
+        width: 100%;
     }
     .hero-description {
-        font-size: 1rem;
+        font-size: clamp(0.9rem, 3vw, 1.15rem);
+        line-height: 1.5;
         margin-bottom: 1.5rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
     }
     .left-section {
         perspective: none;
         flex: 0;
         width: 100%;
+        display: flex;
+        justify-content: center;
     }
     .glass-box {
-        transform: none !important; /* disable heavy 3D on mobile for readability */
+        transform: none !important; 
         width: 100%;
-        max-width: 100%;
-        padding: 1rem;
+        max-width: 320px; /* Scale down on mobile */
+        padding: 0.75rem;
     }
     .content-fade-out.glass-box {
-        transform: translateX(-100vw) translateZ(-150px) rotateX(15deg) scale(0.9) !important;
+        transform: translateX(-100vw) scale(0.9) !important;
     }
     .content-fade-out.right-section .hero-title,
     .content-fade-out.right-section .hero-description {
-        transform: translateX(100vw) translateZ(-150px) rotateX(10deg) scale(0.9) !important;
+        transform: translateX(100vw) scale(0.9) !important;
     }
     .course-image {
-        height: 200px;
+        height: min(200px, 40vh);
     }
     .scroll-track-container {
-        height: 60px;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1000 / 80;
         bottom: 2vh;
+        padding: 0 5%; 
     }
 }
