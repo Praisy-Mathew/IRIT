@@ -454,9 +454,9 @@ nav a:hover {
     }
     .content-wrapper {
         flex-direction: column; 
-        justify-content: flex-start;
-        gap: 1.5rem;
-        padding: 5% 6% 25vh 6%; 
+        justify-content: center; /* Centering balances gaps on tall screens */
+        gap: 1.25rem;
+        padding: 2rem 6% 12vh 6%; /* Reduced bottom padding */
         margin-bottom: 0;
         height: 100%;
         overflow-y: auto; 
@@ -495,8 +495,8 @@ nav a:hover {
     .glass-box {
         transform: none !important; 
         width: 100%;
-        max-width: 320px; /* Scale down on mobile */
-        padding: 0.75rem;
+        max-width: 290px; /* Tighter for small screens */
+        padding: 0.65rem;
     }
     .content-fade-out.glass-box {
         transform: translateX(-100vw) scale(0.9) !important;
@@ -506,13 +506,13 @@ nav a:hover {
         transform: translateX(100vw) scale(0.9) !important;
     }
     .course-image {
-        height: min(200px, 40vh);
+        height: min(180px, 30vh); /* Shrink faster on short screens */
     }
     .scroll-track-container {
         width: 100%;
         height: auto;
         aspect-ratio: 1000 / 80;
-        bottom: 2vh;
-        padding: 0 5%; 
+        bottom: 5vh; /* Lifted curve to reduce gap */
+        padding: 0 8%; 
     }
 }
