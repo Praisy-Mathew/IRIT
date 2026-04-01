@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futuristic Hero - Full Stack Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+<body>
+    <div class="hero-container">
+        <!-- Cinematic Background Layers -->
+        <div class="background-tint"></div>
+        <video id="bg-video" autoplay muted loop playsinline></video>
+        <div class="video-overlay"></div>
+        <canvas id="particles-canvas"></canvas>
+        
+        <!-- Cosmic Nebulae -->
+        <div class="nebula nebula-1"></div>
+        <div class="nebula nebula-2"></div>
+        
+        <!-- Infinite Tron Grid Background -->
+        <div class="cyber-grid"></div>
+        <!-- Ambient Glow Elements for smooth depth of field -->
+        <div class="glow-blue"></div>
+        <div class="glow-cyan"></div>
+        <div class="noise-overlay"></div>
+        
+        <header>
+            <div class="logo">Dev<span class="highlight">Sphere</span></div>
+            <nav>
+                <a href="#">Home</a>
+                <a href="#">Projects</a>
+                <a href="#">About</a>
+                <a href="#" class="btn-outline">Contact</a>
+            </nav>
+        </header>
+
+        <main class="content-wrapper">
+            <!-- Left Side: Floating Translucent Glassmorphism Box -->
+            <div class="left-section">
+                <div class="glass-box">
+                    <div class="floating-bit bit-1"></div>
+                    <div class="floating-bit bit-2"></div>
+                    <div class="floating-bit bit-3"></div>
+                    <img id="slide-image" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80" alt="Course Reference" class="course-image">
+                </div>
+            </div>
+
+            <!-- Right Side: Bold White Text & Description -->
+            <div class="right-section">
+                <h1 class="hero-title">Full Stack<br><span class="text-gradient theme-colored">Developer</span></h1>
+                <p class="hero-description">Architecting <span class="desc-highlight">blazing-fast</span>, scalable web applications from end to end. Specializing in modern frameworks, distributed systems, and minimalist user interfaces.</p>
+            </div>
+        </main>
+
+        <!-- Bottom curved scroll track -->
+        <div class="scroll-track-container">
+            <svg class="scroll-curve" viewBox="0 0 1000 80" preserveAspectRatio="none">
+                <defs>
+                    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="6" result="blur" />
+                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                    </filter>
+                    <filter id="strong-glow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="15" result="blur" />
+                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                    </filter>
+                </defs>
+                <path id="curve" d="M 0 60 Q 500 0 1000 60" fill="none" stroke="rgba(255, 255, 255, 0.25)" stroke-width="3" stroke-dasharray="4 14" stroke-linecap="round"/>
+                <path class="curve-active-path" id="curve-active-glow" d="M 0 60 Q 500 0 1000 60" fill="none" stroke="rgba(0, 212, 255, 0.35)" stroke-width="14" stroke-linecap="round" stroke-dasharray="1200" stroke-dashoffset="1200" filter="url(#strong-glow)"/>
+                <path class="curve-active-path" id="curve-active" d="M 0 60 Q 500 0 1000 60" fill="none" stroke="rgba(0, 212, 255, 1)" stroke-width="6" stroke-linecap="round" stroke-dasharray="1200" stroke-dashoffset="1200" filter="url(#glow)"/>
+            </svg>
+            <div class="glowing-dot" id="dot"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
