@@ -22,19 +22,25 @@
     -webkit-font-smoothing: antialiased;
 }
 
+html, body {
+    overflow-x: hidden;
+}
+
 body {
     background-color: var(--bg-dark);
     color: var(--text-main);
     overflow: hidden; 
-    height: 100vh;
+    min-height: 100dvh;
+    width: 100%;
     touch-action: none; /* Strip browser default scroll handling */
     transition: background-color 0.8s ease;
 }
 
 .hero-container {
     position: relative;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    min-height: 100dvh;
+    height: auto;
     display: flex;
     flex-direction: column;
     perspective: 1000px;
@@ -60,9 +66,8 @@ body {
 #bg-video {
     position: absolute;
     top: 50%;
-    left: 200px;
-    transform: translate(0, -50%) scale(1.2);
-    transform-origin: left;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.2);
     min-width: 100%;
     min-height: 100%;
     object-fit: cover;
@@ -93,7 +98,7 @@ body {
 /* Infinite Cyber Grid */
 .cyber-grid {
     position: absolute;
-    top: 0; left: 0; width: 100vw; height: 100vh;
+    top: 0; left: 0; width: 100%; height: 100%;
     background-image: 
         linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
@@ -119,8 +124,8 @@ body {
     position: absolute;
     top: 20%;
     left: 5%;
-    width: 40vw;
-    height: 50vh;
+    width: 100%;
+    height: 100%;
     background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
     filter: blur(80px);
     transition: background 0.8s ease;
@@ -132,8 +137,8 @@ body {
     position: absolute;
     bottom: 10%;
     right: 15%;
-    width: 40vw;
-    height: 40vh;
+    width: 100%;
+    height: 100%;
     background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
     filter: blur(90px);
     transition: background 0.8s ease;
@@ -145,8 +150,8 @@ body {
 /* Cosmic Nebulae */
 .nebula {
     position: absolute;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
     z-index: 2;
     filter: blur(100px);
@@ -371,7 +376,7 @@ nav a:hover {
     position: absolute;
     bottom: 5vh; 
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 80px; 
     z-index: 30;
     pointer-events: none;
@@ -436,58 +441,987 @@ nav a:hover {
 .content-fade-out.right-section .hero-title,
 .content-fade-out.right-section .hero-description {
     opacity: 0 !important;
-    transform: translateX(100vw) translateZ(-300px) rotateY(45deg) rotateX(15deg) translateY(-40px) !important;
+    transform: translateX(100%) translateZ(-300px) rotateY(45deg) rotateX(15deg) translateY(-40px) !important;
     transition-delay: 0s !important; /* Fast fade out */
 }
 
 .content-fade-out.glass-box {
     opacity: 0 !important;
-    transform: translateX(-100vw) translateZ(-400px) rotateY(-60deg) rotateX(20deg) scale(0.8) !important;
+    transform: translateX(-100%) translateZ(-400px) rotateY(-60deg) rotateX(20deg) scale(0.8) !important;
     filter: blur(20px);
     transition: transform 0.5s cubic-bezier(0.7, 0, 0.84, 0), opacity 0.4s ease, filter 0.4s ease !important;
 }
 
-/* Responsive Mobile Rules */
-@media (max-width: 1024px) {
-    nav {
-        display: none; 
+/* 
+ * ==========================================
+ * SECTION 2: ABOUT US (WHITE THEME)
+ * ==========================================
+ */
+.about-section {
+    background-color: #ffffff;
+    color: #111822;
+    padding: 6% 8%; /* Reduced from 10% */
+    min-height: 100vh; /* Takes full screen below hero */
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 50; /* Renders above dark absolute layers */
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem; /* Reduced from 6rem */
+    align-items: center;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.about-image-wrapper {
+    position: relative;
+}
+
+.about-image-wrapper img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 2;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+}
+
+.image-accent {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 100%;
+    height: 100%;
+    border: 3px solid var(--accent-blue);
+    border-radius: 12px;
+    z-index: 1;
+}
+
+.about-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.section-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    letter-spacing: -1.5px;
+    color: #07090d; 
+}
+
+.section-subtitle {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--accent-blue);
+    margin-bottom: 1.5rem;
+}
+
+.about-content p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #556070;
+    margin-bottom: 1rem;
+}
+
+.about-list {
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.about-list h4 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #111822;
+    margin-bottom: 0.75rem;
+}
+
+.about-list ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.about-list li {
+    font-size: 1.05rem; /* slightly smaller than p */
+    line-height: 1.5;
+    color: #556070;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: flex-start;
+}
+
+.check-icon {
+    color: var(--accent-blue);
+    margin-right: 12px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+p.about-mission {
+    font-weight: 700;
+    color: #07090d;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    border-left: 4px solid var(--accent-blue);
+    padding-left: 1.25rem;
+}
+
+.btn-solid-dark {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background-color: #07090d;
+    color: #ffffff;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 100px;
+    margin-top: 1rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn-solid-dark:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* 
+ * ==========================================
+ * SECTION 3: CAREER OPPORTUNITIES
+ * ==========================================
+ */
+.careers-section {
+    background: #ffffff;
+    color: #111822;
+    padding: 10px 8% 10% 8%; 
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 50;
+}
+
+.careers-header {
+    text-align: center;
+    margin-bottom: 5rem;
+    max-width: 800px;
+}
+
+.careers-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: -1.5px;
+    color: #07090d;
+}
+
+.careers-subtitle {
+    font-size: 1.25rem;
+    color: #556070;
+}
+
+.careers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    width: 100%;
+    max-width: 1400px;
+}
+
+/* 3D Book Container */
+.book-container {
+    perspective: 2000px; /* Deeper perspective for dramatic 3D */
+    width: 100%;
+    outline: none;
+    cursor: pointer;
+    transform-style: preserve-3d;
+}
+
+@keyframes floatBook {
+    0% { transform: translateY(0px) rotateX(0deg); }
+    50% { transform: translateY(-8px) rotateX(2deg); }
+    100% { transform: translateY(0px) rotateX(0deg); }
+}
+
+.book-container:nth-child(even) {
+    animation: floatBook 8s infinite ease-in-out;
+}
+.book-container:nth-child(odd) {
+    animation: floatBook 7s infinite ease-in-out reverse;
+}
+
+.book {
+    display: grid;
+    width: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy 3D feel */
+}
+
+/* 3D Hover & Focus Lift */
+.book-container:hover .book,
+.book-container:focus .book {
+    transform: translateY(-15px) rotateX(8deg) rotateY(-10deg) translateZ(40px);
+}
+
+.book-container.is-open .book {
+    /* If the book is open, we flatten the hover tilt so reading text is comfortable */
+    transform: translateY(-5px) rotateX(0deg) rotateY(0deg) translateZ(10px) !important;
+}
+
+/* The Cover and Page Layers */
+.book-cover, .book-page {
+    grid-area: 1 / 1; /* Automatically snap to identical bounds based on tallest content */
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    overflow: hidden;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255,255,255,0.05); /* Subtle dark card border */
+}
+
+/* The Cover Front */
+.book-cover {
+    background: linear-gradient(135deg, rgba(30, 35, 55, 0.85) 0%, rgba(10, 12, 20, 0.95) 100%);
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.03);
+    z-index: 5;
+    transform-origin: left center;
+    transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), box-shadow 0.8s ease;
+    display: flex;
+    flex-direction: column;
+    backface-visibility: hidden; /* Hides the mirrored text when cover swings open */
+}
+
+/* The Inside Reveal */
+.book-page {
+    background: rgba(10, 15, 25, 0.98); /* Deep dark inside */
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+}
+
+/* The Opening Interaction */
+.book-container.is-open .book-cover {
+    transform: rotateY(-140deg);
+    box-shadow: 20px 20px 40px rgba(0,0,0,0.3); /* Stronger shadow for black box */
+}
+
+.card-glow.border-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+    opacity: 0.5;
+    transition: opacity 0.4s ease;
+}
+
+.book-container.is-open .card-glow.border-top {
+    opacity: 1;
+}
+
+.cover-indicator {
+    font-size: 0.85rem;
+    color: var(--accent-blue);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    opacity: 0.8;
+}
+
+@keyframes pulseGlow {
+    0% { text-shadow: 0 0 10px rgba(255,255,255,0); transform: translateZ(0); }
+    50% { text-shadow: 0 0 25px rgba(255,255,255,0.4); transform: translateZ(10px); }
+    100% { text-shadow: 0 0 10px rgba(255,255,255,0); transform: translateZ(0); }
+}
+
+.icon-placeholder {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    letter-spacing: -1px;
+    animation: pulseGlow 4s infinite ease-in-out;
+    display: inline-block; /* allows transform Z to work */
+}
+
+.career-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    transform: translateZ(20px); /* 3D pop off the cover */
+}
+
+.career-desc {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgb(148, 163, 184); /* Slate muted color */
+    transform: translateZ(15px); /* 3D pop off the page */
+}
+
+/* 3D Physical Spine/Thickness Simulation */
+.book-cover::after {
+    content: '';
+    position: absolute;
+    left: -2px; /* Hugs the hinge */
+    top: 5px;
+    width: 6px;
+    height: calc(100% - 10px);
+    background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(30,40,60,0.9));
+    transform-origin: left;
+    transform: rotateY(-90deg);
+    border-radius: 2px;
+}
+
+/* 
+ * ==========================================
+ * SECTION 4: OUR PROGRAMS (DARK 3D THEME)
+ * ==========================================
+ */
+.programs-section {
+    background-color: var(--bg-dark); /* Deep Dark theme to snap out of the white section */
+    color: var(--text-main);
+    padding: 10% 8%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 50;
+    overflow: hidden;
+}
+
+.programs-header {
+    text-align: center;
+    margin-bottom: 5rem;
+    max-width: 800px;
+}
+
+.programs-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: -1.5px;
+}
+
+.programs-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+}
+
+.programs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    width: 100%;
+    max-width: 1400px;
+    perspective: 2000px; /* Establishes the massive 3D scene */
+}
+
+/* 3D Holographic Card Wrapper */
+.program-card-wrapper {
+    width: 100%;
+    perspective: 1500px;
+    display: flex;
+}
+
+.program-card {
+    background: rgba(15, 20, 30, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    width: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.02);
+}
+
+.program-bg-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.15) 0%, transparent 50%);
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    z-index: 0;
+    /* Will be positioned by JS */
+}
+
+.program-card:hover .program-bg-glow {
+    opacity: 1;
+}
+
+/* 3D Content Separation */
+.program-content {
+    position: relative;
+    z-index: 2;
+    transform-style: preserve-3d;
+    transform: translateZ(30px); /* Base floating layer */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    pointer-events: none; /* Let the card handle the hover math */
+}
+
+.program-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    transform: translateZ(60px); /* Text floats incredibly high */
+    text-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.program-desc {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgb(148, 163, 184);
+    margin-bottom: 2.5rem;
+    transform: translateZ(40px);
+    flex-grow: 1;
+}
+
+.program-stats {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+    transform: translateZ(45px);
+    background: rgba(0,0,0,0.3);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.03);
+}
+
+.stat-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--accent-blue);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.stat-value {
+    font-size: 1.1rem;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.program-btn {
+    display: inline-block;
+    padding: 1.25rem 0;
+    text-align: center;
+    background: transparent;
+    color: #ffffff;
+    font-weight: 600;
+    text-decoration: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    transform: translateZ(80px); /* Button is closest to the camera */
+    transition: color 0.3s, border-color 0.3s, background 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    pointer-events: auto; /* Re-enable pointer events for the link */
+}
+
+.program-btn:hover {
+    color: #000000;
+    background: var(--accent-blue);
+    border-color: var(--accent-blue);
+}
+
+/* 
+ * ==========================================
+ * SECTION 5: PORTFOLIO SLIDER (SWIPER)
+ * ==========================================
+ */
+.black-bg-5 {
+    background-color: #05070a; 
+}
+
+.portfolio-slider-2-area {
+    color: #ffffff;
+    padding: 8% 0 8% 0; /* No side padding allows slider to bleed horizontally */
+    position: relative;
+    z-index: 50;
+    overflow: hidden; 
+    border-top: 1px solid rgba(255,255,255,0.03); 
+}
+
+.portfolio-slider-2-wrap {
+    padding-left: 6%; /* Map to site grid */
+    position: relative;
+}
+
+.portfolio-slider-2-item {
+    display: block;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 3/4;
+    cursor: pointer;
+}
+
+.portfolio-slider-2-thumb {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.portfolio-slider-2-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.portfolio-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+    opacity: 0.85;
+    transition: opacity 0.4s ease;
+}
+
+.portfolio-slider-2-item:hover .portfolio-slider-2-thumb img {
+    transform: scale(1.08);
+}
+
+.portfolio-slider-2-item:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+.portfolio-slider-3-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 2.5rem;
+    width: 100%;
+    z-index: 2;
+    transform: translateY(15px);
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.portfolio-slider-2-item:hover .portfolio-slider-3-content {
+    transform: translateY(0);
+}
+
+.portfolio-slider-3-meta {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--accent-blue);
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.portfolio-slider-3-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* Custom Swiper Scrollbar */
+.tp-scrollbar-container {
+    margin-top: 3rem;
+    padding-right: 6%; /* Re-apply padding on right boundary */
+    position: relative;
+}
+
+.tp-scrollbar {
+    height: 4px;
+    background: rgba(255,255,255,0.08); /* Faint track */
+    border-radius: 4px;
+    width: 100%;
+    position: relative;
+    cursor: pointer;
+}
+
+.swiper-scrollbar-drag {
+    background: var(--accent-blue) !important;
+    border-radius: 4px !important;
+}
+
+.port-showcase-slider-link {
+    position: absolute;
+    right: 5%;
+    top: -5rem; /* Pushed above slider */
+    background: transparent;
+    padding: 0;
+    z-index: 10;
+}
+
+.port-showcase-slider-link a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.05rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    transition: all 0.3s;
+}
+
+.port-showcase-slider-link a:hover {
+    background: var(--accent-blue);
+    color: #000;
+    border-color: var(--accent-blue);
+}
+/* 
+ * ==========================================
+ * SECTION 6: CAREER OPPORTUNITIES (PIN PANEL)
+ * ==========================================
+ */
+.black-bg-3 {
+    background-color: #030508;
+    color: #fff;
+}
+
+.tp-project-3__area {
+    padding: 10% 0;
+    min-height: 100vh;
+}
+
+.container-pin {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 4%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.portfolio-sec-pin {
+    position: sticky;
+    top: 5rem; /* Sticks near the top of the viewport */
+    z-index: 10;
+    pointer-events: none; /* Let clicks pass through to images */
+}
+
+.tp-section-title-3 {
+    font-size: 5rem;
+    font-weight: 800;
+    letter-spacing: -2px;
+    color: #ffffff;
+    text-transform: uppercase;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    margin: 0;
+}
+
+.tp-portfolio-item-wrapper-3 {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+    max-width: 800px; /* Constrains image sizes specifically */
+    margin: 0 auto; /* Centers the images directly underneath the title */
+    width: 100%;
+}
+
+.portfolio-panel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 -20px 50px rgba(0,0,0,0.8);
+    transform-origin: top center;
+    aspect-ratio: 16/9;
+    margin-bottom: 40vh; /* Adds spacing so GSAP pins have duration before the next card stacks! */
+}
+
+.portfolio-panel a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: none; /* Hide default cursor */
+}
+
+.portfolio-panel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.panel-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%);
+    opacity: 1; /* Overlay always present to provide contrast for the title */
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    z-index: 5;
+}
+
+.portfolio-panel:hover .panel-overlay {
+    background: radial-gradient(circle at center, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.9) 100%);
+}
+
+.panel-content {
+    z-index: 10;
+    width: 100%;
+}
+
+.career-card-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 0px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.1;
+    transition: margin 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.portfolio-panel:hover .career-card-title {
+    margin-bottom: 1.5rem; /* Push down to make room for reveal */
+}
+
+.reveal-content {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transform: translateY(20px);
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.portfolio-panel:hover .reveal-content {
+    opacity: 1;
+    max-height: 200px;
+    transform: translateY(0);
+}
+
+.career-card-tag {
+    font-size: 0.85rem;
+    color: var(--accent-blue);
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.career-card-desc {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.6;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.portfolio-panel:hover img {
+    transform: scale(1.15);
+    filter: blur(4px) brightness(0.6);
+}
+
+/* Global Custom Mouse Tracking Element */
+.tp-portfolio-view-btn-3 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 120px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    z-index: 9999;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.85rem;
+    line-height: 1.3;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* GSAP or Native JS will control opacity and transform */
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5); 
+    transition: opacity 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.1s linear; /* Smooth opacity, fast follow */
+}
+
+/* Responsive Rules: Tablets & Small Laptops (min 701px to max 1024px) */
+
+@media (min-width: 701px) and (max-width: 1024px) {
+    nav { display: none; }
+    header { padding: 1.5rem 5%; }
+    .hero-container {
+        perspective: none;
+        height: auto;
+        min-height: 100dvh;
+        overflow: hidden;
+    }
+    .content-wrapper {
+        padding: 0 4%;
+        gap: 2rem;
+        /* Keep it Side-by-Side! */
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 8vh;
+    }
+    .left-section {
+        perspective: none;
+        flex: 1;
+        justify-content: center;
+    }
+    .right-section {
+        padding-left: 2rem;
+        flex: 1.2;
+    }
+    .hero-title {
+        font-size: clamp(3rem, 5vw, 4.5rem);
+        margin-bottom: 1rem;
+    }
+    .hero-description {
+        font-size: 1.05rem;
+        margin-bottom: 1.5rem;
+        max-width: 100%;
+    }
+    .glass-box {
+        transform: none !important;
+        width: 100%;
+        max-width: 360px;
+    }
+    .course-image {
+        height: 200px;
+    }
+    .content-fade-out.glass-box {
+        transform: translateX(-50px) scale(0.9) !important;
+    }
+    .content-fade-out.right-section .hero-title,
+    .content-fade-out.right-section .hero-description {
+        transform: translateX(50px) scale(0.9) !important;
+    }
+    .scroll-track-container {
+        /* Keep absolute on tablet to match desktop feel */
+        position: absolute;
+        bottom: 5vh;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1000 / 80;
+        padding: 0 5%;
+    }
+    
+    /* About Us - Tablet */
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+    .about-image-wrapper img {
+        aspect-ratio: 16/9;
+    }
+    
+    /* Careers - Tablet */
+    .careers-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    /* Programs - Tablet */
+    .programs-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    * { transform-style: flat !important; }
+}
+
+/* Responsive Rules: Phones (max-width: 700px) */
+@media (max-width: 700px) {
+    body {
+        overflow-y: auto; 
+    }
+    .hero-container {
+        height: auto;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        perspective: none;
+        padding-bottom: 2rem;
+    }
+    nav { display: none; }
+    header {
+        padding: 1.5rem 6%;
     }
     .content-wrapper {
         flex-direction: column; 
-        justify-content: center; /* Centering balances gaps on tall screens */
-        gap: 1.25rem;
-        padding: 2rem 6% 12vh 6%; /* Reduced bottom padding */
+        justify-content: flex-start;
+        align-items: center;
+        gap: 2rem;
+        padding: 1dvh 6% 0 6%;
         margin-bottom: 0;
-        height: 100%;
-        overflow-y: auto; 
+        height: auto;
+        flex: 1; 
+        overflow: visible;
         -webkit-overflow-scrolling: touch;
     }
     .right-section {
         padding-left: 0;
         align-items: center;
         text-align: center;
-        flex: 0; 
+        flex: none; 
         width: 100%;
     }
-    /* Balanced Typography for 720px - 1024px range */
     .hero-title {
-        font-size: clamp(2.2rem, 8vw, 3.8rem);
+        font-size: clamp(2.5rem, 11vw, 3.5rem);
         line-height: 1.1;
         text-align: center;
         margin-bottom: 0.75rem;
         width: 100%;
     }
     .hero-description {
-        font-size: clamp(0.9rem, 3vw, 1.15rem);
+        font-size: 0.95rem;
         line-height: 1.5;
-        margin-bottom: 1.5rem;
-        max-width: 600px;
+        margin-bottom: 1rem;
+        max-width: 400px;
         margin-left: auto;
         margin-right: auto;
     }
     .left-section {
         perspective: none;
-        flex: 0;
+        flex: none;
         width: 100%;
         display: flex;
         justify-content: center;
@@ -495,24 +1429,113 @@ nav a:hover {
     .glass-box {
         transform: none !important; 
         width: 100%;
-        max-width: 290px; /* Tighter for small screens */
-        padding: 0.65rem;
+        max-width: 280px; 
+        padding: 0.75rem;
+        margin-bottom: 0;
     }
-    .content-fade-out.glass-box {
-        transform: translateX(-100vw) scale(0.9) !important;
-    }
+    .content-fade-out.glass-box,
     .content-fade-out.right-section .hero-title,
     .content-fade-out.right-section .hero-description {
-        transform: translateX(100vw) scale(0.9) !important;
+        transform: scale(0.9) !important;
+        opacity: 0 !important;
     }
     .course-image {
-        height: min(180px, 30vh); /* Shrink faster on short screens */
+        height: min(160px, 30vh); 
     }
+    
+    /* THE SNAP: Curve tied securely to the component stack */
     .scroll-track-container {
+        position: relative; 
         width: 100%;
         height: auto;
         aspect-ratio: 1000 / 80;
-        bottom: 5vh; /* Lifted curve to reduce gap */
-        padding: 0 8%; 
+        bottom: auto;
+        margin-top: 2rem; 
+        padding: 0 5%; 
     }
+
+    /* About Us - Mobile */
+    .about-section {
+        padding: 15% 6%;
+    }
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .about-image-wrapper img {
+        aspect-ratio: 1/1;
+    }
+    .section-title {
+        font-size: 2.8rem;
+    }
+    .section-subtitle {
+        font-size: 1.25rem;
+    }
+    .image-accent {
+        bottom: -10px;
+        right: -10px;
+    }
+
+    /* Careers - Mobile */
+    .careers-section {
+        padding: 10px 6% 15% 6%;
+    }
+    .careers-title {
+        font-size: 2.8rem;
+    }
+    .careers-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    /* Programs - Mobile */
+    .programs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Portfolio - Mobile */
+    .portfolio-slider-2-area {
+        padding: 15% 0;
+    }
+    .portfolio-slider-3-title {
+        font-size: 1.3rem; 
+    }
+    .portfolio-slider-3-content {
+        padding: 1.5rem;
+    }
+    .tp-scrollbar-container {
+        margin-top: 2rem;
+    }
+    .port-showcase-slider-link {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+    .port-showcase-slider-link a {
+        display: inline-flex;
+        font-size: 0.95rem;
+        padding: 0.75rem 1.5rem;
+    }
+
+    * {
+        transform-style: flat !important;
+    }
+}
+
+/* Ghost Image FLIP Animation Engine */
+#ghost-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
+    will-change: transform, width, height, border-radius;
+    object-fit: cover;
+    transform-origin: top left;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
 }
