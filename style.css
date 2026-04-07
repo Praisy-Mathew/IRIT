@@ -29,10 +29,11 @@ html, body {
 body {
     background-color: var(--bg-dark);
     color: var(--text-main);
-    overflow: hidden; 
+    overflow-y: auto;        /* ✅ allow vertical scroll */
+    overflow-x: hidden;
     min-height: 100dvh;
     width: 100%;
-    touch-action: none; /* Strip browser default scroll handling */
+    touch-action: auto;      /* ✅ allow touch scroll */
     transition: background-color 0.8s ease;
 }
 
