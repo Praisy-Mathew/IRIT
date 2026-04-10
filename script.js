@@ -47,6 +47,9 @@ const slides = [
     }
 ];
 
+
+
+
 // --- Engine and DOM Setup ---
 const path = document.getElementById('curve');
 const activePaths = document.querySelectorAll('.curve-active-path');
@@ -539,19 +542,128 @@ if (typeof Swiper !== 'undefined') {
         }
     });
 }
-// GSAP "usePinPanel" Replicator for Career Opportunities
+// --- GSAP Premium Interactive Engine ---
 if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
-    
-    // Add gap dynamically through GSAP or pure CSS, but rely on native pinning
+
+    // --- Cyber Forward Marquee Engine (Advanced) ---
+    const marqueeSection = document.querySelector('.marquee-3d-section');
+    const marqueePerspective = document.querySelector('.marquee-perspective');
+    const marqueeContent = document.querySelector('.marquee-content');
+    const sparkContainer = document.getElementById('velocity-sparks');
+
+    if (marqueeSection && marqueePerspective) {
+        let scrollVelocity = 0;
+        
+        // --- Cyber Forward Marquee Engine (Advanced) ---
+        const marqueeContents = document.querySelectorAll('.marquee-content');
+        
+        ScrollTrigger.create({
+            onUpdate: (self) => {
+                const vel = Math.abs(self.getVelocity() / 300);
+                scrollVelocity = vel;
+                
+                // 1. Velocity Mapping (Speed + Visual Warp)
+                gsap.to(marqueeContents, {
+                    timeScale: 1 + vel,
+                    filter: `contrast(${1 + vel * 0.1}) brightness(${1 + vel * 0.05})`,
+                    duration: 0.5,
+                    overwrite: true
+                });
+            }
+        });
+
+        // 2. Randomized Power Surges
+        function triggerSurge() {
+            marqueeContents.forEach(content => content.classList.add('power-surge'));
+            setTimeout(() => {
+                marqueeContents.forEach(content => content.classList.remove('power-surge'));
+            }, 800 + Math.random() * 1200);
+            
+            // Schedule next surge
+            setTimeout(triggerSurge, 5000 + Math.random() * 8000);
+        }
+        triggerSurge();
+
+        // 3. Spiral Velocity Sparks
+        function createSpark() {
+            if (!sparkContainer) return;
+            const spark = document.createElement('div');
+            spark.className = 'spark';
+            sparkContainer.appendChild(spark);
+
+            const startX = Math.random() * 100;
+            const startY = Math.random() * 100;
+            const spiralRadius = 50 + Math.random() * 150;
+            const spiralOffset = Math.random() * Math.PI * 2;
+            
+            gsap.set(spark, {
+                left: `${startX}%`,
+                top: `${startY}%`,
+                opacity: 0,
+                scale: 0.1,
+                z: -1500
+            });
+
+            gsap.to(spark, {
+                z: 2000,
+                left: `+=${Math.sin(spiralOffset) * spiralRadius}`,
+                top: `+=${Math.cos(spiralOffset) * spiralRadius}`,
+                opacity: 0.8,
+                scale: 4,
+                duration: 0.8 + Math.random() * 1.5,
+                ease: "power2.in",
+                onUpdate: function() {
+                    // Update opacity based on Z position for better depth
+                    const progress = this.progress();
+                    if (progress > 0.8) spark.style.opacity = 1 - (progress - 0.8) * 5;
+                },
+                onComplete: () => spark.remove()
+            });
+        }
+
+        setInterval(() => {
+            if (ScrollTrigger.isInViewport(marqueeSection)) {
+                createSpark();
+            }
+        }, 120);
+
+        // 4. Multi-Axis 3D Mouse Parallax
+        marqueeSection.addEventListener('mousemove', (e) => {
+            const rect = marqueeSection.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            
+            gsap.to(marqueePerspective, {
+                rotateX: 55 + (y * 15),
+                rotateY: x * 20,
+                translateY: -50 + (y * 30),
+                duration: 1,
+                ease: "power3.out"
+            });
+        });
+        
+        marqueeSection.addEventListener('mouseleave', () => {
+            gsap.to(marqueePerspective, {
+                rotateX: 55,
+                rotateY: 0,
+                translateY: -50,
+                duration: 2,
+                ease: "elastic.out(1, 0.6)"
+            });
+        });
+    }
+
+
+    // 3. Career Pinning Logic (Existing)
     const panels = gsap.utils.toArray('.portfolio-panel');
     if (panels.length > 0) {
         panels.forEach((panel, i) => {
             ScrollTrigger.create({
                 trigger: panel,
-                start: "top 15vh", // Pin each panel when it hits 15% from the top
+                start: "top 15vh",
                 pin: true,
-                pinSpacing: false // False means the next elements scroll naturally over this one!
+                pinSpacing: false
             });
         });
     }
@@ -579,6 +691,121 @@ if (customCursor && projPanels.length > 0) {
             // Note: the transform scale down gives it a 'popping out' bounce effect when disappearing
         });
     });
+}
+
+// --- Sidebar Toggle Logic ---
+const sidebar = document.getElementById('sidebar');
+const sidebarOverlay = document.getElementById('sidebar-overlay');
+const openSidebarBtn = document.getElementById('open-sidebar');
+const closeSidebarBtn = document.getElementById('close-sidebar');
+const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+function openSidebar() {
+    document.body.classList.add('sidebar-active');
+}
+
+function closeSidebar() {
+    document.body.classList.remove('sidebar-active');
+}
+
+if (openSidebarBtn) openSidebarBtn.addEventListener('click', openSidebar);
+if (closeSidebarBtn) closeSidebarBtn.addEventListener('click', closeSidebar);
+if (sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar);
+
+// Close sidebar when a link is clicked
+sidebarLinks.forEach(link => {
+    link.addEventListener('click', closeSidebar);
+});
+
+// --- "Who Should Join" Cinematic 3D Engine ---
+const joinCards = document.querySelectorAll('.join-card');
+
+joinCards.forEach(card => {
+    const glare = card.querySelector('.join-card-glare');
+    
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = ((y - centerY) / centerY) * -12; // Maximum tilt
+        const rotateY = ((x - centerX) / centerX) * 12;
+        
+        gsap.to(card, {
+            rotateX: rotateX,
+            rotateY: rotateY,
+            transformPerspective: 1000,
+            duration: 0.4,
+            ease: "power2.out",
+            overwrite: true
+        });
+        
+        // Dynamic Glare effect
+        const glareX = (x / rect.width) * 100;
+        const glareY = (y / rect.height) * 100;
+        gsap.to(glare, {
+            background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.15) 0%, transparent 75%)`,
+            duration: 0.4,
+            ease: "power2.out"
+        });
+    });
+    
+    card.addEventListener('mouseleave', () => {
+        gsap.to(card, {
+            rotateX: 0,
+            rotateY: 0,
+            duration: 1,
+            ease: "elastic.out(1, 0.6)"
+        });
+        gsap.to(glare, {
+            opacity: 0,
+            duration: 0.5
+        });
+    });
+    
+    card.addEventListener('mouseenter', () => {
+        gsap.to(glare, {
+            opacity: 1,
+            duration: 0.3
+        });
+    });
+});
+
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    // Initial display state matching user's manual HTML updates
+    gsap.set(["#who-should-join-irit .book-container", "#who-should-join-irit .careers-header"], { visibility: "visible" });
+
+    // Upgraded 3D Entrance for Books
+    gsap.from("#who-should-join-irit .book-container", {
+        scrollTrigger: {
+            trigger: "#who-should-join-irit .careers-grid",
+            start: "top 95%", 
+        },
+        y: 120,
+        rotateX: -30,
+        opacity: 0,
+        scale: 0.9,
+        duration: 1.5,
+        stagger: 0.2,
+        ease: "power4.out"
+    });
+    
+    gsap.from("#who-should-join-irit .careers-header > *", {
+        scrollTrigger: {
+            trigger: "#who-should-join-irit",
+            start: "top 92%",
+        },
+        y: 50,
+        opacity: 0,
+        stagger: 0.2,
+        duration: 1.2,
+        ease: "power3.out"
+    });
+
+    ScrollTrigger.refresh();
 }
 
 animate();

@@ -11,7 +11,27 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
-<body>
+<body class="theme-0">
+    <!-- Sidebar Navigation -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <img src="logo.png" alt="IRIT Logo" class="logo-img">
+            </div>
+            <div class="close-btn" id="close-sidebar">&times;</div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#home" class="sidebar-link">Home</a>
+            <a href="#programs" class="sidebar-link">Programs</a>
+            <a href="#why-choose" class="sidebar-link">Why IRIT?</a>
+            <a href="#careers" class="sidebar-link">Careers</a>
+            <a href="#" class="sidebar-btn">Enroll Now</a>
+        </nav>
+        <div class="sidebar-footer">
+            <p>© 2026 IRIT Institute. <br> Industry Ready Institute of Technology</p>
+        </div>
+    </div>
     <div class="hero-container">
         <!-- Cinematic Background Layers -->
         <div class="background-tint"></div>
@@ -31,13 +51,14 @@
         <div class="noise-overlay"></div>
         
         <header>
-            <div class="logo">Dev<span class="highlight">Sphere</span></div>
-            <nav>
-                <a href="#">Home</a>
-                <a href="#">Projects</a>
-                <a href="#">About</a>
-                <a href="#" class="btn-outline">Contact</a>
-            </nav>
+            <div class="logo">
+                <img src="logo.png" alt="IRIT Logo" class="logo-img">
+            </div>
+            <div class="menu-btn" id="open-sidebar">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
         </header>
 
         <main class="content-wrapper">
@@ -115,25 +136,758 @@
             </div>
         </div>
     </section>
+<section class="why-irit-section" id="why-irit">
+   <canvas id="why-three-bg"></canvas>
+   <canvas id="why-lightning-canvas"></canvas>
+   <div class="why-inner">
+
+    <div class="why-header">
+      <span class="why-pill">Why Choose IRIT</span>
+      <h2 class="why-title">Why Students <em>Choose IRIT</em></h2>
+      <p class="why-sub">Unlike traditional institutes, IRIT focuses on practical training, live projects, and AI-driven tools — not just theory</p>
+    </div>
+
+    <!-- DESKTOP: 3D Cylinder -->
+    <div class="why-cylinder-wrap" id="why-cylinder-wrap">
+      <div class="why-cylinder" id="why-cylinder">
+
+        <div class="wc-wrap" onclick="whyFocus(this,0)">
+          <div class="wc-card"><div class="wc-inner">
+            <div class="wc-front">
+              <span class="iconify" data-icon="mdi:school" data-width="36" data-height="36"></span>
+              <h3>Industry-Ready Curriculum</h3>
+            </div>
+            <div class="wc-back">Learn what companies actually need — no outdated syllabus</div>
+          </div></div>
+        </div>
+
+        <div class="wc-wrap" onclick="whyFocus(this,1)">
+          <div class="wc-card"><div class="wc-inner">
+            <div class="wc-front">
+              <span class="iconify" data-icon="mdi:robot" data-width="36" data-height="36"></span>
+              <h3>AI-Integrated Learning</h3>
+            </div>
+            <div class="wc-back">Work with real AI tools used across industries today</div>
+          </div></div>
+        </div>
+
+        <div class="wc-wrap" onclick="whyFocus(this,2)">
+          <div class="wc-card"><div class="wc-inner">
+            <div class="wc-front">
+              <span class="iconify" data-icon="mdi:hammer-wrench" data-width="36" data-height="36"></span>
+              <h3>Hands-On Projects</h3>
+            </div>
+            <div class="wc-back">Build a real portfolio — projects employers actually want to see</div>
+          </div></div>
+        </div>
+
+        <div class="wc-wrap" onclick="whyFocus(this,3)">
+          <div class="wc-card"><div class="wc-inner">
+            <div class="wc-front">
+              <span class="iconify" data-icon="mdi:account-tie" data-width="36" data-height="36"></span>
+              <h3>Expert Mentors</h3>
+            </div>
+            <div class="wc-back">Learn from professionals with real industry experience</div>
+          </div></div>
+        </div>
+
+        <div class="wc-wrap" onclick="whyFocus(this,4)">
+          <div class="wc-card"><div class="wc-inner">
+            <div class="wc-front">
+              <span class="iconify" data-icon="mdi:briefcase-check" data-width="36" data-height="36"></span>
+              <h3>Career-Focused Training</h3>
+            </div>
+            <div class="wc-back">Programs designed around real job roles, not just certificates</div>
+          </div></div>
+        </div>
+
+        <div class="wc-wrap" onclick="whyFocus(this,5)">
+          <div class="wc-card"><div class="wc-inner">
+            <div class="wc-front">
+              <span class="iconify" data-icon="mdi:account-group" data-width="36" data-height="36"></span>
+              <h3>Placement Support</h3>
+            </div>
+            <div class="wc-back">Resume building, interview prep, and direct hiring connections</div>
+          </div></div>
+        </div>
+
+        <div class="wc-wrap" onclick="whyFocus(this,6)">
+          <div class="wc-card"><div class="wc-inner">
+            <div class="wc-front">
+              <span class="iconify" data-icon="mdi:earth" data-width="36" data-height="36"></span>
+              <h3>Real-World Approach</h3>
+            </div>
+            <div class="wc-back">Live projects and AI-driven tools over theoretical learning</div>
+          </div></div>
+        </div>
+
+        <div class="wc-wrap" onclick="whyFocus(this,7)">
+          <div class="wc-card"><div class="wc-inner">
+            <div class="wc-front">
+              <span class="iconify" data-icon="mdi:map-marker-radius" data-width="36" data-height="36"></span>
+              <h3>Regional Trust</h3>
+            </div>
+            <div class="wc-back">Trusted by students across Kerala — the leading Digital Marketing Institute in Pathanamthitta</div>
+          </div></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- MOBILE: Responsive Grid (shown only on mobile) -->
+    <div class="why-mobile-grid">
+      <div class="wmg-card">
+        <span class="iconify" data-icon="mdi:school" data-width="28"></span>
+        <div>
+          <div class="wmg-title">Industry-Ready Curriculum</div>
+          <div class="wmg-desc">Learn what companies actually need</div>
+        </div>
+      </div>
+      <div class="wmg-card">
+        <span class="iconify" data-icon="mdi:robot" data-width="28"></span>
+        <div>
+          <div class="wmg-title">AI-Integrated Learning</div>
+          <div class="wmg-desc">Work with real tools used in industries</div>
+        </div>
+      </div>
+      <div class="wmg-card">
+        <span class="iconify" data-icon="mdi:hammer-wrench" data-width="28"></span>
+        <div>
+          <div class="wmg-title">Hands-On Projects</div>
+          <div class="wmg-desc">Build real portfolio projects</div>
+        </div>
+      </div>
+      <div class="wmg-card">
+        <span class="iconify" data-icon="mdi:account-tie" data-width="28"></span>
+        <div>
+          <div class="wmg-title">Expert Mentors</div>
+          <div class="wmg-desc">Learn from professionals with real experience</div>
+        </div>
+      </div>
+      <div class="wmg-card">
+        <span class="iconify" data-icon="mdi:briefcase-check" data-width="28"></span>
+        <div>
+          <div class="wmg-title">Career-Focused Training</div>
+          <div class="wmg-desc">Programs designed for real job roles</div>
+        </div>
+      </div>
+      <div class="wmg-card">
+        <span class="iconify" data-icon="mdi:account-group" data-width="28"></span>
+        <div>
+          <div class="wmg-title">Placement Support</div>
+          <div class="wmg-desc">Resume building, interview prep & hiring connections</div>
+        </div>
+      </div>
+      <div class="wmg-card">
+        <span class="iconify" data-icon="mdi:earth" data-width="28"></span>
+        <div>
+          <div class="wmg-title">Real-World Approach</div>
+          <div class="wmg-desc">Practical training, live projects, AI-driven tools</div>
+        </div>
+      </div>
+      <div class="wmg-card wmg-card--accent">
+        <span class="iconify" data-icon="mdi:map-marker-radius" data-width="28"></span>
+        <div>
+          <div class="wmg-title">Regional Trust</div>
+          <div class="wmg-desc">Trusted across Kerala — #1 in Pathanamthitta</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="why-stats">
+      <div class="why-stat">
+        <div class="wstat-num" data-target="1200">0+</div>
+        <div class="wstat-label">Students Trained</div>
+      </div>
+      <div class="why-stat">
+        <div class="wstat-num" data-target="95">0%</div>
+        <div class="wstat-label">Placement Rate</div>
+      </div>
+      <div class="why-stat">
+        <div class="wstat-num" data-target="3">0</div>
+        <div class="wstat-label">Industry Programs</div>
+      </div>
+      <div class="why-stat">
+        <div class="wstat-num" data-target="12">0+</div>
+        <div class="wstat-label">Expert Mentors</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.why-irit-section {
+  position: relative;
+  background: #030912;
+  padding: 120px 0 140px;
+  overflow: hidden;
+  isolation: isolate;
+  /* ── 3D Scene Variables ── */
+  --wc-radius: 270px;
+  --wc-width: 180px;
+  --wc-height: 210px;
+}
+
+.why-irit-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(167,139,250,0.4), rgba(0,212,255,0.4), transparent);
+}
+
+#why-three-bg {
+  position: absolute;
+  inset: 0; width: 100%; height: 100%; z-index: 0;
+}
+
+#why-lightning-canvas {
+  position: absolute;
+  inset: 0; width: 100%; height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.why-irit-section.surge-flash {
+  animation: bg-flash 0.3s ease-out;
+}
+
+@keyframes bg-flash {
+  0% { background: #030912; }
+  30% { background: #0a1226; }
+  100% { background: #030912; }
+}
+
+.why-inner {
+  position: relative; z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Header */
+.why-header { text-align: center; margin-bottom: 64px; }
+
+.why-pill {
+  display: inline-block;
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: #a78bfa;
+  border: 1px solid rgba(167,139,250,0.3);
+  background: rgba(167,139,250,0.06);
+  padding: 6px 20px; border-radius: 100px; margin-bottom: 20px;
+}
+
+.why-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.2rem, 8vw, 3.4rem); /* Fluid sizing */
+  font-weight: 800; color: #fff;
+  margin: 0 0 14px;
+  letter-spacing: -0.03em; line-height: 1.1;
+}
+
+.why-sub {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(0.9rem, 4vw, 1.1rem); /* Fluid sizing */
+  color: rgba(255,255,255,0.38);
+  font-weight: 300; max-width: 520px;
+  margin: 0 auto; line-height: 1.7;
+}
+
+/* ── DESKTOP CYLINDER ── */
+.why-cylinder-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1400px;
+  height: 380px;
+  margin-bottom: 72px;
+}
+
+.why-cylinder {
+  position: relative;
+  width: 200px;
+  height: 220px;
+  transform-style: preserve-3d;
+}
+
+/* card wraps — centered inside cylinder */
+.wc-wrap {
+  position: absolute;
+  width: var(--wc-width);
+  height: var(--wc-height);
+  left: 50%;
+  top: 50%;
+  margin-left: calc(var(--wc-width) / -2);
+  margin-top: calc(var(--wc-height) / -2);
+  transform-style: preserve-3d;
+  cursor: pointer;
+  transition: transform 0.8s cubic-bezier(.2,.8,.2,1);
+}
+
+.wc-wrap:nth-child(1){ transform: rotateY(0deg)   translateZ(var(--wc-radius)); }
+.wc-wrap:nth-child(2){ transform: rotateY(45deg)  translateZ(var(--wc-radius)); }
+.wc-wrap:nth-child(3){ transform: rotateY(90deg)  translateZ(var(--wc-radius)); }
+.wc-wrap:nth-child(4){ transform: rotateY(135deg) translateZ(var(--wc-radius)); }
+.wc-wrap:nth-child(5){ transform: rotateY(180deg) translateZ(var(--wc-radius)); }
+.wc-wrap:nth-child(6){ transform: rotateY(225deg) translateZ(var(--wc-radius)); }
+.wc-wrap:nth-child(7){ transform: rotateY(270deg) translateZ(var(--wc-radius)); }
+.wc-wrap:nth-child(8){ transform: rotateY(315deg) translateZ(var(--wc-radius)); }
+
+.wc-card {
+  width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.wc-inner {
+  width: 100%; height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+}
+
+.wc-card.flipped .wc-inner { transform: rotateY(180deg); }
+
+.wc-front,
+.wc-back {
+  position: absolute;
+  width: 100%; height: 100%;
+  border-radius: 14px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+.wc-front {
+  background: linear-gradient(145deg, #0a0f1e, #111827);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #e2e8f0;
+}
+
+.wc-front .iconify {
+  color: #a78bfa;
+  margin-bottom: 10px;
+  transition: filter 0.3s, transform 0.3s;
+}
+
+.wc-wrap.wc-active .wc-front .iconify {
+  filter: drop-shadow(0 0 8px #a78bfa) drop-shadow(0 0 14px #00d4ff);
+  transform: scale(1.2);
+}
+
+.wc-front h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px; font-weight: 700;
+  color: #fff; margin: 0;
+  line-height: 1.35;
+  text-shadow: 0 0 8px rgba(167,139,250,0.3);
+}
+
+.wc-back {
+  background: linear-gradient(135deg, #a78bfa, #00d4ff);
+  color: #03080f;
+  transform: rotateY(180deg);
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px; font-weight: 500;
+  line-height: 1.55;
+  box-shadow: 0 0 30px rgba(167,139,250,0.4), 0 0 60px rgba(0,212,255,0.25);
+}
+
+.wc-wrap.wc-active .wc-front {
+  box-shadow: 0 0 35px rgba(167,139,250,0.5), 0 0 70px rgba(0,212,255,0.3);
+}
+
+/* ── MOBILE GRID (hidden on desktop) ── */
+.why-mobile-grid { display: none; }
+
+/* ── STATS BAR ── */
+.why-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Responsive grid */
+  gap: 16px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 56px;
+}
+
+.why-stat {
+  text-align: center;
+  padding: 22px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.why-stat:hover {
+  border-color: rgba(167,139,250,0.25);
+  background: rgba(167,139,250,0.04);
+}
+
+.wstat-num {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.4rem; font-weight: 900;
+  letter-spacing: -0.04em; margin-bottom: 6px;
+  background: linear-gradient(135deg, #a78bfa, #00d4ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+.wstat-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px; font-weight: 400;
+  color: rgba(255,255,255,0.38);
+  letter-spacing: 0.04em;
+}
+
+/* ── TABLET ── */
+@media (max-width: 900px) {
+  .why-irit-section {
+    --wc-radius: 210px;
+    --wc-width: 150px;
+    --wc-height: 180px;
+  }
+  .why-cylinder-wrap { height: 320px; }
+}
+
+/* ── MOBILE: enable cylinder (Universal Responsive) ── */
+@media (max-width: 600px) {
+  .why-irit-section { 
+    padding: 60px 0 80px; 
+    --wc-radius: 160px; /* Reduced radius for mobile */
+    --wc-width: 110px;  /* Reduced width for mobile */
+    --wc-height: 140px; /* Reduced height for mobile */
+  }
+
+  .why-inner { padding: 0 10px; }
+
+  .why-cylinder-wrap { 
+    display: flex; 
+    height: 300px; 
+    perspective: 1000px;
+    margin-bottom: 30px;
+    align-items: center; justify-content: center;
+  }
+
+  .why-cylinder {
+    transform: none; /* Removed scale to prevent flattening */
+    transform-style: preserve-3d;
+  }
+
+  .why-mobile-grid { display: none; }
+
+  .why-stats {
+    padding-top: 30px;
+    gap: 10px;
+  }
+
+  .wstat-num { font-size: 1.8rem; }
+  .why-header { margin-bottom: 20px; }
+}
+@media (max-width: 600px) {
+  .why-cylinder-wrap {
+    height: 340px;
+  }
+
+  .why-cylinder {
+    transform: scale(0.95);
+  }
+}
+@media (max-width: 600px) {
+  .why-irit-section { 
+    --wc-radius: 120px;   /* ↓ reduce depth */
+    --wc-width: 110px;
+    --wc-height: 140px;
+  }
+
+  .why-cylinder-wrap {
+    height: 320px;
+    perspective: 900px;
+  }
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+(function () {
+   const sec = document.querySelector('.why-irit-section');
+   if (!sec) return;
+
+   /* ── Lightning Engine ── */
+   (function initLightning() {
+     const canvas = document.getElementById('why-lightning-canvas');
+     const ctx = canvas.getContext('2d');
+     let w, h;
+
+     function resize() {
+       w = canvas.width = sec.offsetWidth;
+       h = canvas.height = sec.offsetHeight;
+     }
+     window.addEventListener('resize', resize);
+     resize();
+
+     class Bolt {
+       constructor() {
+         this.reset();
+       }
+       reset() {
+         this.active = false;
+         this.segments = [];
+         this.opacity = 0;
+         this.timer = Math.random() * 100 + 50;
+       }
+       strike() {
+         this.active = true;
+         this.opacity = 1;
+         const startX = Math.random() * w;
+         const startY = 0;
+         const endX = w/2 + (Math.random() - 0.5) * w * 0.4;
+         const endY = h * 0.6 + Math.random() * h * 0.2;
+         
+         this.segments = this.createPath(startX, startY, endX, endY, 6);
+         if (Math.random() > 0.6) {
+           sec.classList.add('surge-flash');
+           setTimeout(() => sec.classList.remove('surge-flash'), 300);
+         }
+       }
+       createPath(x1, y1, x2, y2, limit) {
+         if (limit === 0) return [{x: x1, y: y1}, {x: x2, y: y2}];
+         const midX = (x1 + x2) / 2 + (Math.random() - 0.5) * (limit * 20);
+         const midY = (y1 + y2) / 2 + (Math.random() - 0.5) * (limit * 20);
+         return [
+           ...this.createPath(x1, y1, midX, midY, limit - 1),
+           ...this.createPath(midX, midY, x2, y2, limit - 1).slice(1)
+         ];
+       }
+       update() {
+         if (!this.active) {
+           this.timer--;
+           if (this.timer <= 0) this.strike();
+         } else {
+           this.opacity -= 0.05;
+           if (this.opacity <= 0) this.reset();
+         }
+       }
+       draw() {
+         if (!this.active || this.segments.length === 0) return;
+         ctx.strokeStyle = Math.random() > 0.5 ? '#a78bfa' : '#00d4ff';
+         ctx.lineWidth = 1.5;
+         ctx.shadowBlur = 15;
+         ctx.shadowColor = ctx.strokeStyle;
+         ctx.globalAlpha = this.opacity;
+         ctx.beginPath();
+         ctx.moveTo(this.segments[0].x, this.segments[0].y);
+         for (let i = 1; i < this.segments.length; i++) {
+           ctx.lineTo(this.segments[i].x, this.segments[i].y);
+         }
+         ctx.stroke();
+       }
+     }
+
+     const bolts = Array.from({ length: 2 }, () => new Bolt());
+     function animate() {
+       ctx.clearRect(0, 0, w, h);
+       bolts.forEach(b => {
+         b.update();
+         b.draw();
+       });
+       requestAnimationFrame(animate);
+     }
+     animate();
+   })();
+
+   /* ── Three.js Background ── */
+  if (window.THREE) {
+    const bgC = document.getElementById('why-three-bg');
+    const bgR = new THREE.WebGLRenderer({ canvas: bgC, alpha: true, antialias: true });
+    bgR.setPixelRatio(Math.min(devicePixelRatio, 2));
+    const bgS = new THREE.Scene();
+    const bgCam = new THREE.PerspectiveCamera(70, 1, 0.1, 300);
+    bgCam.position.z = 30;
+
+    function resizeWhyBg() {
+      const W = sec.offsetWidth, H = sec.offsetHeight;
+      bgR.setSize(W, H);
+      bgCam.aspect = W / H;
+      bgCam.updateProjectionMatrix();
+    }
+    resizeWhyBg();
+    window.addEventListener('resize', resizeWhyBg);
+
+    const rings = [];
+    for (let i = 0; i < 16; i++) {
+      const m = new THREE.Mesh(
+        new THREE.TorusGeometry(12 + Math.random() * 6, 0.04, 4, 80),
+        new THREE.MeshBasicMaterial({ color: i % 2 === 0 ? 0xa78bfa : 0x00d4ff, transparent: true, opacity: 0.05 + Math.random() * 0.05 })
+      );
+      m.position.z = -i * 9;
+      m.rotation.x = Math.random() * 0.4;
+      bgS.add(m); rings.push(m);
+    }
+
+    const starG = new THREE.BufferGeometry();
+    const starP = new Float32Array(600 * 3);
+    for (let i = 0; i < 600 * 3; i++) starP[i] = (Math.random() - 0.5) * 200;
+    starG.setAttribute('position', new THREE.BufferAttribute(starP, 3));
+    bgS.add(new THREE.Points(starG, new THREE.PointsMaterial({ color: 0xffffff, size: 0.15, transparent: true, opacity: 0.22 })));
+
+    let wmx = 0, wmy = 0;
+    document.addEventListener('mousemove', e => { wmx = (e.clientX / innerWidth - 0.5) * 2; wmy = (e.clientY / innerHeight - 0.5) * 2; });
+
+    let wT = 0;
+    (function loop() {
+      requestAnimationFrame(loop); wT += 0.006;
+      bgCam.position.x += (wmx * 4 - bgCam.position.x) * 0.02;
+      bgCam.position.y += (-wmy * 2 - bgCam.position.y) * 0.02;
+      bgCam.lookAt(0, 0, 0);
+      rings.forEach((r, i) => {
+        r.position.z += 0.09;
+        if (r.position.z > 32) r.position.z = -130;
+        r.rotation.z += 0.002 + i * 0.0003;
+      });
+      bgR.render(bgS, bgCam);
+    })();
+  }
+
+  /* ── Cylinder Auto-Rotation ── */
+  const cyl = document.getElementById('why-cylinder');
+  if (!cyl) return;
+
+  let angle = 0;
+  let autoSpin = true;
+  const STEP = 45;
+  const isMobile = () => window.innerWidth <= 600;
+
+  // Compute radius based on screen size
+  function getRadius() {
+    return parseFloat(getComputedStyle(sec).getPropertyValue('--wc-radius')) || 270;
+  }
+
+  function setBasePositions() {
+    const r = getRadius();
+    document.querySelectorAll('.wc-wrap').forEach((w, i) => {
+      w.style.transform = `rotateY(${i * STEP}deg) translateZ(${r}px)`;
+    });
+  }
+  setBasePositions();
+  window.addEventListener('resize', setBasePositions);
+
+  let raf;
+  function spinLoop() {
+    if (autoSpin) { // Enabled auto-rotation on all devices for total parity
+      angle += 0.18;
+      cyl.style.transform = `rotateY(-${angle}deg)`;
+    }
+    raf = requestAnimationFrame(spinLoop);
+  }
+  spinLoop();
+
+  window.whyFocus = function (wrap, index) {
+    autoSpin = false;
+
+    const r = getRadius();
+    // Use proportional focus distance
+    const focusZ = r * 1.8;
+
+    // Rotate cylinder so clicked card faces front
+    cyl.style.transition = 'transform 0.7s cubic-bezier(.2,.8,.2,1)';
+    cyl.style.transform = `rotateY(-${index * STEP}deg)`;
+    angle = index * STEP;
+
+    // Reset all
+    document.querySelectorAll('.wc-wrap').forEach((w, i) => {
+      w.style.transition = 'transform 0.6s cubic-bezier(.2,.8,.2,1)';
+      w.style.transform = `rotateY(${i * STEP}deg) translateZ(${r}px)`;
+      w.querySelector('.wc-card').classList.remove('flipped');
+      w.classList.remove('wc-active');
+    });
+
+    // Bring forward
+    setTimeout(() => {
+      wrap.style.transform = `rotateY(${index * STEP}deg) translateZ(${focusZ}px) scale(1.15)`;
+      wrap.classList.add('wc-active');
+    }, 400);
+
+    // Flip
+    setTimeout(() => {
+      wrap.querySelector('.wc-card').classList.add('flipped');
+    }, 700);
+
+    // Reset & resume
+    setTimeout(() => {
+      document.querySelectorAll('.wc-wrap').forEach((w, i) => {
+        w.style.transform = `rotateY(${i * STEP}deg) translateZ(${r}px)`;
+        w.querySelector('.wc-card').classList.remove('flipped');
+        w.classList.remove('wc-active');
+      });
+      setTimeout(() => {
+        cyl.style.transition = '';
+        autoSpin = true;
+      }, 200);
+    }, 3200);
+  };
+
+  /* ── Stats counter ── */
+  document.querySelectorAll('.wstat-num').forEach(el => {
+    const target = parseInt(el.dataset.target);
+    const suffix = el.textContent.replace(/[0-9]/g, '');
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      const start = performance.now();
+      const dur = 1800;
+      (function tick(now) {
+        const p = Math.min((now - start) / dur, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(ease * target) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      })(start);
+      io.unobserve(el);
+    }, { threshold: 0.5 });
+    io.observe(el);
+  });
+})();
+</script>
+
 
     <!-- Why Choose IRIT Section -->
-    <section id="why-choose-irit" class="careers-section">
+    <!-- <section id="why-choose-irit" class="careers-section">
         <div class="careers-header">
             <h2 class="careers-title text-gradient theme-colored">Why Choose IRIT?</h2>
             <p class="careers-subtitle">We provide comprehensive training programs that prepare you for real-world challenges</p>
         </div>
         
         <div class="careers-grid">
-            <!-- Full Stack Developer -->
+        
             <div class="book-container" tabindex="0">
                 <div class="book">
-                    <!-- Inside Reveal -->
+                    
                     <div class="book-page">
                         <div class="page-content">
                             <p class="career-desc">Learn the latest technologies and frameworks used by top companies worldwide.</p>
                         </div>
                     </div>
-                    <!-- The Cover -->
+                    
                     <div class="book-cover">
                         <div class="card-glow border-top"></div>
                         <div class="card-content">
@@ -145,7 +899,6 @@
                 </div>
             </div>
 
-            <!-- AI Assisted Developer -->
             <div class="book-container" tabindex="0">
                 <div class="book">
                     <div class="book-page">
@@ -164,7 +917,7 @@
                 </div>
             </div>
 
-            <!-- Performance Marketing Specialist -->
+            
             <div class="book-container" tabindex="0">
                 <div class="book">
                     <div class="book-page">
@@ -183,7 +936,7 @@
                 </div>
             </div>
 
-            <!-- Digital Growth Strategist -->
+            
             <div class="book-container" tabindex="0">
                 <div class="book">
                     <div class="book-page">
@@ -202,7 +955,7 @@
                 </div>
             </div>
 
-            <!-- Architectural Designer -->
+           
             <div class="book-container" tabindex="0">
                 <div class="book">
                     <div class="book-page">
@@ -221,7 +974,7 @@
                 </div>
             </div>
 
-            <!-- Building Planning Specialist -->
+            
             <div class="book-container" tabindex="0">
                 <div class="book">
                     <div class="book-page">
@@ -240,7 +993,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Our Programs Section -->
     <section id="programs" class="programs-section">
@@ -427,12 +1180,28 @@
         </div>
     </section>
 
+    <!-- Cyber Forward Marquee (Single Track) -->
+    <section class="marquee-3d-section">
+        <div class="velocity-sparks" id="velocity-sparks"></div>
+        <div class="marquee-perspective">
+            <div class="marquee-track">
+                <div class="marquee-content">
+                    100% INTERNSHIP GUARANTEE • 100% PLACEMENT ASSISTANCE • SYLLABUS PREPARED BY IIT PROFESSOR • UGC APPROVED CERTIFICATE • 100% INTERNSHIP GUARANTEE • 100% PLACEMENT ASSISTANCE • SYLLABUS PREPARED BY IIT PROFESSOR • UGC APPROVED CERTIFICATE • 100% INTERNSHIP GUARANTEE • 100% PLACEMENT ASSISTANCE • SYLLABUS PREPARED BY IIT PROFESSOR • UGC APPROVED CERTIFICATE
+                </div>
+                <!-- Continuous loop copy -->
+                <div class="marquee-content">
+                    100% INTERNSHIP GUARANTEE • 100% PLACEMENT ASSISTANCE • SYLLABUS PREPARED BY IIT PROFESSOR • UGC APPROVED CERTIFICATE • 100% INTERNSHIP GUARANTEE • 100% PLACEMENT ASSISTANCE • SYLLABUS PREPARED BY IIT PROFESSOR • UGC APPROVED CERTIFICATE • 100% INTERNSHIP GUARANTEE • 100% PLACEMENT ASSISTANCE • SYLLABUS PREPARED BY IIT PROFESSOR • UGC APPROVED CERTIFICATE
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Career Opportunities (Pin Panel Section) -->
     <section id="careers" class="tp-project-3__area p-relative black-bg-3 pt-110">
         <div class="container-pin">
             <!-- Pinned Title Header -->
             <div class="tp-project-3__title-box pb-30 text-center portfolio-sec-pin">
-                <h3 class="tp-section-title-3 tp_title_anim">Career Opportunities</h3>
+                <h3 class="tp-section-title-3 tp_title_anim" style="font-size: 50px;">Career Opportunities</h3>
             </div>
             
             <!-- Stacking Image Panels -->
@@ -539,7 +1308,324 @@
         <div class="tp-portfolio-view-btn-3" id="global-view-btn">
             <span>View <br/> Course</span>
         </div>
-    </section>
+
+    <!-- Who Should Join Section -->
+    <section id="who-should-join-irit" class="careers-section">
+    <div class="careers-header">
+        <h2 class="careers-title text-gradient theme-colored">Who Should Join IRIT Training Programs</h2>
+        <p class="careers-subtitle">
+            IRIT programs are designed to support learners at every stage, from beginner to advanced level.
+        </p>
+    </div>
+    
+    <div class="careers-grid">
+    
+        <!-- Card 1 -->
+        <div class="book-container" tabindex="0">
+            <div class="book">
+                <div class="book-page">
+                    <div class="page-content">
+                        <p class="career-desc">Start your career with industry-focused courses designed to make you job-ready from day one.</p>
+                    </div>
+                </div>
+                <div class="book-cover">
+                    <div class="card-glow border-top"></div>
+                    <div class="card-content">
+                        <div class="icon-placeholder">🎓</div>
+                        <h3 class="career-name">Students</h3>
+                        <div class="cover-indicator">Click to Open &rarr;</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="book-container" tabindex="0">
+            <div class="book">
+                <div class="book-page">
+                    <div class="page-content">
+                        <p class="career-desc">No prior experience? No problem. Learn from scratch with step-by-step guidance.</p>
+                    </div>
+                </div>
+                <div class="book-cover">
+                    <div class="card-glow border-top"></div>
+                    <div class="card-content">
+                        <div class="icon-placeholder">🌱</div>
+                        <h3 class="career-name">Beginners</h3>
+                        <div class="cover-indicator">Click to Open &rarr;</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="book-container" tabindex="0">
+            <div class="book">
+                <div class="book-page">
+                    <div class="page-content">
+                        <p class="career-desc">Transition into tech or marketing with structured programs tailored for career switchers.</p>
+                    </div>
+                </div>
+                <div class="book-cover">
+                    <div class="card-glow border-top"></div>
+                    <div class="card-content">
+                        <div class="icon-placeholder">🔄</div>
+                        <h3 class="career-name">Career Switchers</h3>
+                        <div class="cover-indicator">Click to Open &rarr;</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="book-container" tabindex="0">
+            <div class="book">
+                <div class="book-page">
+                    <div class="page-content">
+                        <p class="career-desc">Upgrade your expertise and expand your opportunities with in-demand skills.</p>
+                    </div>
+                </div>
+                <div class="book-cover">
+                    <div class="card-glow border-top"></div>
+                    <div class="card-content">
+                        <div class="icon-placeholder">💻</div>
+                        <h3 class="career-name">Freelancers</h3>
+                        <div class="cover-indicator">Click to Open &rarr;</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="book-container" tabindex="0">
+            <div class="book">
+                <div class="book-page">
+                    <div class="page-content">
+                        <p class="career-desc">Learn digital strategies to grow your business and reach a wider audience online.</p>
+                    </div>
+                </div>
+                <div class="book-cover">
+                    <div class="card-glow border-top"></div>
+                    <div class="card-content">
+                        <div class="icon-placeholder">🚀</div>
+                        <h3 class="career-name">Entrepreneurs</h3>
+                        <div class="cover-indicator">Click to Open &rarr;</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<section id="who-conveyor">
+
+<style>
+#who-conveyor *{margin:0;padding:0;box-sizing:border-box}
+
+#who-conveyor{
+  position:relative;
+  padding:100px 20px;
+  background:#03040f;
+  overflow:hidden;
+  perspective:1400px;
+}
+
+/* CONTENT */
+#who-conveyor .wrap{
+  max-width:1200px;
+  margin:auto;
+}
+
+#who-conveyor .focus-split {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  text-align: left;
+}
+
+#who-conveyor .focus-text {
+  flex: 1;
+}
+
+#who-conveyor .focus-visual {
+  flex: 1;
+  position: relative;
+}
+
+#who-conveyor h2{
+  font-family:'Syne';
+  font-size:clamp(32px,5vw,58px);
+  color:#fff;
+  margin-bottom:24px;
+}
+
+#who-conveyor h2 span{
+  color:#00d4f5;
+}
+
+#who-conveyor .sub{
+  color:#7b85b8;
+  max-width:540px;
+  margin:0 0 40px;
+  line-height:1.8;
+  font-size:clamp(15px,1.6vw,17px);
+}
+
+/* BELT */
+#who-conveyor .belt{
+  position:relative;
+  height:420px;
+  width: 100%;
+  transform-style:preserve-3d;
+}
+
+/* CARD */
+#who-conveyor .card{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:240px;
+  padding:20px;
+  border-radius:16px;
+  background:rgba(13,18,48,0.75);
+  border:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(10px);
+  color:#fff;
+  transform-style:preserve-3d;
+  transition:.3s;
+  box-shadow:0 20px 50px rgba(0,0,0,.5);
+}
+
+#who-conveyor .card h4{
+  font-family:'Syne';
+  color:#00d4f5;
+  margin-bottom:8px;
+  font-size:15px;
+}
+
+#who-conveyor .card p{
+  font-size:13.5px;
+  color:#aaa;
+  line-height:1.6;
+}
+
+/* ACTIVE CARD */
+#who-conveyor .card.active{
+  box-shadow:0 25px 70px rgba(0,212,245,.25);
+}
+
+/* 📱 MOBILE */
+@media(max-width:992px){
+  #who-conveyor .focus-split {
+    flex-direction: column;
+    text-align: center;
+    gap: 0px;
+  }
+}
+
+@media(max-width:768px){
+  #who-conveyor{
+    padding:90px 16px;
+  }
+
+  #who-conveyor .sub {
+    margin: 0 auto 40px;
+  }
+
+  #who-conveyor .belt{
+    height:300px;
+  }
+
+  #who-conveyor .card{
+    width:200px;
+    padding:16px;
+  }
+
+  #who-conveyor .card h4{
+    font-size:14px;
+  }
+
+  #who-conveyor .card p{
+    font-size:12.5px;
+  }
+}
+</style>
+
+<div class="wrap">
+  <div class="focus-split">
+    <div class="focus-text">
+      <h2>What we <span>focus</span> on</h2>
+      <p class="sub">
+        IRIT (Industry Ready Institute Of Technology) is dedicated to providing 
+        career-focused education designed to meet modern industry demands. Our mission 
+        is to transform students into skilled professionals ready for the real world.
+      </p>
+    </div>
+
+    <div class="focus-visual">
+      <div class="belt" id="belt">
+        <div class="card"><p>Practical learning over theory</p></div>
+        <div class="card"><p>Real-time project experience</p></div>
+        <div class="card"><p>Expert mentorship</p></div>
+        <div class="card"><p>Strong placement support</p></div>
+        <div class="card"><p>100% Internship Guarantee</p></div>
+        <div class="card"><p>100% Placement Assistance</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+
+  const cards = document.querySelectorAll('#belt .card');
+
+  let t = 0;
+
+  const isMobile = window.innerWidth < 768;
+
+  const speed = isMobile ? 0.006 : 0.01;
+  const radius = isMobile ? 120 : 200; // Adjusted for split layout
+  const yRange = isMobile ? 30 : 50;
+
+  function animate(){
+
+    t += speed;
+
+    cards.forEach((card,i)=>{
+
+      let angle = t + i * 1.2;
+
+      let z = Math.cos(angle) * radius;
+      let y = Math.sin(angle) * yRange;
+
+      let scale = (z + radius) / (2 * radius);
+
+      let baseScale = isMobile ? 0.6 : 0.7;
+
+      card.style.transform = `
+        translate(-50%,-50%)
+        translateZ(${z}px)
+        translateY(${y}px)
+        scale(${baseScale + scale})
+      `;
+
+      card.classList.remove('active');
+      if(z > radius - 40){
+        card.classList.add('active');
+      }
+
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+
+})();
+</script>
+
+</section>
 
     <!-- Global Cinematic Hardware-Accelerated Ghost Image -->
     <img id="ghost-image" src="" alt="">
