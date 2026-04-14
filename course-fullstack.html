@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Stack Development | IRIT Institute</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body class="theme-0 course-page">
+    <!-- Sidebar Navigation -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <img src="logo.png" alt="IRIT Logo" class="logo-img">
+            </div>
+            <div class="close-btn" id="close-sidebar">&times;</div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="sidebar-link">Home</a>
+            <a href="about.html" class="sidebar-link">About Us</a>
+            <a href="#programs" class="sidebar-link">Programs</a>
+            <a href="#careers" class="sidebar-link">Careers</a>
+            <div class="sidebar-item dropdown">
+                <a href="#" class="sidebar-link dropdown-toggle">Courses <i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="course-fullstack.html" class="dropdown-link">Python Full Stack</a></li>
+                    <li><a href="course-node.html" class="dropdown-link">Node.js Full Stack</a></li>
+                    <li><a href="course-digital.html" class="dropdown-link">Digital Marketing</a></li>
+                    <li><a href="course-design.html" class="dropdown-link">Building Designing</a></li>
+                </ul>
+            </div>
+            <a href="contact.html" class="sidebar-link">Contact</a>
+            <a href="#" class="sidebar-btn">Enroll Now</a>
+        </nav>
+        
+    </div>
+<style>
+        /* Parent */
+.sidebar-item {
+    position: relative;
+}
+
+/* Hide dropdown initially */
+.dropdown-menu {
+    display: none;
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    background: #111;
+    border-radius: 8px;
+}
+
+/* Dropdown links */
+.dropdown-menu li a {
+    display: block;
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.dropdown-menu li a:hover {
+    background: #222;
+    padding-left: 25px;
+}
+
+/* Show on hover */
+.sidebar-item:hover .dropdown-menu {
+    display: block;
+}
+    </style>
+    <!-- Global Header -->
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="logo.png" alt="IRIT Logo" class="logo-img"></a>
+        </div>
+        <div class="menu-btn" id="open-sidebar">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </header>
+
+    <!-- Split Hero Section -->
+    <section class="sv-inner__slider-area">
+        <div class="container-fluid" style="width: 100%; padding: 0 6%;">
+            <div class="row" style="display: flex; flex-wrap: wrap; align-items: center;">
+                <!-- Left: Content -->
+                <div class="col-content" style="flex: 1; min-width: 350px; padding-right: 50px;">
+                    <div class="sv-inner__slider-content-wrap">
+                        <div class="sv-inner__slider-title-box">
+                            <span class="sv-inner__slider-subtitle">Course Specialization</span>
+                            <h3 class="sv-inner__slider-title">Python<br>Full Stack<br>Development</h3>
+                        </div>
+                        <div class="sv-inner__service-list-wrap">
+                            <div class="sv-inner__service-list">
+                                <span>Frontend to Backend — Master It All with Python.</span>
+                            </div>
+                            <div class="sv-inner__service-list">
+                                <span>Become a Job-Ready Full Stack Developer.</span>
+                            </div>
+                            <div class="sv-inner__service-list">
+                                <span>Turn Ideas into Fully Functional Web Applications.</span>
+                            </div>
+                        </div>
+                        <div style="margin-top: 50px;">
+                            <a href="#" class="sidebar-btn" style="padding: 1.2rem 3rem; text-decoration: none;">Enroll in Course</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Dual Marquee -->
+                <div class="col-marquee" style="flex: 1; min-width: 350px;">
+                    <div class="sv-inner__slider-main">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <!-- Column 1 -->
+                            <div class="sv-inner__marquee-col">
+                                <div class="sv-inner__slider-item"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=500&q=80" alt="Dev 1"></div>
+                                <div class="sv-inner__slider-item"><img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=500&q=80" alt="Dev 2"></div>
+                                <div class="sv-inner__slider-item"><img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=500&q=80" alt="Dev 3"></div>
+                                <div class="sv-inner__slider-item"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=500&q=80" alt="Dev 1"></div>
+                                <div class="sv-inner__slider-item"><img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=500&q=80" alt="Dev 2"></div>
+                                <div class="sv-inner__slider-item"><img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=500&q=80" alt="Dev 3"></div>
+                            </div>
+                            <!-- Column 2 -->
+                            <div class="sv-inner__marquee-col reverse">
+                                <div class="sv-inner__slider-item"><img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&w=500&q=80" alt="Dev 4"></div>
+                                <div class="sv-inner__slider-item"><img src="https://images.unsplash.com/photo-1550439062-609e1531270e?auto=format&fit=crop&w=500&q=80" alt="Dev 5"></div>
+                                <div class="sv-inner__slider-item"><img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&w=500&q=80" alt="Dev 6"></div>
+                                <div class="sv-inner__slider-item"><img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&w=500&q=80" alt="Dev 4"></div>
+                                <div class="sv-inner__slider-item"><img src="https://images.unsplash.com/photo-1550439062-609e1531270e?auto=format&fit=crop&w=500&q=80" alt="Dev 5"></div>
+                                <div class="sv-inner__slider-item"><img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&w=500&q=80" alt="Dev 6"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Overview Section -->
+    <section class="program-overview">
+        <div class="container-fluid" style="padding: 0 6%;">
+            <div class="overview-grid">
+                <!-- Left: Program Stats -->
+                <div class="overview-card accent">
+                    <div class="stat-item">
+                        <span class="stat-label">Program Duration</span>
+                        <h2 class="stat-value">6 Months <span>+ 3 Months</span> Internship</h2>
+                        <p style="color: #8e9bb0; margin-top: 5px;">Total Duration: 9 Months</p>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Course Fee</span>
+                        <h2 class="stat-value">₹ 12,000<span>/-</span></h2>
+                    </div>
+                    <div style="margin-top: auto;">
+                        <a href="#" class="sidebar-btn" style="width: 100%; text-align: center;">Enroll Now</a>
+                    </div>
+                </div>
+
+                <!-- Right: Learning & Guarantees -->
+                <div class="overview-card">
+                    <h3 class="learning-title">What You Will Learn</h3>
+                    <div class="learning-list">
+                        <div class="learning-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Full-stack development skills</span>
+                        </div>
+                        <div class="learning-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Industry-level coding practices</span>
+                        </div>
+                        <div class="learning-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Real project exposure</span>
+                        </div>
+                    </div>
+
+                    <div class="guarantee-badges">
+                        <div class="guarantee-badge">
+                            <i class="fas fa-shield-alt guarantee-icon"></i>
+                            <span class="guarantee-text">100% Internship Guarantee</span>
+                        </div>
+                        <div class="guarantee-badge">
+                            <i class="fas fa-briefcase guarantee-icon"></i>
+                            <span class="guarantee-text">100% Placement Assistance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Insights Area -->
+    <section class="sv-inner__info-area">
+        <div class="container-fluid" style="padding: 0 6%;">
+            <div class="row justify-content-center" style="margin-bottom: 90px; text-align: center;">
+                <div class="col-xl-9">
+                    <h4 class="sv-inner__info-title">
+                        Master Python programming from basics to advanced with real-world applications.
+                    </h4>
+                </div>
+            </div>
+
+            <div class="row module-row" style="display: flex; flex-wrap: wrap; margin-bottom: 100px;">
+                <div class="col-xl-4" style="flex: 1; min-width: 300px;">
+                    <div class="sv-inner__info-service">
+                        <h4 class="sv-inner__left-title">
+                            <span><i class="fas fa-star" style="font-size: 0.8rem;"></i></span>
+                            Frontend  Phase
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-xl-8" style="flex: 2; min-width: 350px;">
+                    <div class="sv-inner__service-category-wrap">
+                        <div class="sv-inner__service-category">
+                            <a href="#">
+                                <div class="sv-inner__service-category-content">
+                                    <span><i class="fas fa-pencil-ruler"></i></span>
+                                    <span>Build Dynamic Websites using HTML, CSS, JavaScript</span>
+                                </div>
+                                
+                            </a>
+                        </div>
+                        <div class="sv-inner__service-category">
+                            <a href="#">
+                                <div class="sv-inner__service-category-content">
+                                    <span><i class="fas fa-vial"></i></span>
+                                    <span>Learn React for Modern Frontend Development</span>
+                                </div>
+                                
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row module-row" style="display: flex; flex-wrap: wrap;">
+                <div class="col-xl-4" style="flex: 1; min-width: 300px;">
+                    <div class="sv-inner__info-service">
+                        <h4 class="sv-inner__left-title">
+                            <span><i class="fas fa-star" style="font-size: 0.8rem;"></i></span>
+                           Backend Development
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-xl-8" style="flex: 2; min-width: 350px;">
+                    <div class="sv-inner__service-category-wrap">
+                        <div class="sv-inner__service-category">
+                            <a href="#">
+                                <div class="sv-inner__service-category-content">
+                                    <span><i class="fas fa-code"></i></span>
+                                    <span>Develop Powerful Backends using Python (FastAPI / Django)</span>
+                                </div>
+                                
+                            </a>
+                        </div>
+                        <div class="sv-inner__service-category">
+                            <a href="#">
+                                <div class="sv-inner__service-category-content">
+                                    <span><i class="fas fa-server"></i></span>
+                                    <span>Work with MySQL Database Integration</span>
+                                </div>
+                               
+                            </a>
+                        </div>
+                        <div class="sv-inner__service-category">
+                            <a href="#">
+                                <div class="sv-inner__service-category-content">
+                                    <span><i class="fas fa-server"></i></span>
+                                    <span>Create REST APIs & Real-Time Applications</span>
+                                </div>
+                               
+                            </a>
+                        </div>
+                         <div class="sv-inner__service-category">
+                            <a href="#">
+                                <div class="sv-inner__service-category-content">
+                                    <span><i class="fas fa-server"></i></span>
+                                    <span>Hands-on Live Projects & Case Studies</span>
+                                </div>
+                               
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Syllabus Breakdown Section -->
+    <section class="syllabus-section">
+        <div class="syllabus-container">
+            <div class="syllabus-header">
+                <h2 class="syllabus-title">IRAS Syllabus Breakdown</h2>
+                <p style="color: #8e9bb0; font-size: 1.1rem; max-width: 700px; margin: 0 auto;">A comprehensive technical roadmap designed to transform you into an AI-Native Full Stack Architect.</p>
+            </div>
+
+            <div class="syllabus-grid">
+                <div class="module-card">
+        <span class="module-badge">Module 0</span>
+        <h3 class="module-title">The Prompt Engineering Engine</h3>
+        <div class="module-focus">Core Skill: Learning to "Speak Machine" through Human Language</div>
+        <ul class="module-points">
+            <li>Mastering Chain-of-Thought (CoT) and Few-Shot Prompting for complex Python logic</li>
+            <li>Crafting .cursorrules to enforce project-wide standards</li>
+            <li>Applying the "Prompt-Refine-Ship" loop for iterative improvement</li>
+            <li>Using context window strategies for large codebases and documentation</li>
+        </ul>
+    </div>
+
+    <div class="module-card">
+        <span class="module-badge">Module 1</span>
+        <h3 class="module-title">The AI-Native Architect</h3>
+        <div class="module-focus">Focus: Environment Setup & Python Logic</div>
+        <ul class="module-points">
+            <li>Shifting from manual coding to System Prompting in Cursor/Windsurf</li>
+            <li>Writing clean Python using Type Hinting and Pydantic</li>
+            <li>Building AI-friendly code structures for better understanding</li>
+            <li>Agentic debugging using terminal-based AI error fixing</li>
+        </ul>
+    </div>
+
+    <div class="module-card">
+        <span class="module-badge">Module 2</span>
+        <h3 class="module-title">Rapid Frontend with Generative UI</h3>
+        <div class="module-focus">Focus: React & Design-to-Code</div>
+        <ul class="module-points">
+            <li>Deep dive into React Hooks (useState, useEffect) for auditing AI code</li>
+            <li>Prompting v0.app and Bolt.new to generate advanced UI components</li>
+            <li>Building data tables and admin dashboards using AI tools</li>
+            <li>Refactoring and integrating AI-generated components into projects</li>
+        </ul>
+    </div>
+
+    <div class="module-card">
+        <span class="module-badge">Module 3</span>
+        <h3 class="module-title">Data Integrity & Backend Logic</h3>
+        <div class="module-focus">Focus: MySQL & API Architecture</div>
+        <ul class="module-points">
+            <li>Designing optimized MySQL schemas and ER diagrams using AI</li>
+            <li>Building FastAPI endpoints with AI-generated CRUD operations</li>
+            <li>Ensuring secure backend with SQL Injection protection</li>
+            <li>Implementing JWT authentication and secure data handling</li>
+        </ul>
+    </div>
+
+    <div class="module-card">
+        <span class="module-badge">Module 4</span>
+        <h3 class="module-title">The Deployment Vibe</h3>
+        <div class="module-focus">Focus: DevOps & Scalability</div>
+        <ul class="module-points">
+            <li>Creating Dockerfiles and GitHub Actions workflows using AI</li>
+            <li>Deploying frontend on Vercel and backend on AWS/Render</li>
+            <li>Setting up scalable cloud infrastructure with minimal configuration</li>
+            <li>Monitoring performance using AI-driven log analysis</li>
+        </ul>
+    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-row">
+                <!-- Column 1: Identity -->
+                <div class="footer-col col-identity">
+                    <img src="logo.png" alt="IRIT Logo" class="footer-logo">
+                    <p class="footer-about">Industry Ready Institute of Technology (IRIT) is Kerala's leading institute for practical, industry-focused training in tech, marketing, and architecture.</p>
+                    <div class="footer-socials">
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#home">Home</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#programs">Programs</a></li>
+                        <li><a href="index.html#why-irit">Why Choose IRIT?</a></li>
+                        <li><a href="index.html#careers">Careers</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Programs -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Our Programs</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#programs">Full Stack Development</a></li>
+                        <li><a href="index.html#programs">Performance Marketing</a></li>
+                        <li><a href="index.html#programs">Building Designing</a></li>
+                        <li><a href="index.html#programs">Interior Designing</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Contact -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Contact Us</h4>
+                    <div class="contact-item">
+                        <span class="contact-label">Location</span>
+                        <p class="contact-text">Pathanamthitta, Kerala, India</p>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Email</span>
+                        <p class="contact-text">info@irit.edu.in</p>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Phone</span>
+                        <p class="contact-text">+91 94000 00000</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2026 IRIT Institute. All Rights Reserved.</p>
+                <p class="credits">Designed for the Future of Learning.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Isolated Scoped Scripts -->
+    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+    <script src="course-script.js"></script>
+</body>
+</html>

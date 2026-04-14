@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Designing & Planning Engineering | IRIT Institute</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body class="theme-0 course-page">
+    <!-- Sidebar Navigation -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <img src="logo.png" alt="IRIT Logo" class="logo-img">
+            </div>
+            <div class="close-btn" id="close-sidebar">&times;</div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="sidebar-link">Home</a>
+            <a href="about.html" class="sidebar-link">About Us</a>
+            <a href="#programs" class="sidebar-link">Programs</a>
+            <a href="#careers" class="sidebar-link">Careers</a>
+            <div class="sidebar-item dropdown">
+                <a href="#" class="sidebar-link dropdown-toggle">Courses <i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="course-fullstack.html" class="dropdown-link">Python Full Stack</a></li>
+                    <li><a href="course-node.html" class="dropdown-link">Node.js Full Stack</a></li>
+                    <li><a href="course-digital.html" class="dropdown-link">Digital Marketing</a></li>
+                    <li><a href="course-design.html" class="dropdown-link">Building Designing</a></li>
+                </ul>
+            </div>
+            <a href="contact.html" class="sidebar-link">Contact</a>
+            <a href="#" class="sidebar-btn">Enroll Now</a>
+        </nav>
+        
+    </div>
+<style>
+        /* Parent */
+.sidebar-item {
+    position: relative;
+}
+
+/* Hide dropdown initially */
+.dropdown-menu {
+    display: none;
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    background: #111;
+    border-radius: 8px;
+}
+
+/* Dropdown links */
+.dropdown-menu li a {
+    display: block;
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.dropdown-menu li a:hover {
+    background: #222;
+    padding-left: 25px;
+}
+
+/* Show on hover */
+.sidebar-item:hover .dropdown-menu {
+    display: block;
+}
+    </style>
+    <!-- Global Header -->
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="logo.png" alt="IRIT Logo" class="logo-img"></a>
+        </div>
+        <div class="menu-btn" id="open-sidebar">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </header>
+
+    <!-- Split Hero Section -->
+    <section class="sv-inner__slider-area">
+        <div class="container-fluid" style="width: 100%; padding: 0 6%;">
+            <div class="row" style="display: flex; flex-wrap: wrap; align-items: center;">
+                <!-- Left: Content -->
+                <div class="col-content" style="flex: 1; min-width: 350px; padding-right: 50px;">
+                    <div class="sv-inner__slider-content-wrap">
+                        <div class="sv-inner__slider-title-box">
+                            <span class="sv-inner__slider-subtitle">Course Specialization</span>
+                            <h3 class="sv-inner__slider-title">Building Designing<br>& Planning Engineering<br>Diploma</h3>
+                        </div>
+                        <div class="sv-inner__service-list-wrap">
+                            <div class="sv-inner__service-list">
+                                <span>From Blueprint to Reality — Master Civil Design</span>
+                            </div>
+                            <div class="sv-inner__service-list">
+                                <span>Build a Career in Modern Construction & Design</span>
+                            </div>
+                            <div class="sv-inner__service-list">
+                                <span>Engineering Your Success</span>
+                            </div>
+                        </div>
+                        <div style="margin-top: 50px;">
+                            <a href="#" class="sidebar-btn" style="padding: 1.2rem 3rem; text-decoration: none;">Enroll in Course</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Dual Marquee -->
+                <div class="col-marquee" style="flex: 1; min-width: 350px;">
+                    <div class="sv-inner__slider-main">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <!-- Column 1 -->
+                            <div class="sv-inner__marquee-col">
+                                <div class="sv-inner__slider-item"><img src="design_img_1.png" alt="Blueprints"></div>
+                                <div class="sv-inner__slider-item"><img src="design_img_2.png" alt="3D Render"></div>
+                                <div class="sv-inner__slider-item"><img src="design_img_3.png" alt="AutoCAD Plan"></div>
+                                <div class="sv-inner__slider-item"><img src="design_img_1.png" alt="Blueprints"></div>
+                                <div class="sv-inner__slider-item"><img src="design_img_2.png" alt="3D Render"></div>
+                                <div class="sv-inner__slider-item"><img src="design_img_3.png" alt="AutoCAD Plan"></div>
+                            </div>
+                            <!-- Column 2 -->
+                            <div class="sv-inner__marquee-col reverse">
+                                <div class="sv-inner__slider-item"><img src="design_img_4.png" alt="Site Engineering"></div>
+                                <div class="sv-inner__slider-item"><img src="design_img_5.png" alt="Presentation"></div>
+                                <div class="sv-inner__slider-item"><img src="design_img_2.png" alt="3D Render"></div>
+                                <div class="sv-inner__slider-item"><img src="design_img_4.png" alt="Site Engineering"></div>
+                                <div class="sv-inner__slider-item"><img src="design_img_5.png" alt="Presentation"></div>
+                                <div class="sv-inner__slider-item"><img src="design_img_2.png" alt="3D Render"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Overview Section -->
+    <section class="program-overview">
+        <div class="container-fluid" style="padding: 0 6%;">
+            <div class="overview-grid">
+                <!-- Left: Program Stats -->
+                <div class="overview-card accent">
+                    <div class="stat-item">
+                        <span class="stat-label">Program Duration</span>
+                        <h2 class="stat-value">120 Days</h2>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Standard Course Fee</span>
+                        <h2 class="stat-value">₹ 1,20,000<span>/-</span></h2>
+                    </div>
+                    <div class="offer-box" style="background: rgba(99, 102, 241, 0.05); padding: 25px; border-radius: 16px; margin-top: 30px; border: 1px solid rgba(99, 102, 241, 0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                        <span class="stat-label" style="color: #6366f1; font-weight: 800; margin-bottom: 15px; display: block; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px;">Opening Offers:</span>
+                        <ul style="list-style: none; padding: 0; font-size: 1.05rem; color: #ffffff;">
+                            <li style="margin-bottom: 12px; display: flex; align-items: center;">
+                                <i class="fas fa-certificate" style="margin-right: 12px; color: #6366f1; font-size: 1.2rem;"></i> 
+                                <span>First 20 students: <strong style="color: #6366f1; font-size: 1.2rem;">50% Off</strong> (₹ 60,000)</span>
+                            </li>
+                            <li style="margin-bottom: 12px; display: flex; align-items: center;">
+                                <i class="fas fa-certificate" style="margin-right: 12px; color: #6366f1; font-size: 1.2rem;"></i> 
+                                <span>Next 20 students: <strong style="color: #6366f1; font-size: 1.2rem;">40% Off</strong> (₹ 72,000)</span>
+                            </li>
+                            <li style="display: flex; align-items: center;">
+                                <i class="fas fa-certificate" style="margin-right: 12px; color: #6366f1; font-size: 1.2rem;"></i> 
+                                <span>Final 20 students: <strong style="color: #6366f1; font-size: 1.2rem;">30% Off</strong> (₹ 84,000)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Right: Learning & Guarantees -->
+                <div class="overview-card">
+                    <h3 class="learning-title">What You Will Learn</h3>
+                    <div class="learning-list">
+                        <div class="learning-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Practical design training </span>
+                        </div>
+                        <div class="learning-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Industry-relevant tools </span>
+                        </div>
+                        <div class="learning-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Real project exposure </span>
+                        </div>
+                        
+                    </div>
+
+                    <div class="guarantee-badges">
+                        <div class="guarantee-badge">
+                            <i class="fas fa-shield-alt guarantee-icon"></i>
+                            <span class="guarantee-text">100% Internship Guarantee</span>
+                        </div>
+                        <div class="guarantee-badge">
+                            <i class="fas fa-briefcase guarantee-icon"></i>
+                            <span class="guarantee-text">100% Placement Assistance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Insights Area -->
+    <section class="sv-inner__info-area">
+        <div class="container-fluid" style="padding: 0 6%;">
+            <div class="row justify-content-center" style="margin-bottom: 90px; text-align: center;">
+                <div class="col-xl-9">
+                    <h4 class="sv-inner__info-title">
+                        Master building design from manual presentation and Vasthu to advanced BIM modeling and professional project planning.
+                    </h4>
+                </div>
+            </div>
+
+            <div class="row module-row" style="display: flex; flex-wrap: wrap; margin-bottom: 100px;">
+                <div class="col-xl-4" style="flex: 1; min-width: 300px;">
+                    <div class="sv-inner__info-service">
+                        <h4 class="sv-inner__left-title">
+                            <span><i class="fas fa-star" style="font-size: 0.8rem;"></i></span>
+                            Engineering & Design
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-xl-8" style="flex: 2; min-width: 350px;">
+                    <div class="sv-inner__service-category-wrap">
+                        <div class="sv-inner__service-category">
+                            <a href="#">
+                                <div class="sv-inner__service-category-content">
+                                    <span><i class="fas fa-pencil-ruler"></i></span>
+                                    <span>Engineering Drawing: Scales&Units, Unit Conversion, Vasthu, & Site Measuring</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="sv-inner__service-category">
+                            <a href="#">
+                                <div class="sv-inner__service-category-content">
+                                    <span><i class="fas fa-hard-hat"></i></span>
+                                    <span>Building Construction: Site Training & Setting Out Details</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row module-row" style="display: flex; flex-wrap: wrap;">
+                <div class="col-xl-4" style="flex: 1; min-width: 300px;">
+                    <div class="sv-inner__info-service">
+                        <h4 class="sv-inner__left-title">
+                            <span><i class="fas fa-star" style="font-size: 0.8rem;"></i></span>
+                           Software & Planning
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-xl-8" style="flex: 2; min-width: 350px;">
+                    <div class="sv-inner__service-category-wrap">
+                        <div class="sv-inner__service-category">
+                            <a href="#">
+                                <div class="sv-inner__service-category-content">
+                                    <span><i class="fas fa-desktop"></i></span>
+                                    <span>Design Softwares: AutoCAD (2D/3D) & Revit Architecture (BIM)</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="sv-inner__service-category">
+                            <a href="#">
+                                <div class="sv-inner__service-category-content">
+                                    <span><i class="fas fa-calculator"></i></span>
+                                    <span>Estimation: Detailed Quantity Surveying & Cost Analysis</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="sv-inner__service-category">
+                            <a href="#">
+                                <div class="sv-inner__service-category-content">
+                                    <span><i class="fas fa-tasks"></i></span>
+                                    <span>Planning: Industrial Visits & PRIMAVERA Mastery</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Syllabus Breakdown Section -->
+    <section class="syllabus-section">
+        <div class="syllabus-container">
+            <div class="syllabus-header">
+                <h2 class="syllabus-title">IRAS Syllabus Breakdown</h2>
+                <p style="color: #8e9bb0; font-size: 1.1rem; max-width: 700px; margin: 0 auto;">A comprehensive technical roadmap designed to transform you into an AI-Native Full Stack Architect.</p>
+            </div>
+
+            <div class="syllabus-grid">
+                            <div class="module-card">
+        <span class="module-badge">Module 1</span>
+        <h3 class="module-title">Civil Engineering Application</h3>
+        <div class="module-focus">Focus: Drawing & Construction Fundamentals</div>
+        <ul class="module-points">
+            <li>Engineering Drawing: Mastering Scales, Units, and Unit Conversion</li>
+            <li>Site Mastery: Vasthu, Site Measuring, and Manual Presentation</li>
+            <li>Construction: Setting Out, Site Training, and Structural Details</li>
+            <li>Practical details from Setting Out to Coping</li>
+        </ul>
+    </div>
+
+    <div class="module-card">
+        <span class="module-badge">Module 2</span>
+        <h3 class="module-title">Industry Standard Softwares</h3>
+        <div class="module-focus">Focus: AutoCAD, Revit & BIM Workflow</div>
+        <ul class="module-points">
+            <li>AutoCAD: Plan, Elevation, Section, and Roof/Stair Designing</li>
+            <li>Legal Drawings: Sancion Drawing and Completion Drawings</li>
+            <li>Revit Architecture: Project Drafting, Model View, and Rendering</li>
+            <li>BIM: Massing, Family creation, and Template management</li>
+        </ul>
+    </div>
+
+    <div class="module-card">
+        <span class="module-badge">Module 3</span>
+        <h3 class="module-title">Estimation & Quantity Surveying</h3>
+        <div class="module-focus">Focus: Quantity Analysis & Costing</div>
+        <ul class="module-points">
+            <li>Detailed Estimation: Mastering project cost predictions</li>
+            <li>Quantity Surveying: Analysis of materials and structural requirements</li>
+            <li>Financials: In-depth Cost Analysis and Budget Planning</li>
+            <li>Bar Bending Schedule (BBS) for structural reinforcement</li>
+        </ul>
+    </div>
+
+    <div class="module-card">
+        <span class="module-badge">Module 4</span>
+        <h3 class="module-title">Planning Engineering</h3>
+        <div class="module-focus">Focus: Project Management & Primavera</div>
+        <ul class="module-points">
+            <li>Data Analysis: Site training and industrial data interpretation</li>
+            <li>PRIMAVERA: Mastering professional project scheduling software</li>
+            <li>Cost Analysis: Integrating planning with industrial financial goals</li>
+            <li>Industrial Visits: Direct exposure to large-scale engineering projects</li>
+        </ul>
+    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-row">
+                <!-- Column 1: Identity -->
+                <div class="footer-col col-identity">
+                    <img src="logo.png" alt="IRIT Logo" class="footer-logo">
+                    <p class="footer-about">Industry Ready Institute of Technology (IRIT) is Kerala's leading institute for practical, industry-focused training in tech, marketing, and architecture.</p>
+                    <div class="footer-socials">
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#home">Home</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#programs">Programs</a></li>
+                        <li><a href="index.html#why-irit">Why Choose IRIT?</a></li>
+                        <li><a href="index.html#careers">Careers</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Programs -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Our Programs</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#programs">Full Stack Development</a></li>
+                        <li><a href="index.html#programs">Performance Marketing</a></li>
+                        <li><a href="index.html#programs">Building Designing</a></li>
+                        <li><a href="index.html#programs">Interior Designing</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Contact -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Contact Us</h4>
+                    <div class="contact-item">
+                        <span class="contact-label">Location</span>
+                        <p class="contact-text">Pathanamthitta, Kerala, India</p>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Email</span>
+                        <p class="contact-text">info@irit.edu.in</p>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Phone</span>
+                        <p class="contact-text">+91 94000 00000</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2026 IRIT Institute. All Rights Reserved.</p>
+                <p class="credits">Designed for the Future of Learning.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Isolated Scoped Scripts -->
+    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+    <script src="course-script.js"></script>
+</body>
+</html>

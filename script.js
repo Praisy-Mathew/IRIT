@@ -60,164 +60,178 @@ const rightSection = document.querySelector('.right-section');
 const titleEl = document.querySelector('.hero-title');
 const descEl = document.querySelector('.hero-description');
 const slideImageEl = document.getElementById('slide-image');
+const video = document.getElementById('bg-video');
+const canvas = document.getElementById('particles-canvas');
+const cyberGrid = document.querySelector('.cyber-grid');
+
+// --- Global Sidebar Navigation Engine ---
+const sidebar = document.getElementById('sidebar');
+const sidebarOverlay = document.getElementById('sidebar-overlay');
+const openSidebarBtn = document.getElementById('open-sidebar');
+const closeSidebarBtn = document.getElementById('close-sidebar');
+const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+function openSidebar() {
+    document.body.classList.add('sidebar-active');
+    // Cinematic link reveal for all pages
+    if (typeof gsap !== 'undefined' && sidebarLinks.length > 0) {
+        gsap.fromTo(sidebarLinks, 
+            { x: 40, opacity: 0 }, 
+            { x: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: "power3.out", delay: 0.2 }
+        );
+    }
+}
+
+function closeSidebar() {
+    document.body.classList.remove('sidebar-active');
+}
+
+if (openSidebarBtn) openSidebarBtn.addEventListener('click', openSidebar);
+if (closeSidebarBtn) closeSidebarBtn.addEventListener('click', closeSidebar);
+if (sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar);
+
+if (sidebarLinks.length > 0) {
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', closeSidebar);
+    });
+}
 
 // --- HLS Video Background Setup ---
-const video = document.getElementById('bg-video');
-const videoSrc = 'https://stream.mux.com/s8pMcOvMQXc4GD6AX4e1o01xFogFxipmuKltNfSYza0200.m3u8';
-
-if (Hls.isSupported()) {
-    const hls = new Hls();
-    hls.loadSource(videoSrc);
-    hls.attachMedia(video);
-} else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    video.src = videoSrc;
+if (video) {
+    const videoSrc = 'https://stream.mux.com/s8pMcOvMQXc4GD6AX4e1o01xFogFxipmuKltNfSYza0200.m3u8';
+    if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(videoSrc);
+        hls.attachMedia(video);
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = videoSrc;
+    }
 }
 
 // --- Galactic Background Engine ---
-const canvas = document.getElementById('particles-canvas');
-const ctx = canvas.getContext('2d');
-let particles = [];
-let stars = [];
-let shootingStars = [];
-const particleCount = 70;
-const starCount = 300;
+if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let stars = [];
+    let shootingStars = [];
+    const particleCount = 70;
+    const starCount = 300;
 
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    initStars();
-}
-window.addEventListener('resize', resizeCanvas);
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        initStars();
+    }
+    window.addEventListener('resize', resizeCanvas);
 
-const cyberGrid = document.querySelector('.cyber-grid');
+    class Star {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 1.5;
+            this.opacity = Math.random();
+            this.twinkleFactor = Math.random() * 0.02;
+        }
+        draw(mx, my) {
+            const px = this.x + mx * (this.size * 5);
+            const py = this.y + my * (this.size * 5);
+            ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+            ctx.beginPath();
+            ctx.arc(px, py, this.size, 0, Math.PI * 2);
+            ctx.fill();
+            this.opacity += this.twinkleFactor;
+            if (this.opacity > 1 || this.opacity < 0.1) this.twinkleFactor *= -1;
+        }
+    }
 
-class Star {
-    constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 1.5;
-        this.opacity = Math.random();
-        this.twinkleFactor = Math.random() * 0.02;
+    class ShootingStar {
+        constructor() { this.reset(); }
+        reset() {
+            this.active = false;
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * (canvas.height / 2);
+            this.length = Math.random() * 80 + 20;
+            this.speed = Math.random() * 15 + 10;
+            this.opacity = 0;
+        }
+        launch() { this.active = true; this.opacity = 1; }
+        update() {
+            if (!this.active) return;
+            this.x -= this.speed;
+            this.y += this.speed * 0.5;
+            this.opacity -= 0.02;
+            if (this.opacity <= 0) this.reset();
+        }
+        draw() {
+            if (!this.active) return;
+            ctx.strokeStyle = `rgba(255, 255, 255, ${this.opacity})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(this.x, this.y);
+            ctx.lineTo(this.x + this.length, this.y - (this.length * 0.5));
+            ctx.stroke();
+        }
     }
-    draw(mx, my) {
-        // Subtle Mouse Parallax on Stars
-        const px = this.x + mx * (this.size * 5);
-        const py = this.y + my * (this.size * 5);
-        
-        ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-        ctx.beginPath();
-        ctx.arc(px, py, this.size, 0, Math.PI * 2);
-        ctx.fill();
-        
-        // Twinkle
-        this.opacity += this.twinkleFactor;
-        if (this.opacity > 1 || this.opacity < 0.1) this.twinkleFactor *= -1;
-    }
-}
 
-class ShootingStar {
-    constructor() {
-        this.reset();
+    class Stardust {
+        constructor() { this.reset(); }
+        reset() {
+            this.x = Math.random() * canvas.width;
+            this.y = canvas.height + Math.random() * 100;
+            this.baseX = this.x;
+            this.size = Math.random() * 3 + 1;
+            this.speedY = Math.random() * 0.8 + 0.3;
+            this.opacity = Math.random() * 0.6 + 0.2;
+            this.wobble = Math.random() * 30;
+            this.freq = Math.random() * 0.02;
+        }
+        update(velocity) {
+            this.y -= this.speedY + (velocity * 25);
+            this.x = this.baseX + Math.sin(this.y * this.freq) * this.wobble;
+            if (this.y < -20) this.reset();
+        }
+        draw(hue) {
+            ctx.fillStyle = `hsla(${hue}, 80%, 75%, ${this.opacity})`;
+            ctx.shadowBlur = 8;
+            ctx.shadowColor = `hsla(${hue}, 80%, 75%, 0.8)`;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
     }
-    reset() {
-        this.active = false;
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * (canvas.height / 2);
-        this.length = Math.random() * 80 + 20;
-        this.speed = Math.random() * 15 + 10;
-        this.opacity = 0;
-    }
-    launch() {
-        this.active = true;
-        this.opacity = 1;
-    }
-    update() {
-        if (!this.active) return;
-        this.x -= this.speed;
-        this.y += this.speed * 0.5;
-        this.opacity -= 0.02;
-        if (this.opacity <= 0) this.reset();
-    }
-    draw() {
-        if (!this.active) return;
-        ctx.strokeStyle = `rgba(255, 255, 255, ${this.opacity})`;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(this.x, this.y);
-        ctx.lineTo(this.x + this.length, this.y - (this.length * 0.5));
-        ctx.stroke();
-    }
-}
 
-class Stardust {
-    constructor() {
-        this.reset();
+    function initStars() {
+        stars = [];
+        for (let i = 0; i < starCount; i++) stars.push(new Star());
     }
-    reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = canvas.height + Math.random() * 100;
-        this.baseX = this.x;
-        this.size = Math.random() * 3 + 1;
-        this.speedY = Math.random() * 0.8 + 0.3;
-        this.opacity = Math.random() * 0.6 + 0.2;
-        this.wobble = Math.random() * 30;
-        this.freq = Math.random() * 0.02;
-    }
-    update(velocity) {
-        this.y -= this.speedY + (velocity * 25);
-        this.x = this.baseX + Math.sin(this.y * this.freq) * this.wobble;
-        if (this.y < -20) this.reset();
-    }
-    draw(hue) {
-        ctx.fillStyle = `hsla(${hue}, 80%, 75%, ${this.opacity})`;
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = `hsla(${hue}, 80%, 75%, 0.8)`;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-    }
-}
 
-function initStars() {
-    stars = [];
-    for (let i = 0; i < starCount; i++) stars.push(new Star());
-}
+    for (let i = 0; i < particleCount; i++) particles.push(new Stardust());
+    for (let i = 0; i < 3; i++) shootingStars.push(new ShootingStar());
+    resizeCanvas();
 
-for (let i = 0; i < particleCount; i++) particles.push(new Stardust());
-for (let i = 0; i < 3; i++) shootingStars.push(new ShootingStar());
-resizeCanvas();
-
-function animateGalaxy(velocity, hue, mx, my) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    // 1. Draw Static Parallax Starfield
-    stars.forEach(s => s.draw(mx, my));
-    
-    // 2. Rare Shooting Stars
-    if (Math.random() < 0.005) {
-        const inactive = shootingStars.find(ss => !ss.active);
-        if (inactive) inactive.launch();
-    }
-    shootingStars.forEach(ss => {
-        ss.update();
-        ss.draw();
-    });
-
-    // 3. Draw Floating Stardust
-    particles.forEach(p => {
-        p.update(velocity);
-        p.draw(hue);
-    });
-    
-    // Dynamic Grid Speed
-    const gridSpeed = 3 / (1 + velocity * 12);
-    cyberGrid.style.animationDuration = `${gridSpeed}s`;
+    window.animateGalaxy = function(velocity, hue, mx, my) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        stars.forEach(s => s.draw(mx, my));
+        if (Math.random() < 0.005) {
+            const inactive = shootingStars.find(ss => !ss.active);
+            if (inactive) inactive.launch();
+        }
+        shootingStars.forEach(ss => { ss.update(); ss.draw(); });
+        particles.forEach(p => { p.update(velocity); p.draw(hue); });
+        if (cyberGrid) {
+            const gridSpeed = 3 / (1 + velocity * 12);
+            cyberGrid.style.animationDuration = `${gridSpeed}s`;
+        }
+    };
 }
 
 // Get real length of the SVG Path
-const pathLength = path.getTotalLength();
-activePaths.forEach(p => p.style.strokeDasharray = pathLength);
-activePaths.forEach(p => p.style.strokeDashoffset = pathLength);
+let pathLength = 0;
+if (path) {
+    pathLength = path.getTotalLength();
+    activePaths.forEach(p => p.style.strokeDasharray = pathLength);
+    activePaths.forEach(p => p.style.strokeDashoffset = pathLength);
+}
 
 // Add Magnetic Parallax Physics Base
 let mouseX = 0;
@@ -352,26 +366,24 @@ function animate() {
     }
     
     // --- ABSOLUTELY PERFECT DOT ALIGNMENT ENGINE ---
-    const distanceToPoint = currentProgress * pathLength;
-    const localPoint = path.getPointAtLength(distanceToPoint);
-    
-    // Use the native Screen CTM (Coordinate Transformation Matrix)
-    // This maps the SVG ViewBox coordinate to exact screen pixels,
-    // handling all letterboxing, scaling, and resolution variations.
-    const matrix = path.getScreenCTM();
-    const svgPoint = path.ownerSVGElement.createSVGPoint();
-    svgPoint.x = localPoint.x;
-    svgPoint.y = localPoint.y;
-    const finalPoint = svgPoint.matrixTransform(matrix);
-    
-    // The dot is inside .scroll-track-container, which has position: absolute.
-    // To position it relative to its container, we subtract the container's bounding rect.
-    const containerRect = dot.parentElement.getBoundingClientRect();
-    
-    dot.style.left = `${finalPoint.x - containerRect.left}px`;
-    dot.style.top = `${finalPoint.y - containerRect.top}px`;
-    
-    activePaths.forEach(p => p.style.strokeDashoffset = pathLength - distanceToPoint);
+    if (path && dot) {
+        const distanceToPoint = currentProgress * pathLength;
+        const localPoint = path.getPointAtLength(distanceToPoint);
+        
+        // Use the native Screen CTM (Coordinate Transformation Matrix)
+        const matrix = path.getScreenCTM();
+        const svgPoint = path.ownerSVGElement.createSVGPoint();
+        svgPoint.x = localPoint.x;
+        svgPoint.y = localPoint.y;
+        const finalPoint = svgPoint.matrixTransform(matrix);
+        
+        const containerRect = dot.parentElement.getBoundingClientRect();
+        
+        dot.style.left = `${finalPoint.x - containerRect.left}px`;
+        dot.style.top = `${finalPoint.y - containerRect.top}px`;
+        
+        activePaths.forEach(p => p.style.strokeDashoffset = pathLength - distanceToPoint);
+    }
     
     if (!glassBox.classList.contains('content-fade-out')) {
         if (window.innerWidth > 1024) glassBox.style.transform = `rotateY(${12 - (currentProgress * 24) + magneticRotY}deg) rotateX(${4 + (currentProgress * 2) + magneticRotX}deg) translateY(${currentProgress * -20}px)`;
@@ -446,10 +458,12 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-const initialTitle = applySplitTextBlur(slides[0].title, 0);
-const initialDesc = applySplitTextBlur(slides[0].desc, initialTitle.nextIndex);
-titleEl.innerHTML = initialTitle.html;
-descEl.innerHTML = initialDesc.html;
+if (titleEl && descEl) {
+    const initialTitle = applySplitTextBlur(slides[0].title, 0);
+    const initialDesc = applySplitTextBlur(slides[0].desc, initialTitle.nextIndex);
+    titleEl.innerHTML = initialTitle.html;
+    descEl.innerHTML = initialDesc.html;
+}
 
 // Initialize FLIP target images with the final slide's asset
 const finalSlideImg = slides[slides.length - 1].image;
@@ -693,29 +707,7 @@ if (customCursor && projPanels.length > 0) {
     });
 }
 
-// --- Sidebar Toggle Logic ---
-const sidebar = document.getElementById('sidebar');
-const sidebarOverlay = document.getElementById('sidebar-overlay');
-const openSidebarBtn = document.getElementById('open-sidebar');
-const closeSidebarBtn = document.getElementById('close-sidebar');
-const sidebarLinks = document.querySelectorAll('.sidebar-link');
 
-function openSidebar() {
-    document.body.classList.add('sidebar-active');
-}
-
-function closeSidebar() {
-    document.body.classList.remove('sidebar-active');
-}
-
-if (openSidebarBtn) openSidebarBtn.addEventListener('click', openSidebar);
-if (closeSidebarBtn) closeSidebarBtn.addEventListener('click', closeSidebar);
-if (sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar);
-
-// Close sidebar when a link is clicked
-sidebarLinks.forEach(link => {
-    link.addEventListener('click', closeSidebar);
-});
 
 // --- "Who Should Join" Cinematic 3D Engine ---
 const joinCards = document.querySelectorAll('.join-card');
@@ -809,3 +801,88 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
 }
 
 animate();
+
+// --- Programs Section Lavender Stage Flow Engine ---
+(function initProgramsLavender() {
+    const canvas = document.getElementById("programs-particles");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const section = document.getElementById("programs");
+
+    let w, h;
+    let particles = [];
+
+    function resize() {
+        if (!section) return;
+        w = canvas.width = section.offsetWidth;
+        h = canvas.height = section.offsetHeight;
+        
+        particles = [];
+        for(let i = 0; i < 180; i++) {
+            particles.push(resetParticle({}));
+        }
+    }
+
+    function resetParticle(p) {
+        p.x = Math.random() * w;
+        p.y = Math.random() * -h; // Start above camera
+        p.z = Math.random() * 0.5 + 0.5; // Depth factor
+        p.speed = (Math.random() * 2 + 1) * p.z;
+        p.opacity = Math.random() * 0.4 + 0.1;
+        p.color = Math.random() > 0.5 ? "#ffffff" : "#a78bfa";
+        p.history = []; // For trails
+        return p;
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, w, h);
+
+        particles.forEach(p => {
+            // Store previous position for trails
+            p.history.push({x: p.x, y: p.y});
+            if (p.history.length > 5) p.history.shift();
+
+            // Vertical movement
+            p.y += p.speed;
+
+            // Horizontal Convergence (The curved flow)
+            // As particles move down, they gravitate towards the center-bottom
+            const centerProgress = p.y / h;
+            const targetX = w / 2;
+            const convergenceForce = Math.pow(centerProgress, 2) * 0.05;
+            p.x += (targetX - p.x) * convergenceForce;
+
+            if (p.y > h + 50) {
+                resetParticle(p);
+                p.y = -20;
+            }
+
+            // Draw trails
+            if (p.history.length > 2) {
+                ctx.beginPath();
+                ctx.moveTo(p.history[0].x, p.history[0].y);
+                for (let i = 1; i < p.history.length; i++) {
+                    ctx.lineTo(p.history[i].x, p.history[i].y);
+                }
+                ctx.strokeStyle = p.color;
+                ctx.lineWidth = p.z * 1.5;
+                ctx.globalAlpha = p.opacity;
+                ctx.stroke();
+                
+                // Glow point at the tip
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.z * 1.2, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.globalAlpha = p.opacity + 0.3;
+                ctx.fill();
+            }
+        });
+        
+        ctx.globalAlpha = 1.0;
+        requestAnimationFrame(draw);
+    }
+
+    window.addEventListener("resize", resize);
+    resize();
+    draw();
+})();

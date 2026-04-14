@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Marketing Strategist | IRIT Institute</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body class="theme-0 course-page">
+    <!-- Sidebar Navigation -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <img src="logo.png" alt="IRIT Logo" class="logo-img">
+            </div>
+            <div class="close-btn" id="close-sidebar">&times;</div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="sidebar-link">Home</a>
+            <a href="about.html" class="sidebar-link">About Us</a>
+            <a href="#programs" class="sidebar-link">Programs</a>
+            <a href="#careers" class="sidebar-link">Careers</a>
+            <div class="sidebar-item dropdown">
+                <a href="#" class="sidebar-link dropdown-toggle">Courses <i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="course-fullstack.html" class="dropdown-link">Python Full Stack</a></li>
+                    <li><a href="course-node.html" class="dropdown-link">Node.js Full Stack</a></li>
+                    <li><a href="course-digital.html" class="dropdown-link">Digital Marketing</a></li>
+                    <li><a href="course-design.html" class="dropdown-link">Building Designing</a></li>
+                </ul>
+            </div>
+            <a href="contact.html" class="sidebar-link">Contact</a>
+            <a href="#" class="sidebar-btn">Enroll Now</a>
+        </nav>
+        
+    </div>
+<style>
+        /* Parent */
+.sidebar-item {
+    position: relative;
+}
+
+/* Hide dropdown initially */
+.dropdown-menu {
+    display: none;
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    background: #111;
+    border-radius: 8px;
+}
+
+/* Dropdown links */
+.dropdown-menu li a {
+    display: block;
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.dropdown-menu li a:hover {
+    background: #222;
+    padding-left: 25px;
+}
+
+/* Show on hover */
+.sidebar-item:hover .dropdown-menu {
+    display: block;
+}
+    </style>
+    <!-- Global Header -->
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="logo.png" alt="IRIT Logo" class="logo-img"></a>
+        </div>
+        <div class="menu-btn" id="open-sidebar">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </header>
+
+    <!-- Split Hero Section -->
+    <section class="sv-inner__slider-area">
+        <div class="container-fluid" style="width: 100%; padding: 0 6%;">
+            <div class="row" style="display: flex; flex-wrap: wrap; align-items: center;">
+                <!-- Left: Content -->
+                <div class="col-content" style="flex: 1; min-width: 350px; padding-right: 50px;">
+                    <div class="sv-inner__slider-content-wrap">
+                        <div class="sv-inner__slider-title-box">
+                            <span class="sv-inner__slider-subtitle">Course Specialization</span>
+                            <h3 class="sv-inner__slider-title">Industry Ready Digital Marketing Strategist</h3>
+                        </div>
+                        <div class="sv-inner__service-list-wrap">
+                            <div class="sv-inner__service-list">
+                                <span>Master Digital Marketing & Grow Brands Online</span>
+                            </div>
+                            <div class="sv-inner__service-list">
+                                <span>From Strategy to Sales — Become a Digital Marketer.</span>
+                            </div>
+                            <div class="sv-inner__service-list">
+                                <span>Turn Creativity into Conversions.</span>
+                            </div>
+                        </div>
+                        <div style="margin-top: 50px;">
+                            <a href="#" class="sidebar-btn" style="padding: 1.2rem 3rem; text-decoration: none;">Enroll in Course</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Dual Marquee -->
+                <div class="col-marquee" style="flex: 1; min-width: 350px;">
+                    <div class="sv-inner__slider-main">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <!-- Column 1 -->
+                            <div class="sv-inner__marquee-col">
+                                <div class="sv-inner__slider-item"><img src="dm_img_1.png" alt="Analytics Dash"></div>
+                                <div class="sv-inner__slider-item"><img src="dm_img_2.png" alt="Ads Manager"></div>
+                                <div class="sv-inner__slider-item"><img src="dm_img_3.png" alt="SEO Intelligence"></div>
+                                <div class="sv-inner__slider-item"><img src="dm_img_1.png" alt="Analytics Dash"></div>
+                                <div class="sv-inner__slider-item"><img src="dm_img_2.png" alt="Ads Manager"></div>
+                                <div class="sv-inner__slider-item"><img src="dm_img_3.png" alt="SEO Intelligence"></div>
+                            </div>
+                            <!-- Column 2 -->
+                            <div class="sv-inner__marquee-col reverse">
+                                <div class="sv-inner__slider-item"><img src="dm_img_4.png" alt="Automation"></div>
+                                <div class="sv-inner__slider-item"><img src="dm_img_5.png" alt="Workspace"></div>
+                                <div class="sv-inner__slider-item"><img src="dm_img_6.png" alt="Funnel"></div>
+                                <div class="sv-inner__slider-item"><img src="dm_img_4.png" alt="Automation"></div>
+                                <div class="sv-inner__slider-item"><img src="dm_img_5.png" alt="Workspace"></div>
+                                <div class="sv-inner__slider-item"><img src="dm_img_6.png" alt="Funnel"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Overview Section -->
+    <section class="program-overview">
+        <div class="container-fluid" style="padding: 0 6%;">
+            <div class="overview-grid">
+                <!-- Left: Program Stats -->
+                <div class="overview-card accent">
+                    <div class="stat-item">
+                        <span class="stat-label">Program Duration</span>
+                        <h2 class="stat-value">6 Months <span>+ 2 Months</span> Internship</h2>
+                        <p style="color: #8e9bb0; margin-top: 5px;">Total Duration: 8 Months</p>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Course Fee</span>
+                        <h2 class="stat-value">₹ 45,000<span>/-</span></h2>
+                    </div>
+                    <div style="margin-top: auto;">
+                        <a href="#" class="sidebar-btn" style="width: 100%; text-align: center;">Enroll Now</a>
+                    </div>
+                </div>
+
+                <!-- Right: Learning & Guarantees -->
+                <div class="overview-card">
+                    <h3 class="learning-title">What You Will Learn</h3>
+                    <div class="learning-list">
+                        <div class="learning-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>SEO & SEM</span>
+                        </div>
+                        <div class="learning-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Social Media Marketing</span>
+                        </div>
+                        <div class="learning-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Google Ads & Analytics</span>
+                        </div>
+                        <div class="learning-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Content Marketing & Email Marketing</span>
+                        </div>
+                    </div>
+
+                    <div class="guarantee-badges">
+                        <div class="guarantee-badge">
+                            <i class="fas fa-shield-alt guarantee-icon"></i>
+                            <span class="guarantee-text">100% Internship Guarantee</span>
+                        </div>
+                        <div class="guarantee-badge">
+                            <i class="fas fa-briefcase guarantee-icon"></i>
+                            <span class="guarantee-text">100% Placement Assistance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Insights Area -->
+    <section class="sv-inner__info-area">
+        <div class="container-fluid" style="padding: 0 6%;">
+            <div class="row justify-content-center" style="margin-bottom: 90px; text-align: center;">
+                <div class="col-xl-9">
+                    <h4 class="sv-inner__info-title">
+                        Master performance marketing from measurement frameworks to AI-driven automation and scaling.
+                    </h4>
+                </div>
+            </div>
+
+            <div class="row module-row" style="display: flex; flex-wrap: wrap; margin-bottom: 100px;">
+                <div class="col-xl-4" style="flex: 1; min-width: 300px;">
+                    <div class="sv-inner__info-service">
+                        <h4 class="sv-inner__left-title">
+                            <span><i class="fas fa-star" style="font-size: 0.8rem;"></i></span>
+                            Measurement & Search Intelligence
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-xl-8" style="flex: 2; min-width: 350px;">
+                    <div class="sv-inner__service-category-wrap">
+                        <div class="sv-inner__service-category">
+                            <a href="#">
+                                <div class="sv-inner__service-category-content">
+                                    <span><i class="fas fa-pencil-ruler"></i></span>
+                                    <span>Marketing Funnels & Customer Journey (TOFU, MOFU, BOFU)</span>
+                                </div>
+                                
+                            </a>
+                        </div>
+                        <div class="sv-inner__service-category">
+                            <a href="#">
+                                <div class="sv-inner__service-category-content">
+                                    <span><i class="fas fa-search"></i></span>
+                                    <span>Tracking Setup: GTM, GA4 Events & Server-side Integration</span>
+                                </div>
+                                
+                            </a>
+                        </div>
+                        <div class="sv-inner__service-category">
+                            <a href="#">
+                                <div class="sv-inner__service-category-content">
+                                    <span><i class="fas fa-search"></i></span>
+                                    <span>Privacy, Consent Mode & Data Compliance (GDPR/CCPA)</span>
+                                </div>
+                                
+                            </a>
+                        </div>
+                        <div class="sv-inner__service-category">
+                            <a href="#">
+                                <div class="sv-inner__service-category-content">
+                                    <span><i class="fas fa-search"></i></span>
+                                    <span>Technical SEO, Topic Clusters & Search Optimization</span>
+                                </div>
+                                
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row module-row" style="display: flex; flex-wrap: wrap;">
+                <div class="col-xl-4" style="flex: 1; min-width: 300px;">
+                    <div class="sv-inner__info-service">
+                        <h4 class="sv-inner__left-title">
+                            <span><i class="fas fa-star" style="font-size: 0.8rem;"></i></span>
+                              Ads, AI & Industry Tools
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-xl-8" style="flex: 2; min-width: 350px;">
+                    <div class="sv-inner__service-category-wrap">
+                        <div class="sv-inner__service-category">
+                            <a href="#">
+                                <div class="sv-inner__service-category-content">
+                                    <span><i class="fas fa-bullhorn"></i></span>
+                                    <span>Performance Marketing: Meta Ads & Google Ads (Search + PMax)</span>
+                                </div>
+                                
+                            </a>
+                        </div>
+                        <div class="sv-inner__service-category">
+                            <a href="#">
+                                <div class="sv-inner__service-category-content">
+                                    <span><i class="fas fa-robot"></i></span>
+                                    <span>Audience Targeting, Retargeting & Smart Bidding Strategies</span>
+                                </div>
+                               
+                            </a>
+                        </div>
+                        <div class="sv-inner__service-category">
+                            <a href="#">
+                                <div class="sv-inner__service-category-content">
+                                    <span><i class="fas fa-chart-line"></i></span>
+                                    <span>AI Strategy, Automation & Workflow Integration</span>
+                                </div>
+                               
+                            </a>
+                        </div>
+                         <div class="sv-inner__service-category">
+                            <a href="#">
+                                <div class="sv-inner__service-category-content">
+                                    <span><i class="fas fa-briefcase"></i></span>
+                                    <span>Data Analysis, ROI Tracking & Performance Optimization</span>
+                                </div>
+                               
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Syllabus Breakdown Section -->
+    <section class="syllabus-section">
+        <div class="syllabus-container">
+            <div class="syllabus-header">
+                <h2 class="syllabus-title">IRAS Syllabus Breakdown</h2>
+                <p style="color: #8e9bb0; font-size: 1.1rem; max-width: 700px; margin: 0 auto;">A comprehensive technical roadmap designed to transform you into an AI-Native Full Stack Architect.</p>
+            </div>
+
+            <div class="syllabus-grid">
+                <div class="module-card">
+        <span class="module-badge">Phase 1</span>
+        <h3 class="module-title">The Measurement Framework</h3>
+        <div class="module-focus">Goal: 100% Tracking Accuracy</div>
+        <ul class="module-points">
+            <li>Google Tag Manager: No-code tracking for containers and triggers</li>
+            <li>GA4 Mastery: Custom events and "Exploration" reports</li>
+            <li>Server-Side Tracking: Bypassing browser limits with Meta CAPI</li>
+            <li>Privacy & Compliance: Consent Mode and GDPR architecture</li>
+        </ul>
+    </div>
+
+    <div class="module-card">
+        <span class="module-badge">Phase 2</span>
+        <h3 class="module-title">Performance Marketing Ad Engine</h3>
+        <div class="module-focus">Goal: Mastering Ad Algorithms</div>
+        <ul class="module-points">
+            <li>Meta Ads: "Power 5" strategy and Advantage+ campaigns</li>
+            <li>Google Ads: PMax structure and AI-driven bidding strategies</li>
+            <li>Retention: Building Lookalikes (LAL) and custom retargeting funnels</li>
+            <li>Bidding: Target CPA and ROAS optimization frameworks</li>
+        </ul>
+    </div>
+
+    <div class="module-card">
+        <span class="module-badge">Phase 3</span>
+        <h3 class="module-title">Technical SEO & Search Intelligence</h3>
+        <div class="module-focus">Goal: Owning the Organic SERP</div>
+        <ul class="module-points">
+            <li>On-Page Technicals: Core Web Vitals and JSON-LD Schema</li>
+            <li>Semantic SEO: Entity-based search and Topic Clusters</li>
+            <li>AI Search: Preparing for Search Generative Experience (SGE)</li>
+            <li>Competitor Audits: Ahrefs mastery and backlink cleanup</li>
+        </ul>
+    </div>
+
+    <div class="module-card">
+        <span class="module-badge">Phase 4</span>
+        <h3 class="module-title">AI Strategy & Marketing Automation</h3>
+        <div class="module-focus">Goal: Scaling with AI Efficiency</div>
+        <ul class="module-points">
+            <li>Prompt Engineering: Market research and media planning with LLMs</li>
+            <li>Workflow Automation: Connecting Zapier/Make.com to Ad Platforms</li>
+            <li>Lead Scoring: Using AI to automatically rank lead quality</li>
+            <li>ROI Trends: Identifying hidden ROI using AI data analysis models</li>
+        </ul>
+    </div>
+
+    <div class="module-card">
+        <span class="module-badge">Phase 5</span>
+        <h3 class="module-title">The "Industry Ready" Tool Stack</h3>
+        <div class="module-focus">Goal: Tool Proficiency for the Modern Strategist</div>
+        <div class="tool-stack-table-wrap" style="margin-top: 20px;">
+            <table style="width: 100%; color: #8e9bb0; border-collapse: collapse; font-size: 0.9rem;">
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <th style="text-align: left; padding: 10px 0;">Category</th>
+                    <th style="text-align: left; padding: 10px 0;">Must-Master Tools</th>
+                </tr>
+                <tr><td style="padding: 10px 0;">Analytics</td><td>GA4, Microsoft Clarity</td></tr>
+                <tr><td style="padding: 10px 0;">Media Buying</td><td>Meta Ads Manager, Google Ads Editor</td></tr>
+                <tr><td style="padding: 10px 0;">SEO</td><td>Ahrefs, Screaming Frog</td></tr>
+                <tr><td style="padding: 10px 0;">Reporting</td><td>Looker Studio (Live Dashboards)</td></tr>
+            </table>
+        </div>
+    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-row">
+                <!-- Column 1: Identity -->
+                <div class="footer-col col-identity">
+                    <img src="logo.png" alt="IRIT Logo" class="footer-logo">
+                    <p class="footer-about">Industry Ready Institute of Technology (IRIT) is Kerala's leading institute for practical, industry-focused training in tech, marketing, and architecture.</p>
+                    <div class="footer-socials">
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#home">Home</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#programs">Programs</a></li>
+                        <li><a href="index.html#why-irit">Why Choose IRIT?</a></li>
+                        <li><a href="index.html#careers">Careers</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Programs -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Our Programs</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#programs">Full Stack Development</a></li>
+                        <li><a href="index.html#programs">Performance Marketing</a></li>
+                        <li><a href="index.html#programs">Building Designing</a></li>
+                        <li><a href="index.html#programs">Interior Designing</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Contact -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Contact Us</h4>
+                    <div class="contact-item">
+                        <span class="contact-label">Location</span>
+                        <p class="contact-text">Pathanamthitta, Kerala, India</p>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Email</span>
+                        <p class="contact-text">info@irit.edu.in</p>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Phone</span>
+                        <p class="contact-text">+91 94000 00000</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2026 IRIT Institute. All Rights Reserved.</p>
+                <p class="credits">Designed for the Future of Learning.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Isolated Scoped Scripts -->
+    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+    <script src="course-script.js"></script>
+</body>
+</html>

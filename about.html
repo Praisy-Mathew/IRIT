@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRIT — Kerala's Future</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#000000;
+  --mg:#7c3aed;--mg2:#a78bfa;--mg3:#ede9fe;
+  --ht:#ff2d78;--ht2:#ff80ab;
+  --gr:#00ff88;--gr2:#69ffb4;
+  --cy:#00d4ff;--cy2:#7ef8ff;
+  --text:#f0f0ff;--muted:rgba(240,240,255,.45);
+}
+html{scroll-behavior:smooth;cursor:none}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden}
+
+/* ── CURSOR ── */
+#c-dot{position:fixed;width:8px;height:8px;background:#fff;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width .2s,height .2s}
+#c-ring{position:fixed;width:44px;height:44px;border:1px solid rgba(124,58,237,.6);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s}
+#c-trail{position:fixed;inset:0;pointer-events:none;z-index:9997}
+
+/* ── CANVAS ── */
+#bg3d{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ── SHARED ── */
+.z{position:relative;z-index:3}
+.sec{padding:8rem 2rem;position:relative;z-index:3}
+.wrap{max-width:1200px;margin:0 auto}
+
+/* ── HERO ── */
+.hero-z{position:relative;z-index:100}
+
+/* 💠 PORTFOLIO SLIDER OVERRIDES */
+.portfolio-slider-2-area {
+    padding: 180px 0 100px;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+}
+.portfolio-slider-2-wrap { position: relative; padding-left: 6%; }
+.portfolio-slider-2-active { overflow: visible !important; }
+.portfolio-slider-2-item {
+    border-radius: 24px;
+    overflow: hidden;
+    aspect-ratio: 16/10;
+    min-height: 400px; /* Ensures layout stability */
+    background: #111;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+.portfolio-slider-2-thumb { width:100%; height:100%; position:relative; }
+.portfolio-slider-2-thumb img { width:100%; height:100%; object-fit:cover; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+.portfolio-slider-2-item:hover .portfolio-slider-2-thumb img { transform: scale(1.1); }
+
+.portfolio-slider-2-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 3rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
+    z-index: 5;
+}
+.portfolio-slider-2-title span {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    display: block;
+}
+.portfolio-slider-2-subtitle span {
+    font-size: 0.9rem;
+    color: var(--cy);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.tp-scrollbar {
+    height: 3px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    margin-top: 50px;
+    max-width: 90%;
+    position: relative;
+    cursor: pointer;
+}
+.swiper-scrollbar-drag { background: var(--cy) !important; border-radius: 10px !important; }
+
+.port-showcase-slider-link {
+    position: absolute;
+    right: 6%;
+    top: -60px;
+    z-index: 20;
+}
+.port-showcase-slider-link a {
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: color 0.3s;
+}
+.port-showcase-slider-link a:hover { color: #fff; }
+
+.tag{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid rgba(124,58,237,.4);background:rgba(124,58,237,.08);
+  border-radius:100px;padding:8px 22px;
+  font-size:.68rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--mg2);
+  margin-bottom:2.5rem;
+}
+.tag-dot{width:6px;height:6px;border-radius:50%;background:var(--mg);animation:ping 1.5s infinite}
+
+/* giant headline */
+.h1{
+  font-family:'Unbounded',sans-serif;
+  font-size:clamp(3rem,10vw,9.5rem);
+  font-weight:900;
+  line-height:.9;
+  letter-spacing:-.02em;
+  margin-bottom:2rem;
+  animation:fadeUp 1s .4s both;
+}
+.h1 .w1{display:block;color:var(--text)}
+.h1 .w2{
+  display:block;
+  background:linear-gradient(90deg,var(--ht),var(--mg),var(--cy),var(--gr));
+  background-size:300% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:fadeUp 1s .5s both, chromashift 5s 1.5s infinite linear;
+}
+.h1 .w3{display:block;color:var(--text);opacity:.7;font-weight:300;font-size:.38em;letter-spacing:.01em;margin-top:.4em}
+
+/* stats ribbon */
+.ribbon{
+  display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0;
+  margin-top:3.5rem;
+  border:1px solid rgba(255,255,255,.07);border-radius:16px;
+  overflow:hidden;backdrop-filter:blur(20px);
+  background:rgba(255,255,255,.03);
+  animation:fadeUp 1s .9s both;
+}
+.rib-item{
+  padding:1.4rem 2.5rem;text-align:center;flex:1;min-width:130px;
+  border-right:1px solid rgba(255,255,255,.07);
+  transition:background .3s;
+}
+.rib-item:last-child{border-right:none}
+.rib-item:hover{background:rgba(124,58,237,.08)}
+.rn{
+  font-family:'Unbounded',sans-serif;font-size:2rem;font-weight:700;
+  background:linear-gradient(135deg,var(--gr),var(--cy));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;
+}
+.rl{font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:6px}
+
+.scroll-cue{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  animation:fadeUp 1s 1.2s both;z-index:2;
+}
+.sc-line{width:1px;height:48px;background:linear-gradient(to bottom,var(--mg),transparent);animation:scline 2s ease-in-out infinite}
+.sc-txt{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+
+/* cinematic noise */
+.noise-fx {
+  position: fixed;
+  inset: 0;
+  background: url('https://grainy-gradients.vercel.app/noise.svg');
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: overlay;
+}
+
+/* ── DIVIDER ── */
+.glow-div{height:1px;max-width:900px;margin:0 auto;position:relative;z-index:3;background:linear-gradient(90deg,transparent,var(--mg),var(--ht),var(--cy),transparent);opacity:.25}
+
+/* ── ABOUT ── */
+#about {
+  position: relative;
+  background: radial-gradient(circle at 70% 50%, rgba(124,58,237,0.08), transparent 50%),
+              radial-gradient(circle at 20% 80%, rgba(0,212,255,0.05), transparent 40%);
+  padding: 8rem 2rem;
+  overflow: visible;
+}
+
+/* 🧱 BENTO MOSAIC GRID */
+.about-bento {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(180px, auto);
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.bento-tile {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  backdrop-filter: blur(10px);
+  opacity: 0; /* Ensures no visibility flash before GSAP kicks in */
+  will-change: transform, opacity;
+}
+.bento-tile:hover {
+  background: rgba(124,58,237,0.05);
+  border-color: rgba(124,58,237,0.2);
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.tile-story { grid-column: span 2; grid-row: span 2; justify-content: start; }
+.tile-metric { text-align: center; align-items: center; }
+.tile-wide { grid-column: span 2; flex-direction: row; align-items: center; gap: 3rem; }
+
+.b-chip { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; color: var(--mg2); letter-spacing: 2px; margin-bottom: 1.5rem; display: block; }
+.b-title { font-family: 'Unbounded', sans-serif; font-size: 2.8rem; font-weight: 900; line-height: 1; margin-bottom: 1.5rem; letter-spacing: -2px; }
+.b-text { font-size: 1.05rem; line-height: 1.7; color: var(--muted); font-weight: 300; }
+.b-text p { margin-bottom: 1rem; }
+
+.b-val { font-family: 'Unbounded', sans-serif; font-size: 2.5rem; font-weight: 900; color: #fff; margin-bottom: 10px; line-height: 1; }
+.b-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--muted); letter-spacing: 1px; }
+.b-icon { font-size: 2rem; margin-bottom: 1rem; opacity: 0.7; }
+
+@media (max-width: 1100px) {
+  .about-bento { grid-template-columns: repeat(2, 1fr); }
+  .tile-story { grid-column: span 2; }
+}
+@media (max-width: 768px) {
+  .about-bento { grid-template-columns: 1fr; }
+  .tile-story, .tile-wide { grid-column: span 1; grid-row: span 1; }
+  .tile-wide { flex-direction: column; text-align: center; }
+}
+
+/* ── FAQ ACCORDION ── */
+#faq { padding: 10rem 2rem; }
+.faq-grid { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }
+.faq-item {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.faq-item:hover {
+  background: rgba(124,58,237,0.05);
+  border-color: rgba(124,58,237,0.2);
+}
+.faq-item.active {
+  background: rgba(124,58,237,0.08);
+  border-color: rgba(124,58,237,0.3);
+}
+.faq-head {
+  padding: 1.8rem 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.faq-q { font-family: 'Unbounded', sans-serif; font-size: 1.05rem; font-weight: 700; color: #fff; line-height: 1.4; padding-right: 2rem; }
+.faq-icon {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; transition: transform 0.4s ease;
+}
+.faq-item.active .faq-icon { transform: rotate(45deg); background: var(--mg); }
+
+.faq-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  opacity: 0;
+}
+.faq-item.active .faq-body {
+  opacity: 1;
+}
+.faq-a { padding: 0 2.2rem 2.2rem; color: var(--muted); line-height: 1.8; font-weight: 300; font-size: 0.95rem; }
+#careers{background:radial-gradient(ellipse at 50% 0%,rgba(124,58,237,.05),transparent 60%)}
+.cgrid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:22px;
+  perspective:1800px;
+}
+
+.flip-wrap{height:340px;perspective:1000px;opacity:0;transform:translateY(50px);transition:opacity .6s,transform .6s}
+.flip-wrap.in{opacity:1;transform:none}
+.flip-inner{
+  position:relative;width:100%;height:100%;
+  transform-style:preserve-3d;
+  transition:transform .8s cubic-bezier(.23,1.2,.56,1);
+}
+.flip-wrap:hover .flip-inner{transform:rotateY(180deg)}
+
+.flip-front,.flip-back{
+  position:absolute;inset:0;border-radius:20px;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  padding:2rem 1.75rem;
+  border:1px solid rgba(255,255,255,.07);
+  backdrop-filter:blur(20px);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+}
+.flip-front{background:rgba(8,6,22,.85)}
+.flip-back{
+  background:linear-gradient(135deg,rgba(15,8,35,.95),rgba(8,6,22,.95));
+  transform:rotateY(180deg);
+  border-color:rgba(124,58,237,.25);
+  justify-content:space-between;
+}
+
+/* animated top beam */
+.beam{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--beam-col,var(--mg)),transparent);animation:beam-scan 3s ease-in-out infinite}
+
+.fc-icon{font-size:2.4rem;margin-bottom:1.25rem;display:block;transition:transform .5s}
+.flip-wrap:hover .fc-icon{transform:scale(0)}
+.fc-title{font-family:'Unbounded',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.6rem;line-height:1.2}
+.fc-desc{color:var(--muted);font-size:.83rem;line-height:1.65;font-weight:300;flex:1}
+.fc-hint{font-size:.68rem;color:rgba(124,58,237,.7);margin-top:auto;padding-top:1rem;border-top:1px solid rgba(255,255,255,.05);text-align:center;letter-spacing:.06em}
+
+/* back face */
+.bk-title{font-family:'Unbounded',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:1rem;background:linear-gradient(135deg,var(--mg2),var(--cy));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.bk-list{list-style:none;margin-bottom:1rem;flex:1}
+.bk-list li{font-size:.78rem;color:var(--muted);padding:4px 0 4px 14px;position:relative;line-height:1.5}
+.bk-list li::before{content:'▸';position:absolute;left:0;color:var(--gr);font-size:.65rem}
+.bk-tags{display:flex;flex-wrap:wrap;gap:5px}
+.bk-tag{background:rgba(0,255,136,.07);border:1px solid rgba(0,255,136,.15);border-radius:100px;padding:2px 10px;font-size:.68rem;color:var(--gr2)}
+.bk-cta{font-size:.75rem;color:var(--ht2);font-weight:500;text-align:center;padding-top:.8rem;border-top:1px solid rgba(255,255,255,.05)}
+
+/* ── WHY SECTION ── */
+#why{overflow:hidden}
+.why-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:16px;
+  perspective:1200px;
+}
+.wc{
+  background:rgba(8,6,22,.7);border:1px solid rgba(255,255,255,.06);
+  border-radius:18px;padding:2rem 1rem;text-align:center;
+  transform-style:preserve-3d;
+  transition:transform .5s cubic-bezier(.23,1.2,.56,1),border-color .3s,background .3s;
+  backdrop-filter:blur(16px);
+  opacity:0;transform:scale(.82) translateY(30px) rotateX(-15deg);cursor:default;
+}
+.wc.in{animation:wcpop .6s forwards cubic-bezier(.23,1.2,.56,1)}
+.wc:hover{transform:translateY(-14px) rotateX(-8deg) rotateY(4deg) scale(1.06);border-color:rgba(0,255,136,.3);background:rgba(0,255,136,.04)}
+.wi{font-size:2.2rem;margin-bottom:.8rem;display:block;transition:transform .4s}
+.wc:hover .wi{transform:scale(1.3) translateZ(10px) rotate(-10deg)}
+.wt{font-size:.8rem;font-weight:500;color:var(--text);line-height:1.35}
+
+/* ── BIG MARQUEE ── */
+.marquee-wrap{overflow:hidden;border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05);padding:.8rem 0;margin:4rem 0 0;position:relative;z-index:3}
+.mq{display:flex;gap:3rem;width:max-content;animation:mqroll 20s linear infinite}
+.mq-item{display:flex;align-items:center;gap:1rem;flex-shrink:0}
+.mq-n{font-family:'Unbounded',sans-serif;font-size:2rem;font-weight:700;background:linear-gradient(135deg,var(--ht),var(--ht2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.mq-l{font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:500}
+.mq-sep{font-size:1.2rem;color:rgba(255,255,255,.15);user-select:none}
+
+/* ── SECTION HEADER COMMON ── */
+.sh{text-align:center;margin-bottom:4.5rem}
+.sh .chip{margin-bottom:.75rem}
+.sh .big-title{margin:0 auto 1rem}
+.sh-sub{color:var(--muted);font-size:.95rem;max-width:560px;margin:0 auto;font-weight:300;line-height:1.8}
+
+/* ── KEYFRAMES ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes chromashift{to{background-position:300% center}}
+@keyframes ping{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.5}}
+@keyframes scline{0%,100%{opacity:.3;transform:scaleY(.5)}50%{opacity:1;transform:scaleY(1)}}
+@keyframes beam-scan{0%,100%{transform:translateX(-100%)}50%{transform:translateX(100%)}}
+@keyframes wcpop{to{opacity:1;transform:none}}
+@keyframes mqroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes float{0%,100%{transform:translateY(0) rotateZ(0)}50%{transform:translateY(-15px) rotateZ(3deg)}}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .cgrid{grid-template-columns:repeat(2,1fr)}
+  .about-grid{grid-template-columns:1fr;gap:3rem}
+  .why-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:600px){
+  .cgrid{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr 1fr}
+  .rib-item{padding:1rem 1rem;min-width:100px}
+  .rn{font-size:1.5rem}
+  #c-dot,#c-ring{display:none}html{cursor:auto}
+}
+
+/* ── HEADER ── */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 6%;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 70px;
+    width: auto;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
+    transition: transform 0.3s ease;
+}
+
+.menu-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 8px;
+    cursor: pointer;
+    z-index: 100;
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    position: relative;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.menu-btn .bar {
+    height: 2px;
+    background: #fff;
+    border-radius: 4px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+}
+
+.menu-btn .bar:nth-child(1) { width: 32px; margin-right: 14px; }
+.menu-btn .bar:nth-child(2) { width: 22px; margin-right: 14px; }
+.menu-btn .bar:nth-child(3) { width: 28px; margin-right: 14px; }
+
+.menu-btn:hover {
+    background: rgba(0, 212, 255, 0.08);
+    border-color: rgba(0, 212, 255, 0.3);
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+.menu-btn:hover .bar {
+    background: var(--cy);
+    box-shadow: 0 0 15px var(--cy);
+}
+
+/* ── SIDEBAR ── */
+.sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 350px;
+    height: 100%;
+    background: rgba(8, 6, 22, 0.98);
+    backdrop-filter: blur(40px);
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    z-index: 2200;
+    transition: all 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    padding: 3rem 2.5rem;
+    box-shadow: -20px 0 50px rgba(0, 0, 0, 0.4);
+}
+
+body.sidebar-active .sidebar-overlay { opacity: 1; visibility: visible; }
+body.sidebar-active .sidebar { right: 0; }
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+.sidebar .logo-img { height: 80px; width: auto; }
+
+.close-btn {
+    font-size: 2.5rem;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.3s;
+    line-height: 1;
+}
+
+.close-btn:hover { color: #fff; }
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.sidebar-link {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0;
+    transform: translateX(40px);
+    display: block;
+}
+
+body.sidebar-active .sidebar-link {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.sidebar-link:nth-child(1) { transition-delay: 0.25s; }
+.sidebar-link:nth-child(2) { transition-delay: 0.33s; }
+.sidebar-link:nth-child(3) { transition-delay: 0.41s; }
+.sidebar-link:nth-child(4) { transition-delay: 0.49s; }
+
+.sidebar-link:hover {
+    transform: translateX(12px);
+    color: var(--cy);
+    text-shadow: 0 0 15px var(--cy);
+}
+
+.sidebar-btn {
+    margin-top: 2rem;
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: var(--cy);
+    color: #000;
+    text-align: center;
+    border-radius: 100px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: all 0.4s;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+/* ── FOOTER ── */
+.main-footer {
+    background-color: #000000;
+    padding: 80px 0 40px;
+    color: #f0f0ff;
+    position: relative;
+    z-index: 100;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.footer-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.footer-logo {
+    height: 50px;
+    width: auto;
+    margin-bottom: 25px;
+}
+
+.footer-about {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 320px;
+    margin-bottom: 30px;
+}
+
+.footer-socials { display: flex; gap: 15px; }
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--muted);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.social-link:hover {
+    border-color: var(--cy);
+    color: var(--cy);
+    transform: translateY(-5px);
+}
+
+.footer-heading {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 12px; }
+.footer-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+.footer-links a:hover { color: var(--cy); transform: translateX(5px); }
+
+.contact-item { margin-bottom: 20px; }
+.contact-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--cy);
+    margin-bottom: 4px;
+}
+.contact-text { font-size: 0.9rem; color: #f0f0ff; }
+
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+@media (max-width: 960px) {
+    .footer-row { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+    .footer-row { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- Sidebar Navigation -->
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="logo">
+            <img src="logo.png" alt="IRIT Logo" class="logo-img">
+        </div>
+        <div class="close-btn" id="close-sidebar">&times;</div>
+    </div>
+    <nav class="sidebar-nav">
+            <a href="index.html" class="sidebar-link">Home</a>
+            <a href="about.html" class="sidebar-link">About Us</a>
+            <a href="#programs" class="sidebar-link">Programs</a>
+            <a href="#careers" class="sidebar-link">Careers</a>
+            <div class="sidebar-item dropdown">
+                <a href="#" class="sidebar-link dropdown-toggle">Courses <i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="course-fullstack.html" class="dropdown-link">Python Full Stack</a></li>
+                    <li><a href="course-node.html" class="dropdown-link">Node.js Full Stack</a></li>
+                    <li><a href="course-digital.html" class="dropdown-link">Digital Marketing</a></li>
+                    <li><a href="course-design.html" class="dropdown-link">Building Designing</a></li>
+                </ul>
+            </div>
+            <a href="contact.html" class="sidebar-link">Contact</a>
+            <a href="#" class="sidebar-btn">Enroll Now</a>
+        </nav>
+    
+</div>
+<style>
+        /* Parent */
+.sidebar-item {
+    position: relative;
+}
+
+/* Hide dropdown initially */
+.dropdown-menu {
+    display: none;
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    background: #111;
+    border-radius: 8px;
+}
+
+/* Dropdown links */
+.dropdown-menu li a {
+    display: block;
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.dropdown-menu li a:hover {
+    background: #222;
+    padding-left: 25px;
+}
+
+/* Show on hover */
+.sidebar-item:hover .dropdown-menu {
+    display: block;
+}
+    </style>
+<header>
+    <div class="logo">
+        <img src="logo.png" alt="IRIT Logo" class="logo-img">
+    </div>
+    <div class="menu-btn" id="open-sidebar">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+</header>
+
+<!-- CURSOR -->
+<div id="c-dot"></div>
+<div id="c-ring"></div>
+<canvas id="c-trail"></canvas>
+<canvas id="bg3d"></canvas>
+
+<!-- ════════════════ HERO (SWIPER SLIDER) ════════════════ -->
+<section class="portfolio-slider-2-area">
+    <div class="portfolio-slider-2-wrap">
+        <div class="port-showcase-slider-link d-none d-sm-block">
+            <a href="index.html#programs">
+                <span>All Programs <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+        </div>
+        
+        <div class="swiper-container portfolio-slider-2-active">
+            <div class="swiper-wrapper">
+                <!-- Slide 1 -->
+                <div class="swiper-slide">
+                    <div class="portfolio-slider-2-item">
+                        <div class="portfolio-slider-2-thumb">
+                            <img src="about_hero_student_learning_1776149391600.png" alt="IRIT Learning Environment">
+                            <div class="portfolio-slider-2-content">
+                                <div class="portfolio-slider-2-subtitle">
+                                    <span>Real-World Training</span>
+                                </div>
+                                <div class="portfolio-slider-2-title">
+                                    <span>Hands-On Industry Experience</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="swiper-slide">
+                    <div class="portfolio-slider-2-item">
+                        <div class="portfolio-slider-2-thumb">
+                            <img src="about_hero_tech_interface_1776149409831.png" alt="Tech Studio">
+                            <div class="portfolio-slider-2-content">
+                                <div class="portfolio-slider-2-subtitle">
+                                    <span>Advanced Labs</span>
+                                </div>
+                                <div class="portfolio-slider-2-title">
+                                    <span>Expert Tech Mentorship</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="swiper-slide">
+                    <div class="portfolio-slider-2-item">
+                        <div class="portfolio-slider-2-thumb">
+                            <img src="about_hero_architecture_detail_1776149427749.png" alt="Architectural Excellence">
+                            <div class="portfolio-slider-2-content">
+                                <div class="portfolio-slider-2-subtitle">
+                                    <span>Design Focus</span>
+                                </div>
+                                <div class="portfolio-slider-2-title">
+                                    <span>Architectural Mastery</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 4 -->
+                <div class="swiper-slide">
+                    <div class="portfolio-slider-2-item">
+                        <div class="portfolio-slider-2-thumb">
+                            <img src="about_hero_graduate_success_1776149959429.png" alt="Graduate Success">
+                            <div class="portfolio-slider-2-content">
+                                <div class="portfolio-slider-2-subtitle">
+                                    <span>Global Careers</span>
+                                </div>
+                                <div class="portfolio-slider-2-title">
+                                    <span>Graduate Success Stories</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tp-scrollbar"></div>
+    </div>
+</section>
+
+<div class="glow-div"></div>
+
+<!-- ════════════════ ABOUT ════════════════ -->
+<section class="sec z" id="about">
+  <div class="wrap">
+    <div class="about-bento">
+      
+      <!-- 🧱 TILE 1: THE STORY -->
+      <div class="bento-tile tile-story">
+        <span class="b-chip">About Us</span>
+        <h2 class="b-title">Empowering <span class="acc">Kerala's</span> Next Generation of <span class="acc2">Tech & Marketing</span></h2>
+        <div class="b-text">
+          <p><strong>IRIT (Institute of Real-World IT & Technology)</strong> is a Kerala-based training institute with a strong presence in <strong>Thrissur</strong> and growing recognition as a Digital Marketing Institute in <strong>Pathanamthitta</strong>.</p>
+          <p>We bridge the gap between classroom learning and real industry expectations through career-focused programs in Full Stack Development, Performance Marketing, and Architectural Design.</p>
+        </div>
+      </div>
+
+      <!-- 🧱 TILE 2: STUDENTS -->
+      <div class="bento-tile tile-metric">
+        <span class="b-icon">🎓</span>
+        <span class="b-val" data-count="5000" data-suf="+">5000+</span>
+        <span class="b-label">Students Trained</span>
+      </div>
+
+      <!-- 🧱 TILE 3: PLACEMENT -->
+      <div class="bento-tile tile-metric">
+        <span class="b-icon">💼</span>
+        <span class="b-val" data-count="95" data-suf="%">95%</span>
+        <span class="b-label">Placement Rate</span>
+      </div>
+
+      <!-- 🧱 TILE 4: WIDE PARTNERS -->
+      <div class="bento-tile tile-wide">
+        <div style="flex:1">
+          <span class="b-val">50+</span>
+          <span class="b-label">Hiring Partners</span>
+        </div>
+        <div class="b-text" style="flex:2">
+          IRIT has trained students from across Kerala including Pathanamthitta, Kochi, and Thrissur, helping them build successful careers in the tech and marketing industry.
+        </div>
+      </div>
+
+      <!-- 🧱 TILE 5: AI -->
+      <div class="bento-tile tile-metric">
+        <span class="b-icon">🤖</span>
+        <span class="b-val">AI ✦</span>
+        <span class="b-label">Integrated Curriculum</span>
+      </div>
+
+      <!-- 🧱 TILE 6: MENTORS -->
+      <div class="bento-tile tile-metric">
+        <span class="b-icon">⭐</span>
+        <span class="b-val">Expert</span>
+        <span class="b-label">Industry Mentors</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+<div class="glow-div"></div>
+<!-- ════════════════ CAREERS ════════════════ -->
+<section class="sec z" id="careers">
+  <div class="wrap">
+    <div class="sh">
+     
+      <h2 class="big-title">Career <span class="acc2">Paths</span></h2>
+    </div>
+
+    <div class="cgrid" id="cgrid">
+
+      <div class="flip-wrap">
+        <div class="flip-inner">
+          <div class="flip-front"><div class="beam" style="--beam-col:#7c3aed"></div><span class="fc-icon">💻</span><div class="fc-title">Full Stack Developer</div><div class="fc-desc">Build complete web applications — pixel-perfect frontends to powerful backend systems using modern frameworks.</div><div class="fc-hint">hover to explore →</div></div>
+          <div class="flip-back"><div class="beam" style="--beam-col:#00d4ff"></div><div class="bk-title">Full Stack Developer</div><ul class="bk-list"><li>HTML, CSS, JavaScript, React &amp; Node.js</li><li>E-commerce platforms, dashboards &amp; APIs</li><li>Databases, deployment &amp; cloud basics</li></ul><div class="bk-tags"><span class="bk-tag">Web Developer</span><span class="bk-tag">Software Engineer</span><span class="bk-tag">Backend Dev</span></div><div class="bk-cta">👉 For complete builders</div></div>
+        </div>
+      </div>
+
+      <div class="flip-wrap">
+        <div class="flip-inner">
+          <div class="flip-front"><div class="beam" style="--beam-col:#ff2d78"></div><span class="fc-icon">🤖</span><div class="fc-title">AI Assisted Developer</div><div class="fc-desc">Build smarter applications integrating AI-powered tools, automation, and next-gen dev workflows.</div><div class="fc-hint">hover to explore →</div></div>
+          <div class="flip-back"><div class="beam" style="--beam-col:#ff2d78"></div><div class="bk-title">AI Assisted Developer</div><ul class="bk-list"><li>ChatGPT, Copilot &amp; automation frameworks</li><li>ML concepts &amp; intelligent app building</li><li>AI-driven testing &amp; debugging automation</li></ul><div class="bk-tags"><span class="bk-tag">AI Developer</span><span class="bk-tag">Automation Eng</span><span class="bk-tag">Smart App Dev</span></div><div class="bk-cta">👉 For AI-era future builders</div></div>
+        </div>
+      </div>
+
+      <div class="flip-wrap">
+        <div class="flip-inner">
+          <div class="flip-front"><div class="beam" style="--beam-col:#00ff88"></div><span class="fc-icon">📈</span><div class="fc-title">Performance Marketing</div><div class="fc-desc">Master data-driven campaigns — high-ROI digital marketing across Google, Meta, and beyond.</div><div class="fc-hint">hover to explore →</div></div>
+          <div class="flip-back"><div class="beam" style="--beam-col:#00ff88"></div><div class="bk-title">Performance Marketing</div><ul class="bk-list"><li>Google Ads, Meta Ads, SEO &amp; analytics</li><li>Campaign optimization &amp; ROI tracking</li><li>Lead generation &amp; conversion strategy</li></ul><div class="bk-tags"><span class="bk-tag">Digital Marketer</span><span class="bk-tag">Ads Specialist</span><span class="bk-tag">Growth Marketer</span></div><div class="bk-cta">👉 For marketing+analytics lovers</div></div>
+        </div>
+      </div>
+
+      <div class="flip-wrap">
+        <div class="flip-inner">
+          <div class="flip-front"><div class="beam" style="--beam-col:#ff2d78"></div><span class="fc-icon">🚀</span><div class="fc-title">Digital Growth Strategist</div><div class="fc-desc">Drive business success with powerful digital strategies, analytics, and growth-driven execution.</div><div class="fc-hint">hover to explore →</div></div>
+          <div class="flip-back"><div class="beam" style="--beam-col:#ff2d78"></div><div class="bk-title">Digital Growth Strategist</div><ul class="bk-list"><li>Full-funnel marketing strategy</li><li>User behavior &amp; performance metrics</li><li>Scaling strategies &amp; growth hacks</li></ul><div class="bk-tags"><span class="bk-tag">Growth Manager</span><span class="bk-tag">Strategy Consultant</span><span class="bk-tag">Biz Analyst</span></div><div class="bk-cta">👉 For business growth leaders</div></div>
+        </div>
+      </div>
+
+      <div class="flip-wrap">
+        <div class="flip-inner">
+          <div class="flip-front"><div class="beam" style="--beam-col:#a78bfa"></div><span class="fc-icon">🏗️</span><div class="fc-title">Architectural Designer</div><div class="fc-desc">Create innovative structures with precision and creativity using professional design tools.</div><div class="fc-hint">hover to explore →</div></div>
+          <div class="flip-back"><div class="beam" style="--beam-col:#a78bfa"></div><div class="bk-title">Architectural Designer</div><ul class="bk-list"><li>AutoCAD, SketchUp &amp; 3D visualization</li><li>Residential &amp; commercial design projects</li><li>Space planning &amp; design principles</li></ul><div class="bk-tags"><span class="bk-tag">Architect</span><span class="bk-tag">Interior Designer</span><span class="bk-tag">3D Designer</span></div><div class="bk-cta">👉 For creative design minds</div></div>
+        </div>
+      </div>
+
+      <div class="flip-wrap">
+        <div class="flip-inner">
+          <div class="flip-front"><div class="beam" style="--beam-col:#00d4ff"></div><span class="fc-icon">🏢</span><div class="fc-title">Building Planning Specialist</div><div class="fc-desc">Plan and manage construction projects with expert knowledge of codes and compliance.</div><div class="fc-hint">hover to explore →</div></div>
+          <div class="flip-back"><div class="beam" style="--beam-col:#00d4ff"></div><div class="bk-title">Building Planning</div><ul class="bk-list"><li>Building codes &amp; regulations</li><li>Project management &amp; site planning</li><li>Budgeting &amp; resource allocation</li></ul><div class="bk-tags"><span class="bk-tag">Planning Engineer</span><span class="bk-tag">Site Manager</span><span class="bk-tag">Project Coord</span></div><div class="bk-cta">👉 For construction enthusiasts</div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="marquee-wrap">
+      <div class="mq" id="mq">
+        <div class="mq-item"><span class="mq-n">5000+</span><span class="mq-l">Students</span></div><span class="mq-sep">✦</span>
+        <div class="mq-item"><span class="mq-n">95%</span><span class="mq-l">Placement</span></div><span class="mq-sep">✦</span>
+        <div class="mq-item"><span class="mq-n">50+</span><span class="mq-l">Partners</span></div><span class="mq-sep">✦</span>
+        <div class="mq-item"><span class="mq-n">AI</span><span class="mq-l">Curriculum</span></div><span class="mq-sep">✦</span>
+        <div class="mq-item"><span class="mq-n">IRIT</span><span class="mq-l">Kerala</span></div><span class="mq-sep">✦</span>
+        <div class="mq-item"><span class="mq-n">5000+</span><span class="mq-l">Students</span></div><span class="mq-sep">✦</span>
+        <div class="mq-item"><span class="mq-n">95%</span><span class="mq-l">Placement</span></div><span class="mq-sep">✦</span>
+        <div class="mq-item"><span class="mq-n">50+</span><span class="mq-l">Partners</span></div><span class="mq-sep">✦</span>
+        <div class="mq-item"><span class="mq-n">AI</span><span class="mq-l">Curriculum</span></div><span class="mq-sep">✦</span>
+        <div class="mq-item"><span class="mq-n">IRIT</span><span class="mq-l">Kerala</span></div><span class="mq-sep">✦</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-div"></div>
+
+<!-- ════════════════ WHY ════════════════ -->
+<section class="sec z" id="why">
+  <div class="wrap">
+    <div class="sh">
+      <div class="chip">Why IRIT</div>
+      <h2 class="big-title">The <span class="acc">IRIT</span> Edge</h2>
+    </div>
+    <div class="why-grid" id="wgrid">
+      <div class="wc"><span class="wi">🎯</span><div class="wt">Industry-Relevant Curriculum</div></div>
+      <div class="wc"><span class="wi">🛠️</span><div class="wt">Hands-On Real Projects</div></div>
+      <div class="wc"><span class="wi">👨‍🏫</span><div class="wt">Expert Mentorship</div></div>
+      <div class="wc"><span class="wi">💼</span><div class="wt">Placement Support</div></div>
+      <div class="wc"><span class="wi">⚡</span><div class="wt">Future-Ready Skills</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-div"></div>
+
+<!-- ════════════════ FAQ ════════════════ -->
+<section class="sec z" id="faq">
+  <div class="wrap">
+    <div class="sh">
+      <div class="chip">Got Questions?</div>
+      <h2 class="big-title">Frequently Asked <span class="acc">Questions</span></h2>
+    </div>
+    
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-head">
+          <span class="faq-q">What courses does IRIT offer?</span>
+          <div class="faq-icon"><i class="fas fa-plus"></i></div>
+        </div>
+        <div class="faq-body"><div class="faq-a">IRIT offers Full Stack Development, Performance Marketing, and Building Designing programs with real-world training and placement support.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-head">
+          <span class="faq-q">Is IRIT a Digital Marketing Institute in Pathanamthitta, Kerala?</span>
+          <div class="faq-icon"><i class="fas fa-plus"></i></div>
+        </div>
+        <div class="faq-body"><div class="faq-a">Yes. IRIT supports students across Kerala, including Pathanamthitta, through industry-focused digital marketing training and placement assistance.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-head">
+          <span class="faq-q">Which is the best digital marketing institute in Pathanamthitta, Kerala?</span>
+          <div class="faq-icon"><i class="fas fa-plus"></i></div>
+        </div>
+        <div class="faq-body"><div class="faq-a">IRIT is considered one of the best digital marketing institutes in Pathanamthitta, Kerala due to its industry-focused curriculum, AI-integrated training, and 95% placement support.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-head">
+          <span class="faq-q">What is the placement rate?</span>
+          <div class="faq-icon"><i class="fas fa-plus"></i></div>
+        </div>
+        <div class="faq-body"><div class="faq-a">IRIT has a 95% placement rate with 50+ hiring partners.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-head">
+          <span class="faq-q">Is this course suitable for beginners?</span>
+          <div class="faq-icon"><i class="fas fa-plus"></i></div>
+        </div>
+        <div class="faq-body"><div class="faq-a">Yes. All programs start from beginner level and gradually move to advanced job-ready skills.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-head">
+          <span class="faq-q">What tools will I learn?</span>
+          <div class="faq-icon"><i class="fas fa-plus"></i></div>
+        </div>
+        <div class="faq-body"><div class="faq-a">Students learn tools like Google Analytics, Meta Ads, Ahrefs, SEMrush, and automation platforms like Zapier and HubSpot.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Main Footer -->
+<footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-row">
+            <div class="footer-col">
+                <img src="logo.png" alt="IRIT Logo" class="footer-logo">
+                <p class="footer-about">Industry Ready Institute of Technology (IRIT) is Kerala's leading institute for practical, industry-focused training.</p>
+                <div class="footer-socials">
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-heading">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="index.html#programs">Programs</a></li>
+                    <li><a href="index.html#careers">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-heading">Our Programs</h4>
+                <ul class="footer-links">
+                    <li><a href="course-fullstack.html">Full Stack Development</a></li>
+                    <li><a href="course-digital.html">Digital Marketing</a></li>
+                    <li><a href="course-design.html">Building Designing</a></li>
+                    <li><a href="course-node.html">Node.js Track</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-heading">Contact Us</h4>
+                <div class="contact-item">
+                    <span class="contact-label">Location</span>
+                    <p class="contact-text">Pathanamthitta, Kerala</p>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Email</span>
+                    <p class="contact-text">info@irit.edu.in</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 IRIT Institute. All Rights Reserved.</p>
+            <p>Designed for the Future of Learning.</p>
+        </div>
+    </div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+
+/* ── SWIPER HERO INITIALIZATION ── */
+new Swiper(".portfolio-slider-2-active", {
+  spaceBetween: 80,
+  slidesPerView: 3,
+  centeredSlides: true,
+  centeredSlidesBounds: true,
+  loop: false, // Disabled infinite loop to allow reaching the end
+  mousewheel: {
+    releaseOnEdges: true, // Crucial: lets the page scroll vertically after reaching the last slide
+    forceToAxis: true    // Prevents accidental horizontal scrolling while scrolling down
+  },
+  speed: 800,
+  keyboard: { enabled: true },
+  breakpoints: {
+    '1400': { slidesPerView: 2 },
+    '1200': { slidesPerView: 2 },
+    '992': { slidesPerView: 1, centeredSlides: false },
+    '768': { slidesPerView: 1 },
+    '0': { slidesPerView: 1 }
+  },
+  scrollbar: {
+    el: ".tp-scrollbar",
+    clickable: true,
+    dragSize: 100
+  },
+  on: {
+    init: function() {
+      setTimeout(() => ScrollTrigger.refresh(), 500); // Ensures layout is ready
+    }
+  }
+});
+
+/* ═══ CLEAN THREE.JS (PARTICLES ONLY NOW) ═══ */
+(function(){
+  const canvas=document.getElementById('bg3d');
+  if(!canvas) return; // Slider might not use canvas
+  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.setSize(innerWidth,innerHeight);
+  const scene=new THREE.Scene();
+  const cam=new THREE.PerspectiveCamera(55,innerWidth/innerHeight,.1,1000);
+  cam.position.z=35;
+  const partGeo = new THREE.BufferGeometry();
+  const pCount = 300;
+  const pPos = new Float32Array(pCount * 3);
+  for(let i=0; i<pCount*3; i++) pPos[i] = (Math.random()-0.5)*100;
+  partGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+  const partMat = new THREE.PointsMaterial({ size: 0.15, color: 0xffffff, transparent: true, opacity: 0.2 });
+  const points = new THREE.Points(partGeo, partMat);
+  scene.add(points);
+  function animate(){
+    requestAnimationFrame(animate);
+    points.rotation.y += 0.0005;
+    renderer.render(scene,cam);
+  }
+  animate();
+})();
+
+/* ── GSAP GLOBAL REVEALS ── */
+window.addEventListener('load', () => {
+    // Register Plugin
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero Entrance
+    gsap.fromTo(".portfolio-slider-2-area", 
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, duration: 1.5, ease: "power4.out" }
+    );
+
+    // About Bento Mosaic Reveal
+    gsap.fromTo(".bento-tile", 
+      { opacity: 0, scale: 0.9, y: 40 },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        scrollTrigger: {
+          trigger: ".about-bento",
+          start: "top 85%", // Triggers earlier for better UX
+          toggleActions: "play none none none"
+        },
+        stagger: {
+          amount: 0.8,
+          grid: [3, 3],
+          from: "center"
+        },
+        duration: 1.2,
+        ease: "power4.out"
+      }
+    );
+    ScrollTrigger.refresh();
+});
+
+/* ── FAQ TOGGLE ── */
+document.querySelectorAll('.faq-head').forEach(head => {
+  head.addEventListener('click', () => {
+    const item = head.parentElement;
+    const body = item.querySelector('.faq-body');
+    const isActive = item.classList.contains('active');
+    
+    // Close others
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('active');
+      i.querySelector('.faq-body').style.maxHeight = '0';
+    });
+    
+    if(!isActive) {
+      item.classList.add('active');
+      body.style.maxHeight = body.scrollHeight + 'px';
+    }
+  });
+});
+document.querySelectorAll('.flip-wrap,.wc,.sc,.rib-item,.pill').forEach(el=>{
+  el.addEventListener('mousemove',e=>{
+    const r=el.getBoundingClientRect();
+    const dx=(e.clientX-r.left)/r.width-.5;
+    const dy=(e.clientY-r.top)/r.height-.5;
+    if(el.classList.contains('flip-wrap')) return;
+    el.style.transform=`rotateX(${-dy*12}deg) rotateY(${dx*12}deg) scale(1.03)`;
+  });
+  el.addEventListener('mouseleave',()=>{
+    if(!el.classList.contains('flip-wrap')) el.style.transform='';
+  });
+});
+
+/* ═══ COUNTER Logic ═══ */
+function count(el){
+  const end=parseInt(el.dataset.count), suf=el.dataset.suf||'';
+  if(isNaN(end))return;
+  let s=null;
+  const dur=1800;
+  (function step(ts){
+    if(!s)s=ts;
+    const p=Math.min((ts-s)/dur,1);
+    const e2=1-Math.pow(1-p,4);
+    el.textContent=Math.floor(e2*end).toLocaleString()+suf;
+    if(p<1)requestAnimationFrame(step);
+  })(performance.now());
+}
+
+/* ═══ INTERSECTION OBSERVER ═══ */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target;
+    const idx=Array.from(el.parentNode.children).indexOf(el);
+    if(el.classList.contains('flip-wrap')){
+      el.style.transitionDelay=(idx*.1)+'s';
+      el.classList.add('in');
+    }
+    if(el.classList.contains('wc')){
+      el.style.animationDelay=(idx*.1)+'s';
+      el.classList.add('in');
+    }
+    if(el.dataset.count)count(el);
+    io.unobserve(el);
+  });
+},{threshold:.1});
+document.querySelectorAll('.flip-wrap,.wc,[data-count]').forEach(el=>io.observe(el));
+
+/* ── SIDEBAR TOGGLE ── */
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebar-overlay');
+const openBtn = document.getElementById('open-sidebar');
+const closeBtn = document.getElementById('close-sidebar');
+openBtn.addEventListener('click', () => document.body.classList.add('sidebar-active'));
+const closeSidebar = () => document.body.classList.remove('sidebar-active');
+closeBtn.addEventListener('click', closeSidebar);
+overlay.addEventListener('click', closeSidebar);
+
+</script>
+</body>
+</html>

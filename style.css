@@ -26,6 +26,26 @@ html, body {
     overflow-x: hidden;
 }
 
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
 body {
    background-color: var(--bg-dark);
   color: var(--text-main);
@@ -51,6 +71,71 @@ body {
 .wc-card,
 .wc-inner {
   transform-style: preserve-3d !important;
+}
+#who-conveyor {
+  perspective: 1400px;
+  perspective-origin: center center;
+}
+#who-conveyor .card.active {
+  transform: scale(1.1) !important;
+  z-index: 10;
+}
+/* ===== PROGRAMS SECTION FIX ===== */
+
+.programs-section {
+    position: relative;
+    width: 100%;
+    padding: 80px 20px;
+    overflow: hidden;
+}
+
+/* Background fix */
+.programs-laser-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Keep content above background */
+.programs-header,
+.programs-grid {
+    position: relative;
+    z-index: 2;
+}
+
+/* Grid alignment fix */
+.programs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    align-items: stretch;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Wrapper fix (important for Antigravity transforms) */
+.program-card-wrapper {
+    width: 100%;
+    transform: none !important;
+}
+
+/* Card consistency */
+.program-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Extra safety (fix weird 3D issues) */
+#programs {
+    transform: none !important;
+    perspective: none !important;
 }
 .hero-container {
     position: relative;
@@ -205,9 +290,14 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2.5rem 6%;
-    position: relative;
-    z-index: 10;
+    padding: 1.5rem 6%;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background: transparent;
+    transition: all 0.3s ease;
 }
 
 .logo {
@@ -216,7 +306,7 @@ header {
 }
 
 .logo-img {
-    height: 95px; /* Increased for better presence */
+    height: 70px;
     width: auto;
     filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
     transition: transform 0.3s ease;
@@ -227,7 +317,7 @@ header {
 }
 
 .sidebar .logo-img {
-    height: 110px; /* Increased for sidebar presence */
+    height: 100px; /* Increased for sidebar presence */
 }
 
 
@@ -287,7 +377,7 @@ header {
     inset: 0;
     background: rgba(0,0,0,0.6);
     backdrop-filter: blur(10px);
-    z-index: 900;
+    z-index: 1100; /* Elevated above Header (1000) */
     opacity: 0;
     visibility: hidden;
     transition: all 0.5s ease;
@@ -299,14 +389,15 @@ header {
     right: -400px;
     width: 350px;
     height: 100%;
-    background: rgba(10, 15, 25, 0.95);
-    backdrop-filter: blur(25px);
-    border-left: 1px solid rgba(255, 255, 255, 0.05);
-    z-index: 1000;
-    transition: all 0.60s cubic-bezier(0.16, 1, 0.3, 1);
+    background: rgba(10, 15, 25, 0.98); /* Deepened for cinematic contrast */
+    backdrop-filter: blur(40px); /* Increased blur depth */
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    z-index: 1200; /* Master Layer Priority */
+    transition: all 0.85s cubic-bezier(0.16, 1, 0.3, 1); /* Slower, high-end quintic easing */
     display: flex;
     flex-direction: column;
     padding: 3rem 2.5rem;
+    box-shadow: -20px 0 50px rgba(0, 0, 0, 0.4);
 }
 
 body.sidebar-active .sidebar-overlay {
@@ -331,6 +422,11 @@ body.sidebar-active .sidebar {
     cursor: pointer;
     transition: color 0.3s;
     line-height: 1;
+    position: relative; /* Established stacking context */
+    z-index: 100 !important; /* Forces button above logo/header layers */
+    pointer-events: auto !important; /* Ensures click capture */
+    padding: 15px; /* Expands clickable hit-zone */
+    margin: -15px; /* Offsets padding to keep visual position */
 }
 
 .close-btn:hover {
@@ -348,14 +444,30 @@ body.sidebar-active .sidebar {
     font-weight: 700;
     color: #fff;
     text-decoration: none;
-    transition: all 0.3s;
-    opacity: 0.7;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0; /* Hidden initially for staggered reveal */
+    transform: translateX(40px); /* Slide-in starting position */
+    display: block;
 }
+
+body.sidebar-active .sidebar-link {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Staggered entrance animation delays */
+body.sidebar-active .sidebar-link:nth-child(1) { transition-delay: 0.25s; }
+body.sidebar-active .sidebar-link:nth-child(2) { transition-delay: 0.33s; }
+body.sidebar-active .sidebar-link:nth-child(3) { transition-delay: 0.41s; }
+body.sidebar-active .sidebar-link:nth-child(4) { transition-delay: 0.49s; }
+body.sidebar-active .sidebar-link:nth-child(5) { transition-delay: 0.57s; }
+body.sidebar-active .sidebar-link:nth-child(6) { transition-delay: 0.65s; }
 
 .sidebar-link:hover {
     opacity: 1;
-    transform: translateX(10px);
+    transform: translateX(12px);
     color: var(--accent-blue);
+    text-shadow: 0 0 15px var(--accent-glow);
 }
 
 .sidebar-btn {
@@ -1077,20 +1189,95 @@ p.about-mission {
 .programs-section {
     background-color: var(--bg-dark); /* Deep Dark theme to snap out of the white section */
     color: var(--text-main);
-    padding: 10% 8%;
+    padding: 8rem 8%; /* Synchronized with Global 8% Grid (Hero and Careers) */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     position: relative;
     z-index: 50;
     overflow: hidden;
 }
 
+/* ── Lavender Stage Background ── */
+.programs-laser-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 100%, #1e1b4b 0%, #03040f 80%);
+}
+
+.programs-laser-bg canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(1px); /* Soften trails */
+}
+
+.beam-main {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    transform: translateX(-50%);
+    background: linear-gradient(to bottom, transparent, #ffffff 20%, #ffffff 80%, transparent);
+    box-shadow: 
+        0 0 10px #fff,
+        0 0 30px #a78bfa,
+        0 0 60px #a78bfa,
+        0 0 100px #a78bfa;
+    z-index: 5; /* Higher z-index relative to programs-laser-bg */
+    animation: beam-flicker 4s infinite ease-in-out;
+}
+
+.beam-glow {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    transform: translateX(-50%);
+    background: radial-gradient(ellipse at center, rgba(167, 139, 250, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+    filter: blur(40px);
+}
+
+.programs-floor {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200%;
+    height: 250px;
+    background: radial-gradient(50% 50% at 50% 0%, rgba(167, 139, 250, 0.4) 0%, transparent 100%);
+    border-radius: 100% 100% 0 0;
+    filter: blur(50px);
+    opacity: 0.8;
+    z-index: 2;
+}
+
+@keyframes beam-flicker {
+    0%, 100% { opacity: 0.8; width: 4px; }
+    50% { opacity: 1; width: 6px; }
+}
+
+@media(max-width:768px){
+    .beam-main { width: 2px; }
+    .programs-floor { height: 150px; opacity: 0.6; }
+}
+
 .programs-header {
-    text-align: center;
-    margin-bottom: 5rem;
-    max-width: 800px;
+    text-align: left; /* Aligns with Hero and About Us spine */
+    margin: 0 0 5rem;
+    max-width: 1400px;
+    width: 100%;
+    position: relative;
+    z-index: 10;
 }
 
 .programs-title {
@@ -1111,7 +1298,11 @@ p.about-mission {
     gap: 3rem;
     width: 100%;
     max-width: 1400px;
-    perspective: 2000px; /* Establishes the massive 3D scene */
+    margin: 0; /* Left Aligned Spine */
+    align-items: stretch;
+    perspective: 2000px;
+    position: relative;
+    z-index: 10;
 }
 
 /* 3D Holographic Card Wrapper */
@@ -1122,19 +1313,20 @@ p.about-mission {
 }
 
 .program-card {
-    background: rgba(15, 20, 30, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    padding: 3rem 2rem;
+    background: rgba(10, 15, 25, 0.8); /* Darker, more premium contrast */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 3.5rem 2.5rem; /* More authoritative spacing */
     width: 100%;
+    min-height: 540px; /* Consistent height for grid-wide alignment */
     position: relative;
     transform-style: preserve-3d;
     transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
     display: flex;
     flex-direction: column;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.02);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.6), inset 0 0 25px rgba(255,255,255,0.03);
 }
 
 .program-bg-glow {
@@ -1168,32 +1360,34 @@ p.about-mission {
 }
 
 .program-name {
-    font-size: 1.8rem;
-    font-weight: 700;
+    font-size: 2.1rem; /* Bolder, matching screenshot scale */
+    font-weight: 800;
     color: #ffffff;
-    margin-bottom: 1.5rem;
-    transform: translateZ(60px); /* Text floats incredibly high */
-    text-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    margin-bottom: 2rem;
+    line-height: 1.2;
+    transform: translateZ(60px); 
+    text-shadow: 0 10px 25px rgba(0,0,0,0.6);
 }
 
 .program-desc {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: rgb(148, 163, 184);
-    margin-bottom: 2.5rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.5); /* Refined readability */
+    margin-bottom: 3rem;
     transform: translateZ(40px);
     flex-grow: 1;
 }
 
 .program-stats {
-    display: flex;
-    gap: 2rem;
-    margin-bottom: 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Symmetrical grid for Duration/Level */
+    gap: 1.5rem;
+    margin-bottom: 3.5rem;
     transform: translateZ(45px);
-    background: rgba(0,0,0,0.3);
-    padding: 1.5rem;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.03);
+    background: rgba(0,0,0,0.4);
+    padding: 1.8rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.05);
 }
 
 .stat-box {
@@ -1202,7 +1396,7 @@ p.about-mission {
 }
 
 .stat-label {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     color: var(--accent-blue);
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -1211,25 +1405,27 @@ p.about-mission {
 }
 
 .stat-value {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     color: #ffffff;
     font-weight: 700;
 }
 
 .program-btn {
-    display: inline-block;
-    padding: 1.25rem 0;
+    display: block; /* Spans full card width for grounded alignment */
+    width: 100%;
+    padding: 1.5rem 0;
     text-align: center;
     background: transparent;
     color: #ffffff;
-    font-weight: 600;
+    font-weight: 700;
     text-decoration: none;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: auto; /* Pushes to bottom */
     transform: translateZ(80px); /* Button is closest to the camera */
-    transition: color 0.3s, border-color 0.3s, background 0.3s;
+    transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     pointer-events: auto; /* Re-enable pointer events for the link */
 }
 
@@ -1237,6 +1433,28 @@ p.about-mission {
     color: #000000;
     background: var(--accent-blue);
     border-color: var(--accent-blue);
+}
+
+
+/* Laptop Viewport Optimization (1024px to 1400px) */
+@media screen and (min-width: 1024px) and (max-width: 1399px) {
+    .logo-img {
+        height: 85px; /* Increased for premium presence on Laptop views */
+    }
+
+    .programs-section {
+        padding: 8rem 8%; /* Consistent with global laptop grid */
+    }
+    
+    .programs-grid {
+        gap: 2rem; 
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+    
+    .program-card {
+        padding: 2.5rem 1.7rem; 
+    }
 }
 
 /* 
@@ -1936,4 +2154,707 @@ p.about-mission {
 @keyframes marquee-infinite {
     0% { transform: translateX(0); }
     100% { transform: translateX(-100%); }
+}
+
+/* 
+ * ==========================================
+ * SECTION 10: MAIN FOOTER (WHITE THEME)
+ * ==========================================
+ */
+.main-footer {
+    background-color: #ffffff;
+    padding: 80px 0 40px;
+    color: #1a202c;
+    position: relative;
+    z-index: 100;
+    font-family: 'Outfit', sans-serif;
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 6%;
+}
+
+.footer-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.footer-logo {
+    height: 50px;
+    width: auto;
+    margin-bottom: 25px;
+}
+
+.footer-about {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #4a5568;
+    max-width: 320px;
+    margin-bottom: 30px;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 15px;
+    animation: footerFadeUp 0.8s ease-out forwards;
+}
+
+.social-link {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1.5px solid #e2e8f0;
+    color: #4a5568;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-link:hover {
+    transform: translateY(-8px) scale(1.15);
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
+    box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2);
+}
+
+.social-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent-blue);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.social-link:hover::after {
+    opacity: 0.05;
+}
+
+@keyframes footerFadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.footer-heading {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #0d1117;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: #4a5568;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.footer-links a:hover {
+    color: var(--accent-blue);
+    transform: translateX(5px);
+}
+
+.contact-item {
+    margin-bottom: 20px;
+}
+
+.contact-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--accent-blue);
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+
+.contact-text {
+    font-size: 0.95rem;
+    color: #1a202c;
+    font-weight: 500;
+}
+
+.footer-bottom {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.copyright, .credits {
+    font-size: 0.85rem;
+    color: #718096;
+}
+
+/* Responsive Footer */
+@media (max-width: 1024px) {
+    .footer-row {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer-row {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+}
+
+/* 
+ * ==========================================
+ * SECTION 11: COURSE INNER PAGE (SV-INNER)
+ * ==========================================
+ */
+.sv-inner__slider-area {
+    padding: 100px 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: radial-gradient(circle at 10% 10%, #0c1221 0%, #07090d 100%);
+    overflow: hidden;
+}
+
+.sv-inner__slider-content-wrap {
+    max-width: 550px;
+}
+
+.sv-inner__slider-subtitle {
+    display: inline-block;
+    color: var(--accent-blue);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.sv-inner__slider-title {
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 40px;
+}
+
+.sv-inner__service-list-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sv-inner__service-list {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 20px 30px;
+    border-radius: 12px;
+    transition: all 0.4s ease;
+}
+
+.sv-inner__service-list:hover {
+    background: rgba(0, 212, 255, 0.05);
+    border-color: var(--accent-blue);
+    transform: translateX(10px);
+}
+
+.sv-inner__service-list span {
+    color: #fff;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+/* Vertical Marquee Engine */
+.sv-inner__slider-main {
+    position: relative;
+    height: 700px;
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+}
+
+.sv-inner__marquee-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: marquee-vertical 40s linear infinite;
+}
+
+.sv-inner__marquee-col.reverse {
+    animation-direction: reverse;
+}
+
+.sv-inner__slider-item img {
+    width: 100%;
+    border-radius: 15px;
+    filter: grayscale(0.5) contrast(1.1);
+    transition: filter 0.5s ease;
+}
+
+.sv-inner__slider-item:hover img {
+    filter: grayscale(0) contrast(1.2);
+}
+
+@keyframes marquee-vertical {
+    from { transform: translateY(0); }
+    to { transform: translateY(-50%); }
+}
+
+@media (max-width: 992px) {
+    .sv-inner__slider-area { padding: 60px 0; }
+    .sv-inner__slider-main { height: 400px; margin-top: 50px; }
+}
+
+/* 
+ * ==========================================
+ * SECTION 12: COURSE MODULES & INFO AREA
+ * ==========================================
+ */
+.sv-inner__info-area {
+    padding: 120px 0 90px;
+    background: #07090d;
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sv-inner__info-title {
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    font-weight: 500;
+    line-height: 1.4;
+    color: #e2e8f0;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.sv-inner__left-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sv-inner__left-title span {
+    color: var(--accent-blue);
+    display: flex;
+}
+
+.sv-inner__service-category-wrap {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sv-inner__service-category {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+}
+
+.sv-inner__service-category a {
+    padding: 24px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    color: #8e9bb0;
+    transition: all 0.3s ease;
+}
+
+.sv-inner__service-category-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.sv-inner__service-category-content span:first-child {
+    color: var(--accent-blue);
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.sv-inner__service-category:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.sv-inner__service-category:hover a {
+    color: #fff;
+}
+
+.sv-inner__service-category:hover .sv-inner__service-category-content span:first-child {
+    opacity: 1;
+}
+
+.sv-inner__service-category-link {
+    color: var(--accent-blue);
+    opacity: 0;
+    transform: translate(-10px, 10px);
+    transition: all 0.3s ease;
+}
+
+.sv-inner__service-category:hover .sv-inner__service-category-link {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+@media (max-width: 1200px) {
+    .sv-inner__info-service { margin-bottom: 40px; }
+}
+
+/* 
+ * ==========================================
+ * SECTION 13: SYLLABUS BREAKDOWN
+ * ==========================================
+ */
+.syllabus-section {
+    padding: 120px 0;
+    background: #030509;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.syllabus-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 6%;
+}
+
+.syllabus-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.syllabus-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.syllabus-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.module-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 40px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
+.module-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent-blue);
+    background: rgba(0, 212, 255, 0.03);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 212, 255, 0.1);
+}
+
+.module-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.module-card:hover::before {
+    opacity: 1;
+}
+
+.module-badge {
+    display: inline-block;
+    color: var(--accent-blue);
+    font-weight: 800;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.module-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.module-focus {
+    font-size: 0.9rem;
+    color: #fff;
+    background: rgba(0, 212, 255, 0.1);
+    padding: 8px 15px;
+    border-radius: 8px;
+    display: inline-block;
+    margin-bottom: 25px;
+    font-weight: 600;
+    border-left: 3px solid var(--accent-blue);
+}
+
+.module-points {
+    list-style: none;
+    padding: 0;
+}
+
+.module-points li {
+    color: #8e9bb0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.module-points li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent-blue);
+}
+
+@media (max-width: 1024px) {
+    .syllabus-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* 
+ * ==========================================
+ * SECTION 14: PROGRAM OVERVIEW (NEW)
+ * ==========================================
+ */
+.program-overview {
+    padding: 100px 0;
+    background: linear-gradient(to bottom, #07090d, #0b0f17);
+    position: relative;
+    overflow: hidden;
+}
+
+.overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    align-items: stretch;
+}
+.program-overview {
+    overflow-x: hidden;
+}
+section {
+    max-width: 100%;
+}
+
+.overview-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 50px;
+    backdrop-filter: blur(12px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.overview-card.accent {
+    border-color: rgba(0, 212, 255, 0.2);
+    background: radial-gradient(circle at top right, rgba(0, 212, 255, 0.05), transparent);
+}
+
+.stat-item {
+    margin-bottom: 35px;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.stat-value {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.2;
+}
+
+.stat-value span {
+    color: var(--accent-blue);
+}
+
+.learning-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+.learning-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.learning-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 24px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.learning-item:hover {
+    background: rgba(0, 212, 255, 0.05);
+    border-color: rgba(0, 212, 255, 0.2);
+    transform: translateX(10px);
+}
+
+.learning-item i {
+    color: var(--accent-blue);
+    font-size: 1.1rem;
+}
+
+.guarantee-badges {
+    display: flex;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.guarantee-badge {
+    flex: 1;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 212, 255, 0.02));
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+}
+
+.guarantee-icon {
+    font-size: 1.8rem;
+    color: var(--accent-blue);
+    margin-bottom: 15px;
+    display: block;
+    text-shadow: 0 0 15px var(--accent-glow);
+}
+
+.guarantee-text {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #fff;
+    display: block;
+}
+
+@media (max-width: 1024px) {
+    .overview-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding-top: 1.2rem; /* Tightened for a cleaner top-edge look */
+    }
+
+    .hero-container, 
+    .sv-inner__slider-area, 
+    .hero {
+        padding-top: 140px; /* Unified clearance for the 95px logo on all pages */
+    }
+
+    .logo-img {
+        height: 95px; /* Large, premium mobile presence */
+    }
+
+    .syllabus-grid { grid-template-columns: 1fr; }
+    .syllabus-section { padding: 80px 0; }
+    .stat-value { font-size: 1.8rem; }
+    .learning-list { grid-template-columns: 1fr; }
+    .guarantee-badges { flex-direction: column; }
+    .overview-card { padding: 30px; }
+}
+/* ===== FINAL OVERFLOW + ALIGNMENT FIX ===== */
+
+/* Prevent ANY section from breaking width */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Force all sections to stay inside screen */
+section {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Fix 3D elements causing overflow */
+.glass-box,
+.hero-container,
+.right-section,
+.left-section {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* Reset Programs section positioning */
+#programs {
+    position: relative;
+    left: 0;
+    right: 0;
+    transform: none !important;
+}
+
+/* Strong grid fix */
+.programs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+
+    max-width: 1200px;
+    margin: 0 auto;
+
+    width: 100%;
+}
+
+/* Prevent cards from overflowing */
+.program-card-wrapper,
+.program-card {
+    width: 100%;
+    max-width: 100%;
 }

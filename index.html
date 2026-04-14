@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 <body class="theme-0">
@@ -22,16 +23,60 @@
             <div class="close-btn" id="close-sidebar">&times;</div>
         </div>
         <nav class="sidebar-nav">
-            <a href="#home" class="sidebar-link">Home</a>
+            <a href="index.html" class="sidebar-link">Home</a>
+            <a href="about.html" class="sidebar-link">About Us</a>
             <a href="#programs" class="sidebar-link">Programs</a>
-            <a href="#why-choose" class="sidebar-link">Why IRIT?</a>
             <a href="#careers" class="sidebar-link">Careers</a>
+            <div class="sidebar-item dropdown">
+                <a href="#" class="sidebar-link dropdown-toggle">Courses <i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="course-fullstack.html" class="dropdown-link">Python Full Stack</a></li>
+                    <li><a href="course-node.html" class="dropdown-link">Node.js Full Stack</a></li>
+                    <li><a href="course-digital.html" class="dropdown-link">Digital Marketing</a></li>
+                    <li><a href="course-design.html" class="dropdown-link">Building Designing</a></li>
+                </ul>
+            </div>
+            <a href="contact.html" class="sidebar-link">Contact</a>
             <a href="#" class="sidebar-btn">Enroll Now</a>
         </nav>
-        <div class="sidebar-footer">
-            <p>© 2026 IRIT Institute. <br> Industry Ready Institute of Technology</p>
-        </div>
+        
     </div>
+    <style>
+        /* Parent */
+.sidebar-item {
+    position: relative;
+}
+
+/* Hide dropdown initially */
+.dropdown-menu {
+    display: none;
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    background: #111;
+    border-radius: 8px;
+}
+
+/* Dropdown links */
+.dropdown-menu li a {
+    display: block;
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.dropdown-menu li a:hover {
+    background: #222;
+    padding-left: 25px;
+}
+
+/* Show on hover */
+.sidebar-item:hover .dropdown-menu {
+    display: block;
+}
+    </style>
     <div class="hero-container">
         <!-- Cinematic Background Layers -->
         <div class="background-tint"></div>
@@ -868,7 +913,12 @@
   });
 })();
 </script>
-
+<script>
+document.querySelector('.dropdown > .sidebar-link').addEventListener('click', function(e) {
+    e.preventDefault();
+    this.nextElementSibling.classList.toggle('show');
+});
+</script>
 
     <!-- Why Choose IRIT Section -->
     <!-- <section id="why-choose-irit" class="careers-section">
@@ -997,8 +1047,16 @@
 
     <!-- Our Programs Section -->
     <section id="programs" class="programs-section">
+        <!-- Lavender Stage Background -->
+        <div class="programs-laser-bg">
+            <canvas id="programs-particles"></canvas>
+            <div class="beam-main"></div>
+            <div class="beam-glow"></div>
+            <div class="programs-floor"></div>
+        </div>
+
         <div class="programs-header">
-            <h2 class="programs-title text-gradient theme-colored">Our Programs</h2>
+            <h2 class="programs-title text-gradient theme-colored" style="text-align: center !important;">Our Programs</h2>
             <p class="programs-subtitle">Choose from our industry-leading training programs designed for career success</p>
         </div>
         
@@ -1013,12 +1071,12 @@
                         
                         <div class="program-stats">
                             <div class="stat-box">
-                                <span class="stat-label">Duration</span>
-                                <span class="stat-value">6 Months</span>
+                                <span class="stat-label" style="color: skyblue;">Duration</span>
+                                <span class="stat-value" style="font-size: 20px;">6 Months</span>
                             </div>
                             <div class="stat-box">
-                                <span class="stat-label">Level</span>
-                                <span class="stat-value">Beginner to Advanced</span>
+                                <span class="stat-label" style="color: skyblue;">Level</span>
+                                <span class="stat-value" style="font-size: 20px;">Beginner to Advanced</span>
                             </div>
                         </div>
                         
@@ -1037,12 +1095,12 @@
                         
                         <div class="program-stats">
                             <div class="stat-box">
-                                <span class="stat-label">Duration</span>
-                                <span class="stat-value">4 Months</span>
+                                <span class="stat-label" style="color: skyblue;">Duration</span>
+                                <span class="stat-value" style="font-size: 20px;">4 Months</span>
                             </div>
                             <div class="stat-box">
-                                <span class="stat-label">Level</span>
-                                <span class="stat-value">Beginner to Intermediate</span>
+                                <span class="stat-label" style="color: skyblue;">Level</span>
+                                <span class="stat-value" style="font-size: 20px;">Beginner to Intermediate</span>
                             </div>
                         </div>
                         
@@ -1061,12 +1119,12 @@
                         
                         <div class="program-stats">
                             <div class="stat-box">
-                                <span class="stat-label">Duration</span>
-                                <span class="stat-value">5 Months</span>
+                                <span class="stat-label" style="color: skyblue;">Duration</span>
+                                <span class="stat-value" style="font-size: 20px;">5 Months</span>
                             </div>
                             <div class="stat-box">
-                                <span class="stat-label">Level</span>
-                                <span class="stat-value">Beginner to Advanced</span>
+                                <span class="stat-label" style="color: skyblue;">Level</span>
+                                <span class="stat-value" style="font-size: 20px;">Beginner to Advanced</span>
                             </div>
                         </div>
                         
@@ -1564,17 +1622,46 @@
 
     <div class="focus-visual">
       <div class="belt" id="belt">
-        <div class="card"><p>Practical learning over theory</p></div>
-        <div class="card"><p>Real-time project experience</p></div>
-        <div class="card"><p>Expert mentorship</p></div>
-        <div class="card"><p>Strong placement support</p></div>
-        <div class="card"><p>100% Internship Guarantee</p></div>
-        <div class="card"><p>100% Placement Assistance</p></div>
+        <div class="card">
+  <h4>Practical Learning Approach</h4>
+  <p>Master skills through hands-on training designed to prepare you for real-world challenges.</p>
+</div>
+
+<div class="card">
+  <h4>Live Project Experience</h4>
+  <p>Build industry-ready portfolios by working on real-time projects and case studies.</p>
+</div>
+
+<div class="card">
+  <h4>Industry Expert Mentors</h4>
+  <p>Get guidance from professionals with proven experience in leading companies.</p>
+</div>
+
+<div class="card">
+  <h4>Career-Focused Support</h4>
+  <p>From resume building to interview prep, we guide you at every step of your career journey.</p>
+</div>
+
+<div class="card">
+  <h4>Guaranteed Internship</h4>
+  <p>Secure hands-on industry exposure with our assured internship program.</p>
+</div>
+
+<div class="card">
+  <h4>100% Placement Assistance</h4>
+  <p>Unlock job opportunities with dedicated placement support and hiring connections.</p>
+</div>
       </div>
     </div>
   </div>
 </div>
-
+<style>
+    .card p {
+  font-size: 8px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.5;
+}
+</style>
 <script>
 (function(){
 
@@ -1585,8 +1672,8 @@
   const isMobile = window.innerWidth < 768;
 
   const speed = isMobile ? 0.006 : 0.01;
-  const radius = isMobile ? 120 : 200; // Adjusted for split layout
-  const yRange = isMobile ? 30 : 50;
+  const radius = isMobile ? 160 : 200; // Adjusted for split layout
+  const yRange = isMobile ? 70 : 50;
 
   function animate(){
 
@@ -1601,7 +1688,7 @@
 
       let scale = (z + radius) / (2 * radius);
 
-      let baseScale = isMobile ? 0.6 : 0.7;
+      let baseScale = isMobile ? 0.5 : 0.7;
 
       card.style.transform = `
         translate(-50%,-50%)
@@ -1626,6 +1713,70 @@
 </script>
 
 </section>
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-row">
+                <!-- Column 1: Identity -->
+                <div class="footer-col col-identity">
+                    <img src="logo.png" alt="IRIT Logo" class="footer-logo">
+                    <p class="footer-about">Industry Ready Institute of Technology (IRIT) is Kerala's leading institute for practical, industry-focused training in tech, marketing, and architecture.</p>
+                    <div class="footer-socials">
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#programs">Programs</a></li>
+                        <li><a href="#why-irit">Why Choose IRIT?</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Programs -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Our Programs</h4>
+                    <ul class="footer-links">
+                        <li><a href="#programs">Full Stack Development</a></li>
+                        <li><a href="#programs">Performance Marketing</a></li>
+                        <li><a href="#programs">Building Designing</a></li>
+                        <li><a href="#programs">Interior Designing</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Contact -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Contact Us</h4>
+                    <div class="contact-item">
+                        <span class="contact-label">Location</span>
+                        <p class="contact-text">Pathanamthitta, Kerala, India</p>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Email</span>
+                        <p class="contact-text">info@irit.edu.in</p>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Phone</span>
+                        <p class="contact-text">+91 94000 00000</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2026 IRIT Institute. All Rights Reserved.</p>
+                <p class="credits">Designed for the Future of Learning.</p>
+            </div>
+        </div>
+    </footer>
 
     <!-- Global Cinematic Hardware-Accelerated Ghost Image -->
     <img id="ghost-image" src="" alt="">

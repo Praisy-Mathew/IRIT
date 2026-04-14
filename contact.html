@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premium Contact Page</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:#fff;
+  color:#333;
+}
+
+/* ================= HERO ================= */
+.hero{
+  position:relative;
+  height:100vh;
+  background:url('https://images.unsplash.com/photo-1518770660439-4636190af475') center/cover no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.hero-overlay{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7));
+}
+
+.hero-content{
+  position:relative;
+  text-align:center;
+  color:#fff;
+  max-width:700px;
+  padding:20px;
+  animation:fadeUp 1s ease;
+}
+
+.hero-content h1{
+  font-size:56px;
+  margin-bottom:15px;
+}
+
+.hero-content p{
+  font-size:18px;
+  margin-bottom:25px;
+  color:#e2e8f0;
+}
+
+.hero-btn{
+  display:inline-block;
+  padding:14px 30px;
+  background:linear-gradient(135deg,#3b82f6,#06b6d4);
+  color:#fff;
+  border-radius:8px;
+  text-decoration:none;
+  transition:0.3s;
+}
+
+.hero-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 20px rgba(0,0,0,0.3);
+}
+
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(40px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* ================= CONTACT ================= */
+.contact-section{
+  padding:80px 20px;
+  background:#0f172a;
+}
+
+.contact-container{
+  max-width:1100px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+}
+
+/* LEFT */
+.contact-info h2{
+  color:#fff;
+  font-size:32px;
+  margin-bottom:10px;
+}
+
+.contact-info p{
+  color:#cbd5e1;
+  margin-bottom:25px;
+}
+
+/* INFO CARDS */
+.info-card{
+  display:flex;
+  gap:15px;
+  padding:18px;
+  border-radius:12px;
+  background:#1e293b;
+  margin-bottom:15px;
+  transition:0.3s;
+}
+
+.info-card:hover{
+  background:#334155;
+  transform:translateY(-3px);
+}
+
+.info-card span{
+  font-size:22px;
+  animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-5px);}
+  100%{transform:translateY(0);}
+}
+
+.info-card strong{
+  color:#fff;
+}
+
+.info-card p{
+  color:#cbd5e1;
+}
+
+/* FORM */
+.contact-form{
+  background:#1e293b;
+  padding:30px;
+  border-radius:15px;
+}
+
+.contact-form h2{
+  color:#fff;
+  margin-bottom:20px;
+}
+
+.input-row{
+  display:flex;
+  gap:15px;
+}
+
+.input-row input{
+  flex:1;
+}
+
+input, select, textarea{
+  width:100%;
+  padding:12px;
+  margin-bottom:15px;
+  border-radius:8px;
+  border:1px solid #334155;
+  background:#0f172a;
+  color:#fff;
+}
+
+input::placeholder,
+textarea::placeholder{
+  color:#94a3b8;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:8px;
+  background:linear-gradient(135deg,#3b82f6,#06b6d4);
+  color:#fff;
+  cursor:pointer;
+}
+
+button:hover{
+  opacity:0.9;
+}
+
+/* ================= FOOTER PARALLAX (MATCH HERO) ================= */
+.parallax2{
+  position:relative;
+  height:60vh;
+  background:url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d') center/cover no-repeat;
+  background-attachment:fixed;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.parallax2::before{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7));
+}
+
+.parallax2 h2{
+  position:relative;
+  color:#fff;
+  font-size:36px;
+  text-align:center;
+  animation:fadeUp 1s ease;
+}
+
+/* ================= MOBILE ================= */
+@media(max-width:768px){
+  .contact-container{
+    grid-template-columns:1fr;
+  }
+
+  .input-row{
+    flex-direction:column;
+  }
+
+  .hero-content h1{
+    font-size:32px;
+  }
+
+  .parallax2{
+    background-attachment:scroll;
+  }
+}
+</style>
+</head>
+
+<body class="contact-page">
+    <!-- Sidebar Navigation -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <img src="logo.png" alt="IRIT Logo" class="logo-img">
+            </div>
+            <div class="close-btn" id="close-sidebar">&times;</div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="sidebar-link">Home</a>
+            <a href="about.html" class="sidebar-link">About Us</a>
+            <a href="#programs" class="sidebar-link">Programs</a>
+            <a href="#careers" class="sidebar-link">Careers</a>
+            <div class="sidebar-item dropdown">
+                <a href="#" class="sidebar-link dropdown-toggle">Courses <i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="course-fullstack.html" class="dropdown-link">Python Full Stack</a></li>
+                    <li><a href="course-node.html" class="dropdown-link">Node.js Full Stack</a></li>
+                    <li><a href="course-digital.html" class="dropdown-link">Digital Marketing</a></li>
+                    <li><a href="course-design.html" class="dropdown-link">Building Designing</a></li>
+                </ul>
+            </div>
+            <a href="contact.html" class="sidebar-link">Contact</a>
+            <a href="#" class="sidebar-btn">Enroll Now</a>
+        </nav>
+        
+    </div>
+<style>
+        /* Parent */
+.sidebar-item {
+    position: relative;
+}
+
+/* Hide dropdown initially */
+.dropdown-menu {
+    display: none;
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    background: #111;
+    border-radius: 8px;
+}
+
+/* Dropdown links */
+.dropdown-menu li a {
+    display: block;
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.dropdown-menu li a:hover {
+    background: #222;
+    padding-left: 25px;
+}
+
+/* Show on hover */
+.sidebar-item:hover .dropdown-menu {
+    display: block;
+}
+    </style>
+    <!-- Global Header -->
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="logo.png" alt="IRIT Logo" class="logo-img"></a>
+        </div>
+        <div class="menu-btn" id="open-sidebar">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <h1>Get In Touch</h1>
+    <p>Start your journey with us and build your future today</p>
+    <a href="#contact" class="hero-btn">Contact Us</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-container">
+
+    <!-- LEFT -->
+    <div class="contact-info">
+      <h2>Contact Information</h2>
+      <p>We’d love to hear from you. Reach out anytime.</p>
+
+      <div class="info-card">
+        <span>📞</span>
+        <div>
+          <strong>Phone</strong>
+          <p>8921999393</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <span>📧</span>
+        <div>
+          <strong>Email</strong>
+          <p>info@irit.in</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <span>📍</span>
+        <div>
+          <strong>Location</strong>
+          <p>Nakshathra IT Park, Adoor</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <span>🕒</span>
+        <div>
+          <strong>Office Hours</strong>
+          <p>Mon–Fri: 9 AM – 6 PM</p>
+          <p>Sat: 10 AM – 4 PM</p>
+          <p>Sun: Closed</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="contact-form">
+      <h2>Send Message</h2>
+
+      <form>
+        <div class="input-row">
+          <input type="text" placeholder="Name *" required>
+          <input type="email" placeholder="Email *" required>
+        </div>
+
+        <select required>
+          <option value="">Course Interest *</option>
+          <option>IRAS - Full Stack Development</option>
+          <option>IRAM - Performance Marketing</option>
+          <option>Building Designing & Planning</option>
+        </select>
+
+        <textarea rows="5" placeholder="Message *" required></textarea>
+
+        <button>Send Message</button>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+</section>
+
+<!-- Main Footer -->
+<footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-row">
+            <!-- Column 1: Identity -->
+            <div class="footer-col col-identity">
+                <img src="logo.png" alt="IRIT Logo" class="footer-logo">
+                <p class="footer-about">Industry Ready Institute of Technology (IRIT) is Kerala's leading institute for practical, industry-focused training in tech, marketing, and architecture.</p>
+                <div class="footer-socials">
+                    <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <!-- Column 2: Quick Links -->
+            <div class="footer-col">
+                <h4 class="footer-heading">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#about">About Us</a></li>
+                    <li><a href="index.html#programs">Programs</a></li>
+                    <li><a href="index.html#why-irit">Why Choose IRIT?</a></li>
+                    <li><a href="index.html#careers">Careers</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Programs -->
+            <div class="footer-col">
+                <h4 class="footer-heading">Our Programs</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html#programs">Full Stack Development</a></li>
+                    <li><a href="index.html#programs">Performance Marketing</a></li>
+                    <li><a href="index.html#programs">Building Designing</a></li>
+                    <li><a href="index.html#programs">Interior Designing</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Contact -->
+            <div class="footer-col">
+                <h4 class="footer-heading">Contact Us</h4>
+                <div class="contact-item">
+                    <span class="contact-label">Location</span>
+                    <p class="contact-text">Pathanamthitta, Kerala, India</p>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Email</span>
+                    <p class="contact-text">info@irit.edu.in</p>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Phone</span>
+                    <p class="contact-text">+91 94000 00000</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p class="copyright">&copy; 2026 IRIT Institute. All Rights Reserved.</p>
+            <p class="credits">Designed for the Future of Learning.</p>
+        </div>
+    </div>
+</footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
