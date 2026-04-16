@@ -123,4 +123,14 @@ ScrollTrigger.refresh();
             overlay.classList.remove('active');
         });
     }
+
+    const dropdownToggles = document.querySelectorAll('.dropdown > .sidebar-link');
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const nextEl = this.nextElementSibling;
+            if (nextEl) nextEl.classList.toggle('show');
+        });
+    });
 });

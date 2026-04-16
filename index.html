@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Futuristic Hero - Full Stack Developer</title>
+    <title>IRIT</title>
+    <link rel="icon" href="logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -28,7 +29,7 @@
             <a href="#programs" class="sidebar-link">Programs</a>
             <a href="#careers" class="sidebar-link">Careers</a>
             <div class="sidebar-item dropdown">
-                <a href="#" class="sidebar-link dropdown-toggle">Courses <i class="fas fa-chevron-down"></i></a>
+                <a class="sidebar-link dropdown-toggle">Courses <i class="fas fa-chevron-down"></i></a>
                 <ul class="dropdown-menu">
                     <li><a href="course-fullstack.html" class="dropdown-link">Python Full Stack</a></li>
                     <li><a href="course-node.html" class="dropdown-link">Node.js Full Stack</a></li>
@@ -73,7 +74,8 @@
 }
 
 /* Show on hover */
-.sidebar-item:hover .dropdown-menu {
+.sidebar-item:hover .dropdown-menu,
+.dropdown-menu.show {
     display: block;
 }
     </style>
@@ -342,7 +344,7 @@
     <!-- Stats -->
     <div class="why-stats">
       <div class="why-stat">
-        <div class="wstat-num" data-target="1200">0+</div>
+        <div class="wstat-num" data-target="5000">0+</div>
         <div class="wstat-label">Students Trained</div>
       </div>
       <div class="why-stat">
@@ -350,7 +352,7 @@
         <div class="wstat-label">Placement Rate</div>
       </div>
       <div class="why-stat">
-        <div class="wstat-num" data-target="3">0</div>
+        <div class="wstat-num" data-target="3">0+</div>
         <div class="wstat-label">Industry Programs</div>
       </div>
       <div class="why-stat">
@@ -913,12 +915,7 @@
   });
 })();
 </script>
-<script>
-document.querySelector('.dropdown > .sidebar-link').addEventListener('click', function(e) {
-    e.preventDefault();
-    this.nextElementSibling.classList.toggle('show');
-});
-</script>
+
 
     <!-- Why Choose IRIT Section -->
     <!-- <section id="why-choose-irit" class="careers-section">

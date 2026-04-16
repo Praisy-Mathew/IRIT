@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Node.js Full Stack Development | IRIT Institute</title>
+    <title>IRIT</title>
+    <link rel="icon" href="logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -23,8 +24,8 @@
         <nav class="sidebar-nav">
             <a href="index.html" class="sidebar-link">Home</a>
             <a href="about.html" class="sidebar-link">About Us</a>
-            <a href="#programs" class="sidebar-link">Programs</a>
-            <a href="#careers" class="sidebar-link">Careers</a>
+            <a href="index.html#programs" class="sidebar-link">Programs</a>
+            <a href="index.html#careers" class="sidebar-link">Careers</a>
             <div class="sidebar-item dropdown">
                 <a href="#" class="sidebar-link dropdown-toggle">Courses <i class="fas fa-chevron-down"></i></a>
                 <ul class="dropdown-menu">
@@ -71,7 +72,8 @@
 }
 
 /* Show on hover */
-.sidebar-item:hover .dropdown-menu {
+.sidebar-item:hover .dropdown-menu,
+.dropdown-menu.show {
     display: block;
 }
     </style>

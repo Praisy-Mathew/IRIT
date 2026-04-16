@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IRIT — Kerala's Future</title>
+<title>IRIT</title>
+<link rel="icon" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
@@ -704,8 +705,8 @@ body.sidebar-active .sidebar-link {
     <nav class="sidebar-nav">
             <a href="index.html" class="sidebar-link">Home</a>
             <a href="about.html" class="sidebar-link">About Us</a>
-            <a href="#programs" class="sidebar-link">Programs</a>
-            <a href="#careers" class="sidebar-link">Careers</a>
+            <a href="index.html#programs" class="sidebar-link">Programs</a>
+            <a href="index.html#careers" class="sidebar-link">Careers</a>
             <div class="sidebar-item dropdown">
                 <a href="#" class="sidebar-link dropdown-toggle">Courses <i class="fas fa-chevron-down"></i></a>
                 <ul class="dropdown-menu">
@@ -752,7 +753,8 @@ body.sidebar-active .sidebar-link {
 }
 
 /* Show on hover */
-.sidebar-item:hover .dropdown-menu {
+.sidebar-item:hover .dropdown-menu,
+.dropdown-menu.show {
     display: block;
 }
     </style>
@@ -1290,6 +1292,16 @@ openBtn.addEventListener('click', () => document.body.classList.add('sidebar-act
 const closeSidebar = () => document.body.classList.remove('sidebar-active');
 closeBtn.addEventListener('click', closeSidebar);
 overlay.addEventListener('click', closeSidebar);
+
+const dropdownToggles = document.querySelectorAll('.dropdown > .sidebar-link');
+dropdownToggles.forEach(toggle => {
+    toggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const nextEl = this.nextElementSibling;
+        if (nextEl) nextEl.classList.toggle('show');
+    });
+});
 
 </script>
 </body>

@@ -92,9 +92,21 @@ if (sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar);
 
 if (sidebarLinks.length > 0) {
     sidebarLinks.forEach(link => {
-        link.addEventListener('click', closeSidebar);
+        if (!link.classList.contains('dropdown-toggle')) {
+            link.addEventListener('click', closeSidebar);
+        }
     });
 }
+
+const dropdownToggles = document.querySelectorAll('.dropdown > .sidebar-link');
+dropdownToggles.forEach(toggle => {
+    toggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const nextEl = this.nextElementSibling;
+        if (nextEl) nextEl.classList.toggle('show');
+    });
+});
 
 // --- HLS Video Background Setup ---
 if (video) {
