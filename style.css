@@ -7,6 +7,10 @@
     --glass-bg: rgba(20, 25, 35, 0.4);
     --glass-border: rgba(255, 255, 255, 0.08);
     --theme-hue: 0deg;
+    
+    /* Typography */
+    --heading-font: 'Inter', sans-serif;
+    --body-font: 'Poppins', sans-serif;
 }
 
 @keyframes float-pulse {
@@ -18,7 +22,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--body-font);
     -webkit-font-smoothing: antialiased;
 }
 
@@ -602,6 +606,7 @@ body.sidebar-active .sidebar-link:nth-child(6) { transition-delay: 0.65s; }
 }
 
 .hero-title {
+    font-family: var(--heading-font);
     font-size: 5.5rem;
     font-weight: 800;
     line-height: 1.05;
@@ -721,8 +726,8 @@ body.sidebar-active .sidebar-link:nth-child(6) { transition-delay: 0.65s; }
 .about-section {
     background-color: #ffffff;
     color: #111822;
-    padding: 6% 8%; /* Reduced from 10% */
-    min-height: 100vh; /* Takes full screen below hero */
+    padding: 80px 8%;
+    min-height: auto; /* Removed 100vh for a more compact layout */
     display: flex;
     align-items: center;
     position: relative;
@@ -771,6 +776,7 @@ body.sidebar-active .sidebar-link:nth-child(6) { transition-delay: 0.65s; }
 }
 
 .section-title {
+    font-family: var(--heading-font);
     font-size: 3.5rem;
     font-weight: 800;
     margin-bottom: 0.5rem;
@@ -2167,7 +2173,7 @@ p.about-mission {
     color: #1a202c;
     position: relative;
     z-index: 100;
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--body-font);
 }
 
 .footer-container {
