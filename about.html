@@ -693,6 +693,105 @@ body.sidebar-active .sidebar-link {
     .footer-row { grid-template-columns: 1fr; }
     .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
 }
+
+/* ── TESTIMONIALS ── */
+.testi-container {
+  width: 100%;
+  overflow: hidden;
+  padding: 60px 0;
+  position: relative;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+.testi-track {
+  display: flex;
+  gap: 30px;
+  width: max-content;
+  animation: scrollTesti 30s linear infinite;
+}
+.testi-track:hover {
+  animation-play-state: paused;
+}
+@keyframes scrollTesti {
+  to { transform: translateX(calc(-50% - 15px)); }
+}
+.testi-card {
+  width: 450px;
+  background: rgba(20,20,20,0.6);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s, border-color 0.4s;
+  cursor: pointer;
+}
+.testi-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(124,58,237,0.2);
+  border-color: rgba(124,58,237,0.4);
+}
+.testi-glow {
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, var(--mg) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+}
+.testi-card:hover .testi-glow {
+  opacity: 0.2;
+}
+.testi-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #d1d5db;
+  font-style: italic;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 2;
+}
+.testi-text::before {
+  content: '"';
+  position: absolute;
+  top: -20px;
+  left: -15px;
+  font-size: 4rem;
+  color: rgba(255,255,255,0.05);
+  font-family: 'Unbounded', sans-serif;
+  z-index: -1;
+}
+.testi-author {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  z-index: 2;
+  position: relative;
+}
+.testi-author img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--mg);
+}
+.testi-name {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1.1rem;
+  color: #fff;
+  margin-bottom: 2px;
+}
+.testi-role {
+  font-size: 0.9rem;
+  color: var(--mg2);
+}
+@media (max-width: 768px) {
+  .testi-card { width: 320px; padding: 30px; }
+}
 </style>
 </head>
 <body>
@@ -1009,6 +1108,308 @@ body.sidebar-active .sidebar-link {
     </div>
   </div>
 </section>
+
+<!-- ════════════════ TESTIMONIALS (Book Page) ════════════════ -->
+<!-- <section class="sec z" id="testimonials" style="overflow: hidden; padding: 100px 0; background: linear-gradient(135deg, rgba(15,15,20,1) 0%, rgba(5,5,10,1) 100%); position: relative; display: flex; flex-direction: column; align-items: center;">
+  
+  <div class="sh" style="text-align: center; margin-bottom: 50px; z-index: 2;">
+     <div class="chip">Real Stories</div>
+     <h2 class="big-title">Alumni <span class="acc">Book</span></h2>
+  </div>
+
+  <div class="book-container">
+      <div id="flipbook-wrapper" style="transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1); display: flex; justify-content: center; width: 100%;">
+          <div id="flipbook">
+          
+          <div class="page page-cover page-cover-top" data-density="hard">
+              <div class="page-content" style="background: radial-gradient(circle at center, #2a2a36 0%, #0d0d14 100%); border: 1px solid rgba(255,255,255,0.08); border-right: 1px solid rgba(255,255,255,0.15); display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 100%; border-radius: 4px 15px 15px 4px; box-shadow: inset -5px 0 40px rgba(0,0,0,0.9), inset 5px 5px 15px rgba(255,255,255,0.03); position: relative; overflow: hidden; padding: 50px 20px 40px 40px;">
+                  
+                 
+                  <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 40px; background: linear-gradient(90deg, rgba(0,0,0,0.95) 0%, rgba(124,58,237,0.2) 50%, rgba(0,0,0,0.7) 100%); border-right: 1px solid rgba(255,255,255,0.1); z-index: 1; box-shadow: 2px 0 10px rgba(0,0,0,0.5);"></div>
+                  
+                 
+                  <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: var(--mg); filter: blur(70px); opacity: 0.35; z-index: 1;"></div>
+                  <div style="position: absolute; bottom: -50px; left: -20px; width: 120px; height: 120px; background: #00ff88; filter: blur(70px); opacity: 0.15; z-index: 1;"></div>
+                  
+                 
+                  <div style="position: relative; z-index: 2; text-align: center; margin-top: 10px;">
+                      <img src="logo.png" style="width: 50px; filter: drop-shadow(0 0 15px rgba(255,255,255,0.3));">
+                  </div>
+
+                 
+                  <div style="position: relative; z-index: 2; text-align: center; width: 100%;">
+                      <div style="display: inline-block; padding: 4px 12px; border: 1px solid rgba(124,58,237,0.5); border-radius: 20px; color: #fff; font-size: 0.65rem; letter-spacing: 2px; margin-bottom: 25px; background: rgba(124,58,237,0.15); font-family: 'Unbounded', sans-serif; box-shadow: 0 0 15px rgba(124,58,237,0.3);">PREMIUM EDITION</div>
+                      <h2 style="font-family: 'Unbounded', sans-serif; color: #fff; font-size: 2.1rem; line-height: 1.15; text-shadow: 0 10px 20px rgba(0,0,0,0.8); margin-bottom: 5px;">OUR<br><span style="color: var(--mg); font-size: 2.1rem; text-shadow: 0 0 20px rgba(124,58,237,0.6);">TESTIMONIALS</span></h2>
+                      <div style="width: 40px; height: 2px; background: linear-gradient(90deg, transparent, var(--mg), transparent); margin: 25px auto;"></div>
+                  </div>
+                  
+                 
+                  <div style="position: relative; z-index: 2; text-align: center;">
+                      <p style="color: #999; font-size: 0.75rem; font-family: monospace; letter-spacing: 1.5px; margin-bottom: 15px;">FEATURING 50+ PLACEMENTS</p>
+                      <p style="color: var(--mg); font-size: 0.75rem; font-family: 'Unbounded', sans-serif; letter-spacing: 1px;" class="bouncing-hint"><i class="fas fa-hand-point-right" style="margin-right: 5px; font-size: 0.9rem;"></i> DRAG TO OPEN</p>
+                  </div>
+              </div>
+          </div>
+
+     
+          <div class="page page-cover" data-density="hard">
+              <div class="page-content" style="background: #0a0a0c; height: 100%; box-shadow: inset 10px 0 20px rgba(0,0,0,0.8); display: flex; flex-direction: column; justify-content: center; padding: 40px; text-align: center;">
+                  <i class="fas fa-quote-right" style="font-size: 2.5rem; color: rgba(255,255,255,0.05); margin-bottom: 20px;"></i>
+                  <h3 style="color: #fff; font-family: 'Unbounded', sans-serif; font-size: 1.2rem; margin-bottom: 15px;">Real Stories.<br>Real Success.</h3>
+                  <p style="color: #888; font-size: 0.9rem; line-height: 1.6;">A collection of experiences from our graduates who transformed their careers through IRIT's advanced training programs.</p>
+              </div>
+          </div>
+
+        
+          <div class="page">
+              <div class="page-content book-page" style="background: #15151a; padding: 40px; height: 100%; box-shadow: inset 10px 0 30px rgba(0,0,0,0.6); display: flex; flex-direction: column; justify-content: center;">
+                  <div class="anim-elem anim-delay-1">
+                      <i class="fas fa-quote-left" style="font-size: 2rem; color: var(--mg); margin-bottom: 20px; opacity: 0.5;"></i>
+                      <p style="color: #ddd; line-height: 1.8; font-style: italic; font-size: 1.05rem;">"IRIT's full-stack program transformed my career. The hands-on projects and expert mentorship bridged the gap between learning and actually doing."</p>
+                  </div>
+                  <div class="anim-elem anim-delay-2" style="margin-top: 40px; display: flex; align-items: center; gap: 15px;">
+                      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--mg); box-shadow: 0 5px 15px rgba(124,58,237,0.3);">
+                      <div>
+                          <h4 style="color: #fff; font-family: 'Unbounded', sans-serif; font-size: 1rem;">Rahul M.</h4>
+                          <p style="color: var(--mg2); font-size: 0.85rem;">Software Engineer</p>
+                      </div>
+                  </div>
+                  <div class="page-number">1</div>
+              </div>
+          </div>
+
+          
+          <div class="page">
+              <div class="page-content book-page" style="background: #15151a; padding: 40px; height: 100%; box-shadow: inset -10px 0 30px rgba(0,0,0,0.6); display: flex; flex-direction: column; justify-content: center;">
+                  <div class="anim-elem anim-delay-1">
+                      <i class="fas fa-quote-left" style="font-size: 2rem; color: #00ff88; margin-bottom: 20px; opacity: 0.5;"></i>
+                      <p style="color: #ddd; line-height: 1.8; font-style: italic; font-size: 1.05rem;">"The digital marketing curriculum is completely up-to-date with current industry standards. I secured a job within 2 weeks of completion."</p>
+                  </div>
+                  <div class="anim-elem anim-delay-2" style="margin-top: 40px; display: flex; align-items: center; gap: 15px;">
+                      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100&auto=format&fit=crop" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid #00ff88; box-shadow: 0 5px 15px rgba(0,255,136,0.3);">
+                      <div>
+                          <h4 style="color: #fff; font-family: 'Unbounded', sans-serif; font-size: 1rem;">Anjali P.</h4>
+                          <p style="color: #69ffb4; font-size: 0.85rem;">Performance Marketer</p>
+                      </div>
+                  </div>
+                  <div class="page-number right">2</div>
+              </div>
+          </div>
+
+          
+          <div class="page">
+              <div class="page-content book-page" style="background: #15151a; padding: 40px; height: 100%; box-shadow: inset 10px 0 30px rgba(0,0,0,0.6); display: flex; flex-direction: column; justify-content: center;">
+                  <div class="anim-elem anim-delay-1">
+                      <i class="fas fa-quote-left" style="font-size: 2rem; color: #ff2d78; margin-bottom: 20px; opacity: 0.5;"></i>
+                      <p style="color: #ddd; line-height: 1.8; font-style: italic; font-size: 1.05rem;">"Being an architectural designer was my dream, and IRIT's building designing course gave me the precise software mastery I needed to excel."</p>
+                  </div>
+                  <div class="anim-elem anim-delay-2" style="margin-top: 40px; display: flex; align-items: center; gap: 15px;">
+                      <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=100&auto=format&fit=crop" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid #ff2d78; box-shadow: 0 5px 15px rgba(255,45,120,0.3);">
+                      <div>
+                          <h4 style="color: #fff; font-family: 'Unbounded', sans-serif; font-size: 1rem;">Sneha K.</h4>
+                          <p style="color: #ff80ab; font-size: 0.85rem;">Architectural Modeler</p>
+                      </div>
+                  </div>
+                  <div class="page-number">3</div>
+              </div>
+          </div>
+
+          
+          <div class="page">
+              <div class="page-content book-page" style="background: #15151a; padding: 40px; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-shadow: inset -10px 0 30px rgba(0,0,0,0.6);">
+                  <div class="anim-elem anim-delay-1">
+                      <h3 style="color: #fff; font-family: 'Unbounded', sans-serif; margin-bottom: 15px; font-size: 1.5rem;">Ready to Start?</h3>
+                      <p style="color: #aaa; margin-bottom: 30px;">Join thousands of successful alumni building top careers.</p>
+                  </div>
+                  <div class="anim-elem anim-delay-2">
+                      <a href="#programs" style="background: var(--mg); color: #fff; padding: 12px 24px; border-radius: 5px; text-decoration: none; font-weight: bold; display: inline-block; box-shadow: 0 10px 20px rgba(124,58,237,0.3);">View Programs</a>
+                  </div>
+                  <div class="page-number right">4</div>
+              </div>
+          </div>
+
+         
+          <div class="page page-cover" data-density="hard">
+              <div class="page-content" style="background: #0a0a0c; height: 100%; box-shadow: inset -10px 0 20px rgba(0,0,0,0.8); display: flex; flex-direction: column; justify-content: center; padding: 40px; text-align: center;">
+                  <h3 style="color: #fff; font-family: 'Unbounded', sans-serif; font-size: 1.2rem; margin-bottom: 15px;">Your Story<br>is Next.</h3>
+                  <p style="color: #888; font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px;">Equip yourself with the skills the industry demands.</p>
+                  <a href="contact.html" style="color: var(--mg); text-decoration: none; font-weight: bold; border-bottom: 1px solid var(--mg); padding-bottom: 3px; margin: 0 auto; display: inline-block;">Contact Admissions</a>
+              </div>
+          </div>
+
+         
+          <div class="page page-cover page-cover-bottom" data-density="hard">
+              <div class="page-content" style="background: linear-gradient(135deg, #181822 0%, #0d0d14 100%); border: 1px solid rgba(255,255,255,0.05); border-left: 1px solid rgba(255,255,255,0.15); display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; border-radius: 15px 4px 4px 15px; box-shadow: inset 5px 0 40px rgba(0,0,0,0.8); position: relative; overflow: hidden; padding: 40px; text-align: center;">
+                 <div style="position: absolute; right: 0; top: 0; bottom: 0; width: 40px; background: linear-gradient(-90deg, rgba(0,0,0,0.9) 0%, rgba(124,58,237,0.2) 50%, rgba(0,0,0,0.6) 100%); border-left: 1px solid rgba(255,255,255,0.05); z-index: 1;"></div>
+                 <img src="logo.png" style="width: 80px; filter: grayscale(1) brightness(2); opacity: 0.8; position: relative; z-index: 2; margin-bottom: 15px;">
+                 <h4 style="font-family: 'Unbounded', sans-serif; color: #777; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; position: relative; z-index: 2; margin-bottom: 60px;">Nakshathra IT Park</h4>
+                 <div style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; opacity: 0.7;">
+                     <div style="width: 140px; height: 50px; background: #fff; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; border-radius: 2px;">
+                         <i class="fas fa-barcode" style="font-size: 2.5rem; color: #000; transform: scaleY(1.8) scaleX(1.5);"></i>
+                     </div>
+                     <p style="color: #666; font-size: 0.7rem; font-family: monospace; letter-spacing: 2px;">ISBN 978-IRIT-2026</p>
+                 </div>
+              </div>
+          </div>
+      </div>
+      </div>
+      
+     
+      <div class="book-pagination" style="position: absolute; bottom: 0px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; gap: 30px; z-index: 10;">
+          <button id="book-prev" class="book-btn-anim" style="background: rgba(30,30,40,0.8); border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px);"><i class="fas fa-chevron-left" style="font-size: 1.2rem;"></i></button>
+          <span id="book-page-info" style="color: #ccc; font-family: 'Unbounded', sans-serif; font-size: 1.1rem; min-width: 120px; text-align: center;">Cover</span>
+          <button id="book-next" class="book-btn-anim" style="background: rgba(124,58,237,0.3); border: 1px solid var(--mg); color: #fff; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px); box-shadow: 0 0 20px rgba(124,58,237,0.4);"><i class="fas fa-chevron-right" style="font-size: 1.2rem;"></i></button>
+      </div>
+
+  </div>
+</section> -->
+
+<!-- PageFlip Styles & Animations -->
+<style>
+.bouncing-hint { display: inline-block; animation: bounceHint 1.5s ease-in-out infinite; }
+@keyframes bounceHint { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
+.book-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 120px; /* Space for pagination */
+    perspective: 1500px;
+    position: relative;
+    opacity: 0;
+    transform: translateY(80px);
+}
+#flipbook {
+    animation: floatBook 6s ease-in-out infinite;
+}
+@keyframes floatBook {
+   0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5)); }
+   50% { transform: translateY(-10px) scale(1.02); filter: drop-shadow(0 40px 50px rgba(124,58,237,0.2)); }
+   100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5)); }
+}
+/* Animation classes for internal page elements */
+.anim-elem {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.stf__item--active .anim-elem {
+    opacity: 1;
+    transform: translateY(0);
+}
+.anim-delay-1 { transition-delay: 0.1s; }
+.anim-delay-2 { transition-delay: 0.3s; }
+
+.page-number {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 0.8rem;
+    color: #555;
+    font-family: 'Unbounded', sans-serif;
+}
+.page-number.right {
+    left: auto;
+    right: 20px;
+}
+/* Pagination button hover animations */
+.book-btn-anim {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+.book-btn-anim:hover {
+    transform: scale(1.15) translateY(-5px);
+    background: var(--mg) !important;
+    box-shadow: 0 10px 20px rgba(124,58,237,0.6) !important;
+}
+.book-btn-anim:active {
+    transform: scale(0.95) translateY(0);
+}
+</style>
+
+<!-- Load PageFlip JS -->
+<script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Initialize Book
+    const pageFlip = new St.PageFlip(document.getElementById('flipbook'), {
+        width: 400,
+        height: 520,
+        size: "fixed",
+        minWidth: 300,
+        maxWidth: 450,
+        minHeight: 400,
+        maxHeight: 600,
+        maxShadowOpacity: 0.3,
+        showCover: true,
+        mobileScrollSupport: true,
+        usePortrait: true
+    });
+
+    pageFlip.loadFromHTML(document.querySelectorAll('.page'));
+
+    // 2. Pagination Logic
+    const btnNext = document.getElementById('book-next');
+    const btnPrev = document.getElementById('book-prev');
+    const infoSpan = document.getElementById('book-page-info');
+
+    btnNext.addEventListener('click', () => { pageFlip.flipNext(); });
+    btnPrev.addEventListener('click', () => { pageFlip.flipPrev(); });
+
+    const wrapper = document.getElementById('flipbook-wrapper');
+    function updateBookCenter(pageIndex) {
+        if (pageFlip.getOrientation() === 'portrait') {
+            wrapper.style.transform = 'translateX(0)';
+            return;
+        }
+        if (pageIndex === 0) {
+            wrapper.style.transform = 'translateX(-200px)';
+        } else if (pageIndex === pageFlip.getPageCount() - 1) {
+            wrapper.style.transform = 'translateX(200px)';
+        } else {
+            wrapper.style.transform = 'translateX(0)';
+        }
+    }
+    
+    // Auto center on initial load
+    setTimeout(() => { updateBookCenter(0); }, 50);
+
+    window.addEventListener('resize', () => {
+        updateBookCenter(pageFlip.getCurrentPageIndex());
+    });
+
+    pageFlip.on('changeState', (e) => {
+        if (e.data === 'read') {
+            updateBookCenter(pageFlip.getCurrentPageIndex());
+        }
+    });
+
+    pageFlip.on('flip', (e) => {
+        const currentPage = e.data;
+        const totalPages = pageFlip.getPageCount();
+        if (currentPage === 0) {
+            infoSpan.innerText = "Cover";
+        } else if (currentPage === totalPages - 1) {
+            infoSpan.innerText = "End";
+        } else {
+            // Because spreads are 2 pages, we compute spread index
+            let spreadNum = Math.ceil(currentPage / 2);
+            infoSpan.innerText = `Spread ${spreadNum}`;
+        }
+        updateBookCenter(currentPage);
+    });
+
+    // 3. Entrance Animation (GSAP)
+    gsap.to(".book-container", {
+        scrollTrigger: {
+            trigger: "#testimonials",
+            start: "top 65%",
+        },
+        y: 0,
+        opacity: 1,
+        duration: 1.5,
+        ease: "expo.out"
+    });
+});
+</script>
 
 <div class="glow-div"></div>
 
