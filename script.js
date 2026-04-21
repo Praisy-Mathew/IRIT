@@ -898,3 +898,37 @@ animate();
     resize();
     draw();
 })();
+
+// --- Social Icons Interactivity (Magnetic Effect & Entrance) ---
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Cinematic Staggered Entrance
+    if (typeof gsap !== 'undefined') {
+        const tl = gsap.timeline({ delay: 1.2 });
+        
+        tl.from(".social-line", {
+            height: 0,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out"
+        })
+        .from(".social-icon", {
+            x: 60,
+            scale: 0.5,
+            opacity: 0,
+            rotation: 45,
+            stagger: 0.15,
+            duration: 1.2,
+            ease: "back.out(1.7)",
+            clearProps: "all"
+        }, "-=0.5");
+
+        // 2. Subtle Idle Drift (Floating effect for the whole bar)
+        gsap.to(".hero-socials", {
+            y: "+=15",
+            duration: 3,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut"
+        });
+    }
+});

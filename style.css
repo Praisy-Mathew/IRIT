@@ -252,6 +252,111 @@ body {
     animation: float-pulse 12s ease-in-out infinite reverse;
 }
 
+/* 
+ * ==========================================
+ * HERO SOCIALS (FLOATING BAR)
+ * ==========================================
+ */
+.hero-socials {
+    position: absolute;
+    right: 1.5%;
+    top: 52%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    z-index: 100;
+    padding-right: 10px;
+    perspective: 1000px; /* Enable 3D depth */
+}
+
+.social-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.social-icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.15rem;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    backdrop-filter: blur(12px); /* Increased blur for more style */
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2), inset 0 0 0 1px rgba(255,255,255,0.05);
+}
+
+.social-icon:hover {
+    transform: scale(1.15) translateX(-8px);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+}
+
+/* Individual Reactive Glows */
+.social-icon[aria-label="Instagram"]:hover {
+    box-shadow: 0 0 25px rgba(228, 64, 95, 0.4), inset 0 0 15px rgba(228, 64, 95, 0.2);
+    color: #e4405f;
+    border-color: #e4405f;
+}
+
+.social-icon[aria-label="Email"]:hover {
+    box-shadow: 0 0 25px rgba(59, 130, 246, 0.4), inset 0 0 15px rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+    border-color: #3b82f6;
+}
+
+.social-icon[aria-label="Call"]:hover {
+    box-shadow: 0 0 25px rgba(16, 185, 129, 0.4), inset 0 0 15px rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    border-color: #10b981;
+}
+
+.social-icon[aria-label="Location"]:hover {
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.4), inset 0 0 15px rgba(0, 212, 255, 0.2);
+    color: #00d4ff;
+    border-color: #00d4ff;
+}
+
+.social-line {
+    width: 2px;
+    height: 100px;
+    background: linear-gradient(to top, var(--accent-blue) 0%, transparent 100%);
+    opacity: 0.4;
+    margin-bottom: 5px;
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+@media (max-width: 1024px) {
+    .hero-socials {
+        right: 10px;
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%);
+        flex-direction: column;
+        gap: 15px;
+        padding-right: 5px;
+    }
+    .social-line {
+        display: block;
+        height: 60px;
+        margin-bottom: 2px;
+    }
+    .social-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 0.95rem;
+    }
+}
+
 /* Cosmic Nebulae */
 .nebula {
     position: absolute;
