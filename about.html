@@ -6,6 +6,7 @@
 <title>IRIT</title>
 <link rel="icon" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
@@ -196,6 +197,83 @@ html, body {
 
 /* ── DIVIDER ── */
 .glow-div{height:1px;max-width:900px;margin:0 auto;position:relative;z-index:3;background:linear-gradient(90deg,transparent,var(--mg),var(--ht),var(--cy),transparent);opacity:.25}
+
+/* ================= GALLERY MARQUEE ================= */
+.gallery-section {
+  padding: 80px 0;
+  background: var(--bg);
+  overflow: hidden;
+  position: relative;
+  z-index: 5;
+}
+
+.gallery-section::before,
+.gallery-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 250px;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.gallery-section::before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg) 0%, transparent 100%);
+}
+
+.gallery-section::after {
+  right: 0;
+  background: linear-gradient(to left, var(--bg) 0%, transparent 100%);
+}
+
+.marquee-container {
+  display: flex;
+  width: max-content;
+  animation: marquee-h 40s linear infinite;
+  gap: 30px;
+  padding: 20px 0;
+}
+
+.gallery-section:hover .marquee-container {
+  animation-play-state: paused;
+}
+
+.gallery-img-wrap {
+  width: 450px;
+  height: 300px;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  background: #111;
+}
+
+.gallery-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s;
+  filter: grayscale(0.2) contrast(1.1);
+}
+
+.gallery-img-wrap:hover {
+  transform: scale(1.02) translateY(-5px);
+  border-color: var(--cy);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+}
+
+.gallery-img-wrap:hover img {
+  transform: scale(1.1);
+  filter: grayscale(0) contrast(1.2);
+}
+
+@keyframes marquee-h {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 15px)); }
+}
 
 /* ── ABOUT ── */
 #about {
@@ -1473,6 +1551,39 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </section>
 
+<!-- Gallery Scrolling Section -->
+<section class="gallery-section">
+  <div class="marquee-container">
+    <!-- Set 1 -->
+    <div class="gallery-img-wrap">
+      <img src="gallery_1.png" alt="Campus Life">
+    </div>
+    <div class="gallery-img-wrap">
+      <img src="gallery_2.png" alt="Tech Workspace">
+    </div>
+    <div class="gallery-img-wrap">
+      <img src="gallery_3.png" alt="Collaboration">
+    </div>
+    <div class="gallery-img-wrap">
+      <img src="gallery_4.png" alt="Innovation Lab">
+    </div>
+    
+    <!-- Set 2 for loop -->
+    <div class="gallery-img-wrap">
+      <img src="gallery_1.png" alt="Campus Life">
+    </div>
+    <div class="gallery-img-wrap">
+      <img src="gallery_2.png" alt="Tech Workspace">
+    </div>
+    <div class="gallery-img-wrap">
+      <img src="gallery_3.png" alt="Collaboration">
+    </div>
+    <div class="gallery-img-wrap">
+      <img src="gallery_4.png" alt="Innovation Lab">
+    </div>
+  </div>
+</section>
+
 <!-- Main Footer -->
 <footer class="main-footer">
     <div class="footer-container">
@@ -1659,59 +1770,40 @@ document.querySelectorAll('.flip-wrap,.wc,.sc,.rib-item,.pill').forEach(el=>{
 
 /* ═══ COUNTER Logic ═══ */
 function count(el){
-  const end=parseInt(el.dataset.count), suf=el.dataset.suf||'';
-  if(isNaN(end))return;
-  let s=null;
-  const dur=1800;
-  (function step(ts){
-    if(!s)s=ts;
-    const p=Math.min((ts-s)/dur,1);
-    const e2=1-Math.pow(1-p,4);
-    el.textContent=Math.floor(e2*end).toLocaleString()+suf;
-    if(p<1)requestAnimationFrame(step);
-  })(performance.now());
+    const end=parseInt(el.dataset.count), suf=el.dataset.suf||'';
+    if(isNaN(end))return;
+    let startTimestamp = null;
+    const duration = 1800;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const easeQuad = 1 - Math.pow(1 - progress, 4);
+        el.textContent = Math.floor(easeQuad * end).toLocaleString() + suf;
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        }
+    };
+    window.requestAnimationFrame(step);
 }
 
 /* ═══ INTERSECTION OBSERVER ═══ */
-const io=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(!e.isIntersecting)return;
-    const el=e.target;
-    const idx=Array.from(el.parentNode.children).indexOf(el);
-    if(el.classList.contains('flip-wrap')){
-      el.style.transitionDelay=(idx*.1)+'s';
-      el.classList.add('in');
-    }
-    if(el.classList.contains('wc')){
-      el.style.animationDelay=(idx*.1)+'s';
-      el.classList.add('in');
-    }
-    if(el.dataset.count)count(el);
-    io.unobserve(el);
-  });
-},{threshold:.1});
-document.querySelectorAll('.flip-wrap,.wc,[data-count]').forEach(el=>io.observe(el));
-
-/* ── SIDEBAR TOGGLE ── */
-const sidebar = document.getElementById('sidebar');
-const overlay = document.getElementById('sidebar-overlay');
-const openBtn = document.getElementById('open-sidebar');
-const closeBtn = document.getElementById('close-sidebar');
-openBtn.addEventListener('click', () => document.body.classList.add('sidebar-active'));
-const closeSidebar = () => document.body.classList.remove('sidebar-active');
-closeBtn.addEventListener('click', closeSidebar);
-overlay.addEventListener('click', closeSidebar);
-
-const dropdownToggles = document.querySelectorAll('.dropdown > .sidebar-link');
-dropdownToggles.forEach(toggle => {
-    toggle.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        const nextEl = this.nextElementSibling;
-        if (nextEl) nextEl.classList.toggle('show');
+const observerOptions = { threshold: 0.15 };
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const el = entry.target;
+            if (el.classList.contains('flip-wrap') || el.classList.contains('wc')) {
+                el.classList.add('in');
+            }
+            if (el.dataset.count) count(el);
+            observer.unobserve(el);
+        }
     });
-});
+}, observerOptions);
 
+document.querySelectorAll('.flip-wrap, .wc, [data-count]').forEach(el => observer.observe(el));
 </script>
+
+<script src="script.js"></script>
 </body>
 </html>

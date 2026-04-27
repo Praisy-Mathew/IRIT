@@ -1,3 +1,114 @@
+// --- Cinematic Enroll Modal Logic (Global Priority Injection) ---
+(function initEnrollModal() {
+    const modalHTML = `
+    <div id="enroll-modal">
+        <div id="enroll-modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close Modal">&times;</button>
+            <div class="modal-header">
+                <h2>Enroll <span>Now</span></h2>
+                <p>Start your journey to becoming an industry-ready professional.</p>
+            </div>
+            <div id="modal-form-container">
+                <form class="modal-form" id="enroll-form">
+                    <div class="form-group">
+                        <label for="modal-name">Full Name</label>
+                        <input type="text" id="modal-name" name="name" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-email">Email Address</label>
+                        <input type="email" id="modal-email" name="email" placeholder="example@domain.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-phone">Phone Number</label>
+                        <input type="tel" id="modal-phone" name="phone" placeholder="Your mobile number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-course">Interested Course</label>
+                        <select id="modal-course" name="course" required>
+                            <option value="" disabled selected>Select a program</option>
+                            <option value="python-fullstack">Python Full Stack Development</option>
+                            <option value="node-fullstack">Node.js Full Stack Development</option>
+                            <option value="digital-marketing">Mastering Digital Marketing</option>
+                            <option value="building-design">Advanced Building Designing</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="modal-submit-btn">Register Interest</button>
+                </form>
+            </div>
+        </div>
+    </div>`;
+
+    if (document.body) {
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+    } else {
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+        });
+    }
+
+    setTimeout(() => {
+        const modal = document.getElementById('enroll-modal');
+        const overlay = document.getElementById('enroll-modal-overlay');
+        const closeBtn = modal?.querySelector('.modal-close');
+        const form = document.getElementById('enroll-form');
+        const content = modal?.querySelector('.modal-content');
+
+        if (!modal || !closeBtn || !form) return;
+
+        function openModal(e) {
+            if (e) e.preventDefault();
+            const path = window.location.pathname;
+            const select = document.getElementById('modal-course');
+            if (path.includes('fullstack')) select.value = 'python-fullstack';
+            if (path.includes('node')) select.value = 'node-fullstack';
+            if (path.includes('digital')) select.value = 'digital-marketing';
+            if (path.includes('design')) select.value = 'building-design';
+
+            modal.style.display = 'flex';
+            if (typeof gsap !== 'undefined') {
+                gsap.to(modal, { opacity: 1, duration: 0.4 });
+                gsap.to(overlay, { backdropFilter: "blur(20px)", duration: 0.6 });
+                gsap.fromTo(content, { scale: 0.8, y: 40, opacity: 0 }, { scale: 1, y: 0, opacity: 1, duration: 0.5, ease: "back.out(1.5)" });
+            }
+        }
+
+        function closeModal() {
+            if (typeof gsap !== 'undefined') {
+                gsap.to(content, { scale: 0.8, y: 20, opacity: 0, duration: 0.3 });
+                gsap.to(overlay, { backdropFilter: "blur(0px)", duration: 0.4 });
+                gsap.to(modal, { opacity: 0, duration: 0.4, onComplete: () => { modal.style.display = 'none'; } });
+            } else { modal.style.display = 'none'; }
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        overlay.addEventListener('click', closeModal);
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.style.display === 'flex') closeModal(); });
+
+        document.addEventListener('click', (e) => {
+            let trigger = e.target.closest('a[href*="contact.html#contact"], .sidebar-btn, .enroll-trigger');
+            if (!trigger) {
+                const potentialBtn = e.target.closest('a, button');
+                if (potentialBtn && potentialBtn.innerText.toLowerCase().includes('enroll')) trigger = potentialBtn;
+            }
+            if (trigger) openModal(e);
+        });
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const container = document.getElementById('modal-form-container');
+            if (typeof gsap !== 'undefined') {
+                gsap.to(container, { opacity: 0, y: -20, duration: 0.3, onComplete: () => {
+                    container.innerHTML = `<div class="success-msg"><i class="fa-solid fa-circle-check"></i><h3>Thank You!</h3><p>Our counselor will contact you shortly.</p></div>`;
+                    gsap.fromTo(container, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4 });
+                    setTimeout(closeModal, 4000);
+                }});
+            }
+        });
+        window.openEnrollModal = openModal;
+    }, 100);
+})();
+
 // --- Slide Data for the Parallax Hero ---
 const slides = [
     {
@@ -47,9 +158,6 @@ const slides = [
     }
 ];
 
-
-
-
 // --- Engine and DOM Setup ---
 const path = document.getElementById('curve');
 const activePaths = document.querySelectorAll('.curve-active-path');
@@ -73,7 +181,6 @@ const sidebarLinks = document.querySelectorAll('.sidebar-link');
 
 function openSidebar() {
     document.body.classList.add('sidebar-active');
-    // Cinematic link reveal for all pages
     if (typeof gsap !== 'undefined' && sidebarLinks.length > 0) {
         gsap.fromTo(sidebarLinks, 
             { x: 40, opacity: 0 }, 
@@ -109,16 +216,21 @@ dropdownToggles.forEach(toggle => {
 });
 
 // --- HLS Video Background Setup ---
-if (video) {
+function initHlsVideos() {
+    const vids = document.querySelectorAll('video#bg-video');
     const videoSrc = 'https://stream.mux.com/s8pMcOvMQXc4GD6AX4e1o01xFogFxipmuKltNfSYza0200.m3u8';
-    if (Hls.isSupported()) {
-        const hls = new Hls();
-        hls.loadSource(videoSrc);
-        hls.attachMedia(video);
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = videoSrc;
-    }
+    
+    vids.forEach(vid => {
+        if (Hls.isSupported()) {
+            const hls = new Hls();
+            hls.loadSource(videoSrc);
+            hls.attachMedia(vid);
+        } else if (vid.canPlayType('application/vnd.apple.mpegurl')) {
+            vid.src = videoSrc;
+        }
+    });
 }
+initHlsVideos();
 
 // --- Galactic Background Engine ---
 if (canvas) {
@@ -239,7 +351,7 @@ if (canvas) {
 
 // Get real length of the SVG Path
 let pathLength = 0;
-if (path) {
+if (path && typeof path.getTotalLength === 'function') {
     pathLength = path.getTotalLength();
     activePaths.forEach(p => p.style.strokeDasharray = pathLength);
     activePaths.forEach(p => p.style.strokeDashoffset = pathLength);
@@ -932,3 +1044,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+
+// --- Galaxy and Floating Logic ---
+// (Previously contained the modal logic which is now moved to the top for reliability)
